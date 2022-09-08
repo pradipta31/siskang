@@ -22,8 +22,7 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 50.0, bottom: 0),
+              padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 50.0, bottom: 0),
               child: TextField(
                   decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -31,8 +30,7 @@ class LoginPage extends StatelessWidget {
                       hintText: 'Masukkan NIM')),
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 15, bottom: 0),
+              padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
               //padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
                 obscureText: true,
@@ -44,7 +42,7 @@ class LoginPage extends StatelessWidget {
             ),
             Align(
               alignment: Alignment.topLeft,
-              child: FlatButton(
+              child: TextButton(
                 onPressed: () {},
                 child: Text(
                   'Forgot Password',
@@ -60,9 +58,9 @@ class LoginPage extends StatelessWidget {
             Container(
               height: 50,
               width: 340,
-              decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(20)),
-              child: FlatButton(
+              decoration:
+                  BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(20)),
+              child: TextButton(
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return MasterPage();
