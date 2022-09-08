@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:siskangv2/themes/themes.dart';
 import 'package:siskangv2/welcome.dart';
 
 void main() => runApp(MyApp());
@@ -6,7 +8,9 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      theme: Themes.lightTheme(context),
+      debugShowCheckedModeBanner: false,
       home: WelcomePage(),
     );
   }

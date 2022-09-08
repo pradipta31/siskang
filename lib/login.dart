@@ -1,5 +1,11 @@
+import 'dart:developer';
+
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:siskangv2/components/main_action_button.dart';
 import 'package:siskangv2/dashboard.dart';
+import 'package:siskangv2/themes/color_pallete.dart';
 import 'package:siskangv2/welcome.dart';
 
 class LoginPage extends StatelessWidget {
@@ -8,72 +14,70 @@ class LoginPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-            child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: 60.0),
-              child: Center(
-                child: Container(
-                  width: 200,
-                  height: 150,
+        body: SizedBox(
+          height: Get.height,
+          width: Get.width,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(children: [
+              Expanded(
+                flex: 1,
+                child: Center(
                   child: Image.asset('asset/images/logo.png'),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 15.0, right: 15.0, top: 50.0, bottom: 0),
-              child: TextField(
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Username',
-                      hintText: 'Masukkan NIM')),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15, bottom: 0),
-              //padding: EdgeInsets.symmetric(horizontal: 15),
-              child: TextField(
-                obscureText: true,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Password',
-                    hintText: 'Masukkan Password '),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topLeft,
-              child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  'Forgot Password',
-                  style: TextStyle(
-                    color: Colors.blue,
-                    fontSize: 15.0,
-                  ),
-                  textAlign: TextAlign.left,
+              Expanded(
+                flex: 3,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8),
+                      child: TextField(
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Username',
+                              hintText: 'Masukkan NIM')),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8),
+                      child: TextField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: 'Password',
+                            hintText: 'Masukkan Password '),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: MainActionButton(
+                        height: 50,
+                        width: Get.width,
+                        label: "Login",
+                        onTap: () {},
+                        borderRadius: 8,
+                      ),
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(text: "Belum memiliki akun? ", style: Get.textTheme.bodyText1),
+                          TextSpan(
+                            text: "Register",
+                            recognizer: TapGestureRecognizer()..onTap = () => log("DATA"),
+                            style: Get.textTheme.bodyText1?.copyWith(
+                                color: Pallete.buttonMainColor, fontWeight: FontWeight.bold),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               ),
-            ),
-            Padding(padding: EdgeInsets.only(top: 10.0)),
-            Container(
-              height: 50,
-              width: 340,
-              decoration:
-                  BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(20)),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return MasterPage();
-                  }));
-                },
-                child: Text(
-                  'Login',
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              ),
-            ),
-          ],
-        )),
+            ]),
+          ),
+        ),
       ),
     );
   }

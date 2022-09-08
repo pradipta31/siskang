@@ -78,9 +78,13 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Lora
+    - family: BeVietnamPro
       fonts:
-        - asset: asset/fonts/static/Lora-Regular.ttf
+        - asset: asset/fonts/BeVietnamPro-Regular.ttf
+        - asset: asset/fonts/BeVietnamPro-Bold.ttf
+          weight: 700
+        - asset: asset/fonts/BeVietnamPro-Italic.ttf
+          style: italic
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
