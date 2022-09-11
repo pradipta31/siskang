@@ -55,7 +55,7 @@ class LoginPage extends StatelessWidget {
                         height: 50,
                         width: Get.width,
                         label: "Login",
-                        onTap: () {},
+                        onTap: () => Get.off(() => MasterPage()),
                         borderRadius: 8,
                       ),
                     ),

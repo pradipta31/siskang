@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:siskangv2/themes/asset_dir.dart';
+import 'package:siskangv2/themes/color_pallete.dart';
 import 'package:siskangv2/widget/dashboard_menu.dart';
 
 class MasterPage extends StatefulWidget {
@@ -9,8 +12,7 @@ class MasterPage extends StatefulWidget {
   State<MasterPage> createState() => _MasterPageState();
 }
 
-class _MasterPageState extends State<MasterPage>
-    with SingleTickerProviderStateMixin {
+class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateMixin {
   late TabController controller;
   String nama = "I Gede Pradipta Adi Nugraha, S.Kom";
 
@@ -30,18 +32,24 @@ class _MasterPageState extends State<MasterPage>
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 93, 126, 143),
-          leading: Container(
-            child: Image.asset(
-              'asset/images/logo.png',
-              scale: 5,
+          backgroundColor: Pallete.primaryLight,
+          titleSpacing: 8,
+          title: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Dashboard",
+              style: Get.textTheme.headline4
+                  ?.copyWith(color: Pallete.white, fontWeight: FontWeight.w700),
             ),
           ),
-          title: Text(
-            'SIsKA-NG',
-          ),
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.notifications))
+            GestureDetector(
+              onTap: () {},
+              child: SvgPicture.asset(
+                AssetsDirectory.notification,
+                color: Pallete.white,
+              ),
+            )
           ],
         ),
         body: Column(
@@ -65,9 +73,7 @@ class _MasterPageState extends State<MasterPage>
                           "Halo, $nama",
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              fontFamily: 'lora'),
+                              fontWeight: FontWeight.bold, fontSize: 20, fontFamily: 'lora'),
                         ),
                         SizedBox(
                           height: 8,
@@ -100,64 +106,57 @@ class _MasterPageState extends State<MasterPage>
                 ),
               ),
             ),
-            // Expanded(
-            //   flex: 1,
-            //   child: Container(
-            //     margin: EdgeInsets.all(0.0),
-            //     color: Color.fromARGB(255, 226, 226, 226),
-            //     height: 100,
-            //     child: Row(
-            //       mainAxisAlignment: MainAxisAlignment.center,
-            //       children: [
-            //         RichText(
-            //           text: TextSpan(
-            //             children: <TextSpan>[
-            //               TextSpan(
-            //                   text: 'hello',
-            //                   style: TextStyle(color: Colors.red)),
-            //               TextSpan(
-            //                   text: ' world',
-            //                   style: TextStyle(color: Colors.blue)),
-            //             ],
-            //           ),
-            //         )
-            //       ],
-            //     ),
-            //   ),
-            // ),
-            // Flexible(
-            //   flex: 1,
-            //   child: Container(
-            //     color: Color.fromARGB(255, 255, 250, 250),
-            //   ),
-            // ),
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment:CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-                    child: Container(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                  child: Container(
                       height: 150,
                       width: Get.width,
                       color: Colors.white,
                       child: Center(
-                        child: GridView.count(crossAxisCount: 4, shrinkWrap: true, crossAxisSpacing: 8, children: [
-                          DashboardMenu(svgIcon: "", menuName: "Berita", height: 80, buttonColor: Colors.blue,),
-                          DashboardMenu(svgIcon: "", menuName: "Berita", height: 80, buttonColor: Colors.blue,),
-                          DashboardMenu(svgIcon: "", menuName: "Berita", height: 80, buttonColor: Colors.blue,),
-                          DashboardMenu(svgIcon: "", menuName: "Berita", height: 80, buttonColor: Colors.blue,),
-                        ],),
-                      )
-                    ),
-                  ),
-                  Expanded(child: Container(
-                    color: Colors.white,
-                  ))
-                ],
-              )
-            )
+                        child: GridView.count(
+                          crossAxisCount: 4,
+                          shrinkWrap: true,
+                          crossAxisSpacing: 8,
+                          children: [
+                            DashboardMenu(
+                              svgIcon: "",
+                              menuName: "Berita",
+                              height: 80,
+                              buttonColor: Colors.blue,
+                            ),
+                            DashboardMenu(
+                              svgIcon: "",
+                              menuName: "Berita",
+                              height: 80,
+                              buttonColor: Colors.blue,
+                            ),
+                            DashboardMenu(
+                              svgIcon: "",
+                              menuName: "Berita",
+                              height: 80,
+                              buttonColor: Colors.blue,
+                            ),
+                            DashboardMenu(
+                              svgIcon: "",
+                              menuName: "Berita",
+                              height: 80,
+                              buttonColor: Colors.blue,
+                            ),
+                          ],
+                        ),
+                      )),
+                ),
+                Expanded(
+                    child: Container(
+                  color: Colors.white,
+                ))
+              ],
+            ))
           ],
         ),
         bottomNavigationBar: Material(
