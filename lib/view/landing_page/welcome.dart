@@ -1,10 +1,8 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:siskangv2/components/main_action_button.dart';
-import 'package:siskangv2/login.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
+import 'package:siskangv2/view/login/login.dart';
 import 'package:siskangv2/widget/button_main.dart';
 
 class WelcomePage extends StatelessWidget {
