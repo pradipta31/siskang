@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:siskangv2/themes/color_pallete.dart';
 import 'package:siskangv2/themes/themes.dart';
 import 'package:siskangv2/view/landing_page/welcome.dart';
 

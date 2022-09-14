@@ -7,4 +7,6 @@ class AssetsDirectory {
   static const menu = "asset/icons/app.svg";
   static const graduationCap = "asset/icons/graduation-cap.svg";
   static const checkbox = "asset/icons/checkbox.svg";
+  static const apps = "asset/icons/apps.svg";
+  static const search = "asset/icons/search.svg";
 }

@@ -170,7 +170,14 @@ class Themes {
       appBarTheme: const AppBarTheme(
         elevation: 1.0,
         centerTitle: true,
-        backgroundColor: Pallete.lighterGrey,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.light,
+          statusBarColor: Pallete.primaryLight,
+          statusBarIconBrightness: Brightness.light,
+          systemNavigationBarColor: Pallete.primaryLight,
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
+        backgroundColor: Pallete.transparent,
         titleTextStyle: TextStyle(
           fontSize: 17.0,
           fontWeight: FontWeight.w700,

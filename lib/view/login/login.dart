@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:siskangv2/components/main_action_button.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
+import 'package:siskangv2/view/dashboard/main_dashboard.dart';
 import 'package:siskangv2/view/dashboard/page/dashboard.dart';
 
 class LoginPage extends StatelessWidget {
@@ -54,7 +55,7 @@ class LoginPage extends StatelessWidget {
                         height: 50,
                         width: Get.width,
                         label: "Login",
-                        onTap: () => Get.off(() => const MasterPage()),
+                        onTap: () => Get.off(() => const MainDashboard()),
                         borderRadius: 8,
                       ),
                     ),

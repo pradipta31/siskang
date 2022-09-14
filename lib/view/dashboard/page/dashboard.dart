@@ -1,11 +1,8 @@
-import 'package:another_stepper/another_stepper.dart';
 import 'package:another_stepper/dto/stepper_data.dart';
-import 'package:another_stepper/widgets/horizontal_stepper.dart';
 import 'package:another_stepper/widgets/vertical_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:im_stepper/stepper.dart';
 import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
 import 'package:siskangv2/view/dashboard/widget/menus.dart';
@@ -19,18 +16,15 @@ class MasterPage extends StatefulWidget {
 }
 
 class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateMixin {
-  late TabController controller;
   String nama = "I Gede Pradipta Adi Nugraha, S.Kom";
 
   @override
   void initState() {
-    controller = TabController(vsync: this, length: 4);
     super.initState();
   }
 
   @override
   void dispose() {
-    controller.dispose();
     super.dispose();
   }
 
@@ -188,42 +182,10 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
                       subtitleTextStyle: Get.textTheme.bodyText1!,
                     ),
                   ),
-                  // AnotherStepper(
-                  //     stepperList: _dummyData()
-                  //         .map((e) => StepperData(title: e.elementAt(1), subtitle: e.last))
-                  //         .toList(),
-                  //     titleTextStyle: Get.textTheme.headline4!,
-                  //     subtitleTextStyle: Get.textTheme.bodyText1!,
-                  //     gap: 30,
-                  //     activeIndex: 2,
-                  //     horizontalStepperHeight: 70,
-                  //     scrollPhysics: NeverScrollableScrollPhysics(),
-                  //     dotWidget: Container(
-                  //       height: 30,
-                  //       width: 30,
-                  //       decoration: BoxDecoration(
-                  //         shape: BoxShape.circle,
-                  //         color: Pallete.primaryLight,
-                  //       ),
-                  //     ),
-                  //     activeBarColor: Pallete.primaryLight,
-                  //     stepperDirection: Axis.vertical),
                 ],
               ),
             )
           ],
-        ),
-        bottomNavigationBar: Material(
-          color: const Color.fromARGB(255, 93, 126, 143),
-          child: TabBar(
-            controller: controller,
-            tabs: [
-              const Tab(icon: Icon(Icons.sports_bar)),
-              const Tab(icon: Icon(Icons.sports_soccer)),
-              const Tab(icon: Icon(Icons.sports_mma)),
-              const Tab(icon: Icon(Icons.sports_tennis)),
-            ],
-          ),
         ),
       ),
     );
