@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
 import 'package:siskangv2/view/dashboard/page/dashboard.dart';
+import 'package:siskangv2/view/dashboard/page/news.dart';
+import 'package:siskangv2/view/dashboard/page/schedule.dart';
 import 'package:siskangv2/view/dashboard/widget/bottom_nav_bar.dart';
 
 class MainDashboard extends StatefulWidget {
@@ -27,15 +29,7 @@ class _MainDashboardState extends State<MainDashboard> {
             _currentIndex = value;
           });
         },
-        children: [
-          MasterPage(),
-          Container(
-            color: Pallete.primaryLight,
-          ),
-          MasterPage(),
-          MasterPage(),
-          MasterPage()
-        ],
+        children: [MasterPage(), SchedulePage(), News(), MasterPage(), MasterPage()],
       ),
       bottomNavigationBar: BottomNavBar(
         currentIndex: _currentIndex,

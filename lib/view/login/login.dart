@@ -59,19 +59,19 @@ class LoginPage extends StatelessWidget {
                         borderRadius: 8,
                       ),
                     ),
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(text: "Belum memiliki akun? ", style: Get.textTheme.bodyText1),
-                          TextSpan(
-                            text: "Register",
-                            recognizer: TapGestureRecognizer()..onTap = () => log("DATA"),
-                            style: Get.textTheme.bodyText1?.copyWith(
-                                color: Pallete.buttonMainColor, fontWeight: FontWeight.bold),
-                          )
-                        ],
-                      ),
-                    )
+                    // RichText(
+                    //   text: TextSpan(
+                    //     children: [
+                    //       TextSpan(text: "Belum memiliki akun? ", style: Get.textTheme.bodyText1),
+                    //       TextSpan(
+                    //         text: "Register",
+                    //         recognizer: TapGestureRecognizer()..onTap = () => log("DATA"),
+                    //         style: Get.textTheme.bodyText1?.copyWith(
+                    //             color: Pallete.buttonMainColor, fontWeight: FontWeight.bold),
+                    //       )
+                    //     ],
+                    //   ),
+                    // )
                   ],
                 ),
               ),

@@ -9,4 +9,8 @@ class AssetsDirectory {
   static const checkbox = "asset/icons/checkbox.svg";
   static const apps = "asset/icons/apps.svg";
   static const search = "asset/icons/search.svg";
+  static const alarmClock = "asset/icons/alarm-clock.svg";
+  static const calendarLinesPen = "asset/icons/calendar-lines-pen.svg";
+  static const home = "asset/icons/home.svg";
+  static const users = "asset/icons/users.svg";
 }
