@@ -22,21 +22,21 @@ class _MainDashboardState extends State<MainDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         onPageChanged: (value) {
           setState(() {
             _currentIndex = value;
           });
         },
-        children: [MasterPage(), SchedulePage(), News(), MasterPage(), MasterPage()],
+        children: const [MasterPage(), SchedulePage(), News(), MasterPage(), MasterPage()],
       ),
       bottomNavigationBar: BottomNavBar(
         currentIndex: _currentIndex,
-        itemColor: Color(0xff27487f),
+        itemColor: const Color(0xff27487f),
         onChange: (index) {
           _pageController.animateToPage(index,
-              duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
+              duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
         },
         children: [
           CustomBottomNavigationItem(
@@ -68,7 +68,7 @@ class _MainDashboardState extends State<MainDashboard> {
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
         statusBarColor: Pallete.primaryLight, statusBarIconBrightness: Brightness.light));
 
     _pageController = PageController();
