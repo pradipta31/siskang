@@ -3,6 +3,7 @@ import 'package:another_stepper/widgets/vertical_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:siskangv2/core/controller/auth_controller.dart';
 import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
 import 'package:siskangv2/view/dashboard/widget/menus.dart';
@@ -74,13 +75,17 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text(
-                              "Halo, $nama",
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: Get.textTheme.headline4
-                                  ?.copyWith(fontWeight: FontWeight.w700, color: Pallete.black),
-                            ),
+                            GetBuilder<AuthController>(
+                                init: Get.find<AuthController>(),
+                                builder: (auth) {
+                                  return Text(
+                                    "Halo, ${auth.userData?.name}",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: Get.textTheme.headline4?.copyWith(
+                                        fontWeight: FontWeight.w700, color: Pallete.black),
+                                  );
+                                }),
                             const SizedBox(
                               height: 8,
                             ),

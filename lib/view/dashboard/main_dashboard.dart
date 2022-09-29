@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:siskangv2/core/controller/auth_controller.dart';
 import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
 import 'package:siskangv2/view/dashboard/page/dashboard.dart';
@@ -8,7 +10,8 @@ import 'package:siskangv2/view/dashboard/page/schedule.dart';
 import 'package:siskangv2/view/dashboard/widget/bottom_nav_bar.dart';
 
 class MainDashboard extends StatefulWidget {
-  const MainDashboard({Key? key}) : super(key: key);
+  final _authController = Get.find<AuthController>();
+  MainDashboard({Key? key}) : super(key: key);
 
   @override
   State<MainDashboard> createState() => _MainDashboardState();

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:siskangv2/components/main_action_button.dart';
+import 'package:siskangv2/core/controller/auth_controller.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
+import 'package:siskangv2/view/dashboard/main_dashboard.dart';
 import 'package:siskangv2/view/login/login.dart';
-import 'package:siskangv2/widget/button_main.dart';
 
 class WelcomePage extends StatelessWidget {
+  final _authController = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
@@ -66,8 +68,14 @@ class WelcomePage extends StatelessWidget {
                               borderRadius: 14,
                               width: Get.width / 2,
                               textColor: Pallete.white,
-                              onTap: () {
-                                Get.off(() => LoginPage(), transition: Transition.rightToLeft);
+                              onTap: () async {
+                                if (_authController.authPref.hasData("Id")) {
+                                  _authController
+                                      .checkLogin()
+                                      .then((value) => Get.offNamed('/dashboard'));
+                                } else {
+                                  Get.off(() => LoginPage(), transition: Transition.rightToLeft);
+                                }
                               },
                             ),
                           ),

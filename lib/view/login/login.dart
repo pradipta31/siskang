@@ -102,9 +102,10 @@ class LoginPage extends StatelessWidget {
                                   onTap: () {
                                     if (_formLogin.currentState!.validate()) {
                                       _formLogin.currentState!.save();
+                                      FocusManager.instance.primaryFocus?.unfocus();
                                       auth
                                           .login()
-                                          .then((value) => Get.off(() => const MainDashboard()))
+                                          .then((value) => Get.offNamed('/dashboard'))
                                           .catchError((error) {
                                         Get.snackbar("Akses Ditolak",
                                             "Username atau password yang dimasukkan salah");
