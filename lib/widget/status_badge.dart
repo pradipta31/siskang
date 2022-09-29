@@ -27,12 +27,15 @@ class StatusBadge extends StatelessWidget {
         borderRadius: BorderRadius.circular(borderRadius ?? 40),
         color: color ?? Pallete.buttonMainColor,
       ),
-      child: Center(
-        child: text ??
-            Text(
-              "OK",
-              style: Get.textTheme.subtitle1?.copyWith(color: Pallete.white),
-            ),
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Center(
+          child: text ??
+              Text(
+                "OK",
+                style: Get.textTheme.subtitle1?.copyWith(color: Pallete.white),
+              ),
+        ),
       ),
     );
   }

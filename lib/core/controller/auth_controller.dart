@@ -17,6 +17,7 @@ class AuthController extends GetxController {
       value.toJson().forEach((key, value) {
         authPref.write(key, value);
       });
+      update();
     }).catchError((error) {
       throw error;
     });

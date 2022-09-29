@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:siskangv2/core/controller/auth_controller.dart';
+import 'package:siskangv2/core/controller/research_controller.dart';
 import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
 import 'package:siskangv2/view/dashboard/page/dashboard.dart';
@@ -11,6 +12,7 @@ import 'package:siskangv2/view/dashboard/widget/bottom_nav_bar.dart';
 
 class MainDashboard extends StatefulWidget {
   final _authController = Get.find<AuthController>();
+  final _researchController = Get.find<ResearchController>();
   MainDashboard({Key? key}) : super(key: key);
 
   @override
@@ -75,6 +77,10 @@ class _MainDashboardState extends State<MainDashboard> {
         statusBarColor: Pallete.primaryLight, statusBarIconBrightness: Brightness.light));
 
     _pageController = PageController();
+    widget._researchController.getMasaStudi(
+        prodiId: widget._authController.userData!.prodiId!,
+        nim: widget._authController.userData!.nim!,
+        jabatan: widget._authController.userData!.jabatan!);
   }
 
   @override

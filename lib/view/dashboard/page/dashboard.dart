@@ -3,7 +3,9 @@ import 'package:another_stepper/widgets/vertical_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:siskangv2/core/controller/auth_controller.dart';
+import 'package:siskangv2/core/controller/research_controller.dart';
 import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
 import 'package:siskangv2/view/dashboard/widget/menus.dart';
@@ -17,8 +19,6 @@ class MasterPage extends StatefulWidget {
 }
 
 class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateMixin {
-  String nama = "I Gede Pradipta Adi Nugraha, S.Kom";
-
   @override
   void initState() {
     super.initState();
@@ -63,51 +63,98 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
             Container(
               color: Pallete.backgroundUncover,
               width: Get.width,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                        flex: 4,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            GetBuilder<AuthController>(
-                                init: Get.find<AuthController>(),
-                                builder: (auth) {
-                                  return Text(
-                                    "Halo, ${auth.userData?.name}",
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: Get.textTheme.headline4?.copyWith(
-                                        fontWeight: FontWeight.w700, color: Pallete.black),
-                                  );
-                                }),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              "Selamat datang di SisKa-NG",
-                              style: Get.textTheme.bodyText1,
-                            )
-                          ],
-                        )),
-                    Expanded(
-                      flex: 1,
-                      child: StatusBadge(
-                        color: Pallete.activeColor,
-                        text: Text(
-                          "Aktif",
-                          maxLines: 1,
-                          style: Get.textTheme.bodyText1?.copyWith(color: Pallete.white),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: Get.width,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                flex: 4,
+                                child: GetBuilder<AuthController>(
+                                    init: Get.find<AuthController>(),
+                                    builder: (auth) {
+                                      return Text(
+                                        "Halo, ${auth.userData?.name}",
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: Get.textTheme.headline4?.copyWith(
+                                            fontWeight: FontWeight.w700, color: Pallete.black),
+                                      );
+                                    }),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: GetBuilder<ResearchController>(
+                                    init: Get.find<ResearchController>(),
+                                    builder: (res) {
+                                      if (res.masaStudi == null) {
+                                        return Shimmer.fromColors(
+                                          baseColor: Pallete.mediumLightGrey,
+                                          highlightColor: Colors.grey[300]!,
+                                          direction: ShimmerDirection.ltr,
+                                          period: Duration(seconds: 2),
+                                          child: StatusBadge(
+                                            color: Pallete.darkGrey,
+                                            text: Padding(
+                                              padding: const EdgeInsets.all(4.0),
+                                              child: Text(
+                                                "Waiting",
+                                                maxLines: 1,
+                                                style: Get.textTheme.bodyText1
+                                                    ?.copyWith(color: Pallete.white),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      } else {
+                                        return StatusBadge(
+                                          color: res.masaStudi?.status?.toUpperCase() == "IN STUDI"
+                                              ? Pallete.activeColor
+                                              : const Color.fromARGB(255, 177, 18, 6),
+                                          text: Padding(
+                                            padding: const EdgeInsets.all(4.0),
+                                            child: Text(
+                                              res.masaStudi?.status?.toUpperCase() == "IN STUDI"
+                                                  ? "Aktif"
+                                                  : "Tidak Aktif",
+                                              maxLines: 1,
+                                              textAlign: TextAlign.center,
+                                              style: Get.textTheme.bodyText1
+                                                  ?.copyWith(color: Pallete.white),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    }),
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                    )
-                  ],
-                ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          "Selamat datang di SisKa-NG",
+                          style: Get.textTheme.bodyText1,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      )
+                    ],
+                  ),
+                ],
               ),
             ),
             Container(
