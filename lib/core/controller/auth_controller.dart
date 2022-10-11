@@ -15,7 +15,7 @@ class AuthController extends GetxController {
     await AuthService().login(FormData({"username": username, "password": password})).then((value) {
       userData = value;
       value.toJson().forEach((key, value) {
-        authPref.write(key, value);
+        authPref.write(key, value.toString());
       });
       update();
     }).catchError((error) {

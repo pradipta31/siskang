@@ -63,6 +63,7 @@ class LoginPage extends StatelessWidget {
                                   },
                                   onSaved: (newValue) {
                                     auth.username = newValue;
+                                    auth.update();
                                   },
                                 ),
                               ),
@@ -90,6 +91,7 @@ class LoginPage extends StatelessWidget {
                                   },
                                   onSaved: (newValue) {
                                     auth.password = newValue;
+                                    auth.update();
                                   },
                                 ),
                               ),

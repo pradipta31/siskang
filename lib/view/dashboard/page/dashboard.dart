@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:another_stepper/dto/stepper_data.dart';
 import 'package:another_stepper/widgets/vertical_stepper.dart';
 import 'package:flutter/material.dart';
@@ -199,41 +201,51 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
                   const SizedBox(
                     height: 20,
                   ),
-                  ListView.builder(
-                    itemCount: _dummyData().length,
-                    physics: const NeverScrollableScrollPhysics(),
-                    padding: EdgeInsets.zero,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemBuilder: (context, index) => VerticalStepperItem(
-                      item: StepperData(
-                          title: _dummyData()[index].first, subtitle: _dummyData()[index].last),
-                      index: index,
-                      totalLength: _dummyData().length,
-                      gap: 30,
-                      activeIndex: 2,
-                      isInverted: false,
-                      activeBarColor: Pallete.primaryLight,
-                      inActiveBarColor: Colors.grey,
-                      barWidth: 2,
-                      dotWidget: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Pallete.primaryLight,
-                        ),
-                        child: Center(
-                          child: Text(
-                            "${index + 1}",
-                            style: Get.textTheme.bodyText1!.copyWith(color: Pallete.white),
+                  GetBuilder<ResearchController>(
+                      init: Get.find<ResearchController>(),
+                      builder: (research) {
+                        return ListView.builder(
+                          //TODO: Sementara static krn respon dari API bukan list
+                          itemCount: research.listedResearchimeline.length,
+                          physics: const NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemBuilder: (context, index) => VerticalStepperItem(
+                            item: StepperData(
+                                title: research.listedResearchimeline[index].name,
+                                subtitle: research.listedResearchimeline[index].date),
+                            index: index,
+                            totalLength: research.listedResearchimeline.length,
+                            gap: 30,
+                            activeIndex:
+                                research.listedResearchimeline.indexWhere((e) => !e.status) > 0
+                                    ? research.listedResearchimeline.indexWhere((e) => !e.status) -
+                                        1
+                                    : research.listedResearchimeline.length,
+                            isInverted: false,
+                            activeBarColor: Pallete.primaryLight,
+                            inActiveBarColor: Colors.grey,
+                            barWidth: 2,
+                            dotWidget: Container(
+                              height: 40,
+                              width: 40,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Pallete.primaryLight,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "${index + 1}",
+                                  style: Get.textTheme.bodyText1!.copyWith(color: Pallete.white),
+                                ),
+                              ),
+                            ),
+                            titleTextStyle: Get.textTheme.headline4!,
+                            subtitleTextStyle: Get.textTheme.bodyText1!,
                           ),
-                        ),
-                      ),
-                      titleTextStyle: Get.textTheme.headline4!,
-                      subtitleTextStyle: Get.textTheme.bodyText1!,
-                    ),
-                  ),
+                        );
+                      }),
                 ],
               ),
             )

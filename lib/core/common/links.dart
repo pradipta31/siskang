@@ -7,8 +7,8 @@ Uri getUriEndpoint(String authority, String unencodedPath, [Map<String, dynamic>
   return Uri.https(authority, unencodedPath, queryParam);
 }
 
-bool responseChecker(Response<dynamic> response) {
-  if (response.isOk && response.body != null && response.body != "null") {
+bool responseChecker(Response<dynamic> value) {
+  if (value.isOk && value.body != null && value.body != "null") {
     return true;
   }
   return false;

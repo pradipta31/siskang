@@ -81,6 +81,8 @@ class _MainDashboardState extends State<MainDashboard> {
         prodiId: widget._authController.userData!.prodiId!,
         nim: widget._authController.userData!.nim!,
         jabatan: widget._authController.userData!.jabatan!);
+
+    widget._researchController.getResearchTimelineByNim(nim: widget._authController.userData!.nim!);
   }
 
   @override
