@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:another_stepper/dto/stepper_data.dart';
 import 'package:another_stepper/widgets/vertical_stepper.dart';
 import 'package:flutter/material.dart';

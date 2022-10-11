@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:siskangv2/core/controller/auth_controller.dart';
+import 'package:siskangv2/core/controller/news_controller.dart';
 import 'package:siskangv2/core/controller/research_controller.dart';
 import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
@@ -13,6 +14,7 @@ import 'package:siskangv2/view/dashboard/widget/bottom_nav_bar.dart';
 class MainDashboard extends StatefulWidget {
   final _authController = Get.find<AuthController>();
   final _researchController = Get.find<ResearchController>();
+  final _newsController = Get.find<NewsController>();
   MainDashboard({Key? key}) : super(key: key);
 
   @override
@@ -83,6 +85,7 @@ class _MainDashboardState extends State<MainDashboard> {
         jabatan: widget._authController.userData!.jabatan!);
 
     widget._researchController.getResearchTimelineByNim(nim: widget._authController.userData!.nim!);
+    widget._newsController.getNews(idProdi: widget._authController.userData!.prodiId!);
   }
 
   @override

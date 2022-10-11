@@ -13,3 +13,7 @@ bool responseChecker(Response<dynamic> value) {
   }
   return false;
 }
+
+String htmlParserToText(String text) {
+  return text.replaceAll("(?s)<(\\w+)\\b[^<>]*>.*?</\\1>", "");
+}

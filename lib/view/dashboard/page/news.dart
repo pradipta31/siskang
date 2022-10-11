@@ -1,12 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:siskangv2/core/controller/news_controller.dart';
 import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
+import 'package:siskangv2/view/dashboard/widget/news_card.dart';
 
 class News extends StatelessWidget {
   const News({Key? key}) : super(key: key);
@@ -44,90 +42,69 @@ class News extends StatelessWidget {
       body: SizedBox(
         height: Get.height,
         width: Get.width,
-        child: ListView.builder(
-          itemCount: _dummyData().length,
-          shrinkWrap: true,
-          itemBuilder: (context, index) => Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: 100,
-                  height: 100,
-                  child: ClipOval(
-                    child: SizedBox.fromSize(
-                      size: const Size.fromRadius(20),
-                      child: Image.asset(
-                        _dummyData()[index]["image"]!,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Expanded(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: GetBuilder<NewsController>(builder: (news) {
+          return ListView.builder(
+            itemCount: news.news.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
-                      _dummyData()[index]["title"]!,
-                      style: Get.textTheme.headline6
-                          ?.copyWith(fontWeight: FontWeight.bold, color: Pallete.black),
+                    NewsCard(
+                      data: news.news[index],
                     ),
-                    Text(_dummyData()[index]["subtitle"]!,
-                        style: Get.textTheme.bodyText1?.copyWith(color: Pallete.darkGrey))
+                    const Divider(
+                      thickness: 2,
+                      color: Pallete.lightGrey,
+                    )
                   ],
-                ))
-              ],
-            ),
-          ),
-        ),
+                )),
+          );
+        }),
       ),
     ));
   }
 
-  List<Map<String, String>> _dummyData() {
-    return [
-      {
-        "image": "asset/images/logo.png",
-        "title": "Sed euismod consectetur sapien, nec mattis lacus lacinia.",
-        "subtitle":
-            "Maecenas vitae risus eget nisl malesuada efficitur sit amet sit amet odio. Ut ultricies feugiat."
-      },
-      {
-        "image": "asset/images/logo.png",
-        "title": "Sed euismod consectetur sapien, nec mattis lacus lacinia.",
-        "subtitle":
-            "Maecenas vitae risus eget nisl malesuada efficitur sit amet sit amet odio. Ut ultricies feugiat."
-      },
-      {
-        "image": "asset/images/logo.png",
-        "title": "Sed euismod consectetur sapien, nec mattis lacus lacinia.",
-        "subtitle":
-            "Maecenas vitae risus eget nisl malesuada efficitur sit amet sit amet odio. Ut ultricies feugiat."
-      },
-      {
-        "image": "asset/images/logo.png",
-        "title": "Sed euismod consectetur sapien, nec mattis lacus lacinia.",
-        "subtitle":
-            "Maecenas vitae risus eget nisl malesuada efficitur sit amet sit amet odio. Ut ultricies feugiat."
-      },
-      {
-        "image": "asset/images/logo.png",
-        "title": "Sed euismod consectetur sapien, nec mattis lacus lacinia.",
-        "subtitle":
-            "Maecenas vitae risus eget nisl malesuada efficitur sit amet sit amet odio. Ut ultricies feugiat."
-      },
-      {
-        "image": "asset/images/logo.png",
-        "title": "Sed euismod consectetur sapien, nec mattis lacus lacinia.",
-        "subtitle":
-            "Maecenas vitae risus eget nisl malesuada efficitur sit amet sit amet odio. Ut ultricies feugiat."
-      }
-    ];
-  }
+  // List<Map<String, String>> _dummyData() {
+  //   return [
+  //     {
+  //       "image": "asset/images/logo.png",
+  //       "title": "Sed euismod consectetur sapien, nec mattis lacus lacinia.",
+  //       "subtitle":
+  //           "Maecenas vitae risus eget nisl malesuada efficitur sit amet sit amet odio. Ut ultricies feugiat."
+  //     },
+  //     {
+  //       "image": "asset/images/logo.png",
+  //       "title": "Sed euismod consectetur sapien, nec mattis lacus lacinia.",
+  //       "subtitle":
+  //           "Maecenas vitae risus eget nisl malesuada efficitur sit amet sit amet odio. Ut ultricies feugiat."
+  //     },
+  //     {
+  //       "image": "asset/images/logo.png",
+  //       "title": "Sed euismod consectetur sapien, nec mattis lacus lacinia.",
+  //       "subtitle":
+  //           "Maecenas vitae risus eget nisl malesuada efficitur sit amet sit amet odio. Ut ultricies feugiat."
+  //     },
+  //     {
+  //       "image": "asset/images/logo.png",
+  //       "title": "Sed euismod consectetur sapien, nec mattis lacus lacinia.",
+  //       "subtitle":
+  //           "Maecenas vitae risus eget nisl malesuada efficitur sit amet sit amet odio. Ut ultricies feugiat."
+  //     },
+  //     {
+  //       "image": "asset/images/logo.png",
+  //       "title": "Sed euismod consectetur sapien, nec mattis lacus lacinia.",
+  //       "subtitle":
+  //           "Maecenas vitae risus eget nisl malesuada efficitur sit amet sit amet odio. Ut ultricies feugiat."
+  //     },
+  //     {
+  //       "image": "asset/images/logo.png",
+  //       "title": "Sed euismod consectetur sapien, nec mattis lacus lacinia.",
+  //       "subtitle":
+  //           "Maecenas vitae risus eget nisl malesuada efficitur sit amet sit amet odio. Ut ultricies feugiat."
+  //     }
+  //   ];
+  // }
 }
