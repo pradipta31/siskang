@@ -14,4 +14,10 @@ class NewsController extends GetxController {
       log(e.toString());
     });
   }
+
+  Future<NewsModel> getNewsById({required String idNews}) async {
+    return await NewsService().getNewsById(FormData({"id_news": idNews})).catchError((e) {
+      log(e.toString());
+    });
+  }
 }

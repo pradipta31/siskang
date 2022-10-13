@@ -13,4 +13,5 @@ class AssetsDirectory {
   static const calendarLinesPen = "asset/icons/calendar-lines-pen.svg";
   static const home = "asset/icons/home.svg";
   static const users = "asset/icons/users.svg";
+  static const calendarLines = "asset/icons/calendar-lines.svg";
 }

@@ -58,7 +58,6 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
           ],
         ),
         body: ListView(
-          // mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
               color: Pallete.backgroundUncover,
@@ -251,17 +250,6 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
         ),
       ),
     );
-  }
-
-  List<Set<String>> _dummyData() {
-    return [
-      {"Pengajuan Proposal", "09 Sep 2022"},
-      {"Upload Proposal", "09 Sep 2022"},
-      {"Ujian Proposal", "09 Sep 2022"},
-      {"Revisi Proposal", "TBA"},
-      {"Bimbingan Tesis", "TBA"},
-      {"Ujian Tesis", "TBA"}
-    ];
   }
 
   dynamic _menus(int index, bool isNeedWidget) {

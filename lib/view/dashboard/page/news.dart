@@ -52,8 +52,12 @@ class News extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    NewsCard(
-                      data: news.news[index],
+                    GestureDetector(
+                      onTap: () =>
+                          Get.toNamed('/news/detail', arguments: news.news[index].idBerita),
+                      child: NewsCard(
+                        data: news.news[index],
+                      ),
                     ),
                     const Divider(
                       thickness: 2,

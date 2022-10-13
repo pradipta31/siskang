@@ -14,4 +14,15 @@ class NewsService extends GetConnect {
       }
     }).catchError((e) => throw e);
   }
+
+  Future<NewsModel> getNewsById(FormData form) async {
+    return await post(getUriEndpoint(domain, "$staticPath/getNewsById").toString(), form)
+        .then((value) {
+      if (responseChecker(value)) {
+        return List<NewsModel>.from(jsonDecode(value.body).map((e) => NewsModel.fromJson(e))).first;
+      } else {
+        throw "Error getNewsById ${value.body} ${value.statusCode}";
+      }
+    }).catchError((e) => throw e);
+  }
 }
