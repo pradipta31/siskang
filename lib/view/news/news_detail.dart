@@ -7,6 +7,7 @@ import 'package:siskangv2/core/controller/news_controller.dart';
 import 'package:siskangv2/core/model/news_model.dart';
 import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
+import 'package:siskangv2/view/misc/image_viewer.dart';
 
 class NewsDetail extends StatelessWidget {
   const NewsDetail({Key? key}) : super(key: key);
@@ -130,15 +131,23 @@ class NewsDetail extends StatelessWidget {
                               BoxShadow(
                                   color: Pallete.darkGrey.withOpacity(0.16),
                                   blurRadius: 2,
-                                  offset: Offset(0, 3),
+                                  offset: const Offset(0, 3),
                                   spreadRadius: 4)
                             ]),
-                            child: Image.network(
-                              snapshot.data!.fotoBerita!,
-                              fit: BoxFit.cover,
-                              width: Get.width,
-                              height: 200,
-                              alignment: Alignment.topCenter,
+                            child: GestureDetector(
+                              onTap: () => Get.to(() => ImageViewer(
+                                  tag: snapshot.data!.idBerita!,
+                                  image: NetworkImage(snapshot.data!.fotoBerita!),
+                                  newsTitle: snapshot.data!.judulBerita!)),
+                              child: Hero(
+                                  tag: snapshot.data!.idBerita!,
+                                  child: Image.network(
+                                    snapshot.data!.fotoBerita!,
+                                    fit: BoxFit.cover,
+                                    width: Get.width,
+                                    height: 200,
+                                    alignment: Alignment.topCenter,
+                                  )),
                             ),
                           ),
                         ),
