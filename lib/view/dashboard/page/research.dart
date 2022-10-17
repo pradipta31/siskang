@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:siskangv2/core/common/links.dart';
 import 'package:siskangv2/core/controller/auth_controller.dart';
 import 'package:siskangv2/core/controller/research_controller.dart';
-import 'package:siskangv2/core/controller/schedule_controller.dart';
 import 'package:siskangv2/core/model/research_timeline_model.dart';
 import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
@@ -25,7 +24,7 @@ class Research extends StatelessWidget {
           title: Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              "Jadwal",
+              "Penelitian",
               style: Get.textTheme.headline4
                   ?.copyWith(color: Pallete.white, fontWeight: FontWeight.w700),
             ),
@@ -52,6 +51,7 @@ class Research extends StatelessWidget {
                   mainWidget: ListView.builder(
                     itemBuilder: (context, index) => ResearchCard(data: snapshot.data![index]),
                     itemCount: snapshot.data!.length,
+                    shrinkWrap: true,
                   ))),
         ),
       ),

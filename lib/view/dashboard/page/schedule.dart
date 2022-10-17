@@ -67,41 +67,4 @@ class _SchedulePageState extends State<SchedulePage> {
       ),
     );
   }
-
-  List<Map<String, dynamic>> _dummyData() {
-    return [
-      {
-        "name": "I Gede Pradipta Adi Nugraha, S.Kom",
-        "profile": "asset/images/logo.png",
-        "status": "Ujian Proposal",
-        "title":
-            "Pellentesque dui ante, consectetur in vulputate vel, vestibulum vitae sapien. Nunc feugiat libero",
-        "pembimbing": ["Dr. Gede Indrawan, S.T., M.T", "Dr. I Gede Aris Gunadi, S.S.I., M.Kom"],
-        "penguji": [
-          "Kadek Yota Ernanda, S.Kom., M.T., Ph.",
-          "Dr. Luh Joni Erawati Dewi, S.T., M.Pd"
-        ],
-        "date": "22-09-2022",
-        "timeStart": "10.00",
-        "timeEnd": "11.00",
-        "location": "ILKOM-1"
-      },
-      {
-        "name": "I Gede Pradipta Adi Nugraha, S.Kom",
-        "profile": "asset/images/logo.png",
-        "status": "Ujian Proposal",
-        "title":
-            "Pellentesque dui ante, consectetur in vulputate vel, vestibulum vitae sapien. Nunc feugiat libero",
-        "pembimbing": ["Dr. Gede Indrawan, S.T., M.T", "Dr. I Gede Aris Gunadi, S.S.I., M.Kom"],
-        "penguji": [
-          "Kadek Yota Ernanda, S.Kom., M.T., Ph.",
-          "Dr. Luh Joni Erawati Dewi, S.T., M.Pd"
-        ],
-        "date": "22-09-2022",
-        "timeStart": "10.00",
-        "timeEnd": "11.00",
-        "location": "ILKOM-1"
-      }
-    ];
-  }
 }
