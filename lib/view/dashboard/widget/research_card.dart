@@ -1,14 +1,19 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:siskangv2/core/model/schedule_model.dart';
+import 'package:siskangv2/components/main_action_button.dart';
+import 'package:siskangv2/core/model/research_timeline_model.dart';
 import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
 import 'package:siskangv2/widget/status_badge.dart';
 
-class ScheduleCard extends StatelessWidget {
-  final ScheduleModel data;
-  const ScheduleCard({Key? key, required this.data}) : super(key: key);
+class ResearchCard extends StatelessWidget {
+  final ResearchTimelineModel data;
+  const ResearchCard({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +45,7 @@ class ScheduleCard extends StatelessWidget {
                     child: SizedBox.fromSize(
                       size: const Size.fromRadius(48),
                       child: Image.network(
-                        data.fotoMhs!,
+                        data.foto!,
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -62,11 +67,13 @@ class ScheduleCard extends StatelessWidget {
                 Expanded(
                   flex: 3,
                   child: StatusBadge(
-                    color: Pallete.activeColor,
+                    color: data.statusPenelitian!.toLowerCase() == "aktif"
+                        ? Pallete.activeColor
+                        : const Color.fromARGB(255, 177, 18, 6),
                     text: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        data.jenisUjian!,
+                        data.statusPenelitian!,
                         maxLines: 2,
                         textAlign: TextAlign.center,
                         style: Get.textTheme.bodyText2?.copyWith(color: Pallete.white),
@@ -133,101 +140,34 @@ class ScheduleCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    AssetsDirectory.calendarLinesPen,
-                    fit: BoxFit.contain,
-                    height: 25,
-                    width: 25,
-                    color: Pallete.primaryLight,
-                  ),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  Expanded(
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: List.generate(
-                            2,
-                            (idx) => Text(
-                                  idx != 1
-                                      ? data.penguji1.toString().toUpperCase()
-                                      : data.penguji2.toString().toUpperCase(),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: Get.textTheme.headline6
-                                      ?.copyWith(fontWeight: FontWeight.w600, color: Pallete.black),
-                                ))),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    AssetsDirectory.alarmClock,
-                    fit: BoxFit.contain,
-                    height: 25,
-                    width: 25,
-                    color: Pallete.primaryLight,
-                  ),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  Expanded(
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            data.tgl.toString().toUpperCase(),
-                            style: Get.textTheme.headline6
-                                ?.copyWith(fontWeight: FontWeight.w600, color: Pallete.black),
-                          ),
-                          Text(
-                            "${data.waktuMulai} - ${data.waktuSelesai}".toString().toUpperCase(),
-                            style: Get.textTheme.headline6
-                                ?.copyWith(fontWeight: FontWeight.w600, color: Pallete.black),
-                          ),
-                        ]),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    AssetsDirectory.home,
-                    fit: BoxFit.contain,
-                    height: 25,
-                    width: 25,
-                    color: Pallete.primaryLight,
-                  ),
-                  const SizedBox(
-                    width: 16,
-                  ),
-                  Expanded(
-                      child: Text(
-                    data.ruangan.toString().toUpperCase(),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: Get.textTheme.headline6
-                        ?.copyWith(fontWeight: FontWeight.w600, color: Pallete.black),
-                  ))
-                ],
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+              child: SizedBox(
+                width: Get.width,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Flexible(
+                      fit: FlexFit.tight,
+                      child: MainActionButton(
+                        height: 50,
+                        borderRadius: 30,
+                        label: "Proposal",
+                        textColor: Pallete.white,
+                        color: Pallete.lightGrey,
+                      ),
+                    ),
+                    Flexible(
+                      fit: FlexFit.tight,
+                      child: MainActionButton(
+                        height: 50,
+                        borderRadius: 30,
+                        label: "Proposal",
+                        textColor: Pallete.white,
+                        color: Pallete.lightGrey,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             )
           ],

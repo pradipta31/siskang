@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:siskangv2/core/model/listed_research_timeline_model.dart';
 import 'package:siskangv2/core/model/masa_studi_model.dart';
@@ -30,6 +32,14 @@ class ResearchController extends GetxController {
       update();
     }).catchError((e) {
       throw e;
+    });
+  }
+
+  Future<List<ResearchTimelineModel>> getAllResearch({required String idProdi}) async {
+    return await ResearchService()
+        .getAllResearch(FormData({"id_prodi": idProdi}))
+        .catchError((error) {
+      log(error.toString());
     });
   }
 

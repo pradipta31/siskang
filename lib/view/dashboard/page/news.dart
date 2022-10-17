@@ -70,45 +70,4 @@ class News extends StatelessWidget {
       ),
     ));
   }
-
-  // List<Map<String, String>> _dummyData() {
-  //   return [
-  //     {
-  //       "image": "asset/images/logo.png",
-  //       "title": "Sed euismod consectetur sapien, nec mattis lacus lacinia.",
-  //       "subtitle":
-  //           "Maecenas vitae risus eget nisl malesuada efficitur sit amet sit amet odio. Ut ultricies feugiat."
-  //     },
-  //     {
-  //       "image": "asset/images/logo.png",
-  //       "title": "Sed euismod consectetur sapien, nec mattis lacus lacinia.",
-  //       "subtitle":
-  //           "Maecenas vitae risus eget nisl malesuada efficitur sit amet sit amet odio. Ut ultricies feugiat."
-  //     },
-  //     {
-  //       "image": "asset/images/logo.png",
-  //       "title": "Sed euismod consectetur sapien, nec mattis lacus lacinia.",
-  //       "subtitle":
-  //           "Maecenas vitae risus eget nisl malesuada efficitur sit amet sit amet odio. Ut ultricies feugiat."
-  //     },
-  //     {
-  //       "image": "asset/images/logo.png",
-  //       "title": "Sed euismod consectetur sapien, nec mattis lacus lacinia.",
-  //       "subtitle":
-  //           "Maecenas vitae risus eget nisl malesuada efficitur sit amet sit amet odio. Ut ultricies feugiat."
-  //     },
-  //     {
-  //       "image": "asset/images/logo.png",
-  //       "title": "Sed euismod consectetur sapien, nec mattis lacus lacinia.",
-  //       "subtitle":
-  //           "Maecenas vitae risus eget nisl malesuada efficitur sit amet sit amet odio. Ut ultricies feugiat."
-  //     },
-  //     {
-  //       "image": "asset/images/logo.png",
-  //       "title": "Sed euismod consectetur sapien, nec mattis lacus lacinia.",
-  //       "subtitle":
-  //           "Maecenas vitae risus eget nisl malesuada efficitur sit amet sit amet odio. Ut ultricies feugiat."
-  //     }
-  //   ];
-  // }
 }

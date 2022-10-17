@@ -13,7 +13,6 @@ class ResearchService extends GetConnect {
       if (responseChecker(value)) {
         return List<MasaStudiModel>.from(
             jsonDecode(value.body).map((e) => MasaStudiModel.fromJson(e)));
-        // return MasaStudiModel.fromJson(jsonDecode(value.body));
       } else {
         throw "Error getMasaStudi ${value.body}";
       }
@@ -31,6 +30,19 @@ class ResearchService extends GetConnect {
       } else {
         throw "Error getResearchTimelineByNim ${value.body}";
       }
-    });
+    }).catchError((error) => throw error);
+  }
+
+  Future<List<ResearchTimelineModel>> getAllResearch(FormData form) async {
+    return await post(
+            getUriEndpoint(domain, "$staticPath/get_timeline_penelitian").toString(), form)
+        .then((value) {
+      if (responseChecker(value)) {
+        return List<ResearchTimelineModel>.from(
+            jsonDecode(value.body).map((e) => ResearchTimelineModel.fromJson(e)));
+      } else {
+        throw "Error getAllResearch ${value.body} ${value.statusCode}";
+      }
+    }).catchError((error) => throw error);
   }
 }
