@@ -49,9 +49,13 @@ class Research extends StatelessWidget {
               future: _research.getAllResearch(idProdi: _auth.userData!.prodiId!),
               builder: (context, snapshot) => snapshotChecker(snapshot,
                   mainWidget: ListView.builder(
-                    itemBuilder: (context, index) => ResearchCard(data: snapshot.data![index]),
+                    itemBuilder: (context, index) => Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: ResearchCard(data: snapshot.data![index]),
+                    ),
                     itemCount: snapshot.data!.length,
                     shrinkWrap: true,
+                    padding: const EdgeInsets.all(16),
                   ))),
         ),
       ),

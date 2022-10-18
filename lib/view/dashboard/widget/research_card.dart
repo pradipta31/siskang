@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -19,16 +20,14 @@ class ResearchCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Pallete.backgroundUncover,
-          boxShadow: [
-            BoxShadow(
-                color: Pallete.darkGrey.withOpacity(0.3),
-                blurRadius: 5,
-                offset: const Offset(0, 3),
-                spreadRadius: 2)
-          ]),
+      decoration:
+          BoxDecoration(borderRadius: BorderRadius.circular(10), color: Pallete.white, boxShadow: [
+        BoxShadow(
+            color: Pallete.darkGrey.withOpacity(0.3),
+            blurRadius: 5,
+            offset: const Offset(0, 3),
+            spreadRadius: 2)
+      ]),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -55,17 +54,31 @@ class ResearchCard extends StatelessWidget {
                   width: 8,
                 ),
                 Expanded(
-                    flex: 5,
-                    child: Text(
-                      data.nama!,
-                      style: Get.textTheme.headline5
-                          ?.copyWith(fontWeight: FontWeight.bold, color: Pallete.primaryLight),
-                    )),
+                  flex: 5,
+                  child: SizedBox(
+                    width: Get.width,
+                    height: 50,
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: AutoSizeText(
+                        data.nama!,
+                        maxLines: 2,
+                        stepGranularity: 2.0,
+                        minFontSize: 14,
+                        textAlign: TextAlign.left,
+                        overflow: TextOverflow.ellipsis,
+                        style: Get.textTheme.headline5
+                            ?.copyWith(fontWeight: FontWeight.bold, color: Pallete.primaryLight),
+                      ),
+                    ),
+                  ),
+                ),
                 const SizedBox(
                   width: 8,
                 ),
-                Expanded(
-                  flex: 3,
+                Flexible(
+                  flex: 2,
+                  fit: FlexFit.tight,
                   child: StatusBadge(
                     color: data.statusPenelitian!.toLowerCase() == "aktif"
                         ? Pallete.activeColor
@@ -147,23 +160,30 @@ class ResearchCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Flexible(
-                      fit: FlexFit.tight,
+                      fit: FlexFit.loose,
                       child: MainActionButton(
-                        height: 50,
+                        height: 30,
+                        width: Get.width / 4,
                         borderRadius: 30,
                         label: "Proposal",
+                        fontSize: 12,
                         textColor: Pallete.white,
-                        color: Pallete.lightGrey,
+                        color: Pallete.selectedColor,
                       ),
                     ),
+                    const SizedBox(
+                      width: 8,
+                    ),
                     Flexible(
-                      fit: FlexFit.tight,
+                      fit: FlexFit.loose,
                       child: MainActionButton(
-                        height: 50,
+                        height: 30,
+                        width: Get.width / 4,
                         borderRadius: 30,
-                        label: "Proposal",
+                        fontSize: 12,
+                        label: "Timeline",
                         textColor: Pallete.white,
-                        color: Pallete.lightGrey,
+                        color: Pallete.selectedColor,
                       ),
                     ),
                   ],

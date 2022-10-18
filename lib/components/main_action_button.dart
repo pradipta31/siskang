@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
@@ -7,7 +8,7 @@ class MainActionButton extends StatelessWidget {
   Function()? onTap;
   String label;
   Color? textColor, border, color;
-  double? width, height, borderRadius;
+  double? width, height, borderRadius, fontSize;
   MainActionButton(
       {Key? key,
       this.onTap,
@@ -16,6 +17,7 @@ class MainActionButton extends StatelessWidget {
       this.border,
       this.color,
       this.width,
+      this.fontSize,
       this.borderRadius,
       this.height})
       : super(key: key);
@@ -39,7 +41,8 @@ class MainActionButton extends StatelessWidget {
           child: Center(
             child: Text(
               label,
-              style: Get.textTheme.subtitle1?.copyWith(color: textColor ?? Pallete.white),
+              style: Get.textTheme.subtitle1
+                  ?.copyWith(color: textColor ?? Pallete.white, fontSize: fontSize),
             ),
           ),
         ),
