@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:siskangv2/core/common/links.dart';
 import 'package:siskangv2/core/controller/auth_controller.dart';
 import 'package:siskangv2/core/controller/research_controller.dart';
 import 'package:siskangv2/core/model/research_timeline_model.dart';
@@ -10,12 +9,12 @@ import 'package:siskangv2/themes/color_pallete.dart';
 import 'package:siskangv2/view/dashboard/widget/research_card.dart';
 
 class Research extends StatelessWidget {
-  final _auth = Get.find<AuthController>();
-  final _research = Get.find<ResearchController>();
-  Research({Key? key}) : super(key: key);
+  const Research({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final _auth = Get.find<AuthController>();
+    final _research = Get.find<ResearchController>();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -47,8 +46,9 @@ class Research extends StatelessWidget {
           width: Get.width,
           child: FutureBuilder<List<ResearchTimelineModel>>(
               future: _research.getAllResearch(idProdi: _auth.userData!.prodiId!),
-              builder: (context, snapshot) => snapshotChecker(snapshot,
-                  mainWidget: ListView.builder(
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
+                  return ListView.builder(
                     itemBuilder: (context, index) => Padding(
                       padding: const EdgeInsets.only(bottom: 16),
                       child: ResearchCard(data: snapshot.data![index]),
@@ -56,7 +56,19 @@ class Research extends StatelessWidget {
                     itemCount: snapshot.data!.length,
                     shrinkWrap: true,
                     padding: const EdgeInsets.all(16),
-                  ))),
+                  );
+                } else if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else if (snapshot.connectionState == ConnectionState.done && !snapshot.hasData) {
+                  return const SizedBox();
+                } else {
+                  return const Center(
+                    child: Text("ERROR"),
+                  );
+                }
+              }),
         ),
       ),
     );

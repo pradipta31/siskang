@@ -6,6 +6,7 @@ import 'package:siskangv2/core/controller/news_controller.dart';
 import 'package:siskangv2/core/controller/research_controller.dart';
 import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
+import 'package:siskangv2/view/dashboard/page/account.dart';
 import 'package:siskangv2/view/dashboard/page/dashboard.dart';
 import 'package:siskangv2/view/dashboard/page/news.dart';
 import 'package:siskangv2/view/dashboard/page/research.dart';
@@ -37,7 +38,7 @@ class _MainDashboardState extends State<MainDashboard> {
             _currentIndex = value;
           });
         },
-        children: [MasterPage(), SchedulePage(), News(), Research(), MasterPage()],
+        children: const [MasterPage(), SchedulePage(), News(), Research(), Account()],
       ),
       bottomNavigationBar: BottomNavBar(
         currentIndex: _currentIndex,

@@ -10,7 +10,7 @@ class MasaStudiModel {
   String? startStudy;
   @JsonKey(name: "tglAkhirStudi")
   String? endStudy;
-  @JsonKey(name: "sisaMasaStudy")
+  @JsonKey(name: "sisaMasaStudi")
   String? remainingStudy;
   @JsonKey(name: "Nim")
   String? nim;

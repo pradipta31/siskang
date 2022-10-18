@@ -33,4 +33,6 @@ class AuthController extends GetxController {
       // userData = UserModel.fromJson(authPref.getValues());
     }
   }
+
+  String userPhoto(String photoName) => "https://siska-ng.site/assets/images/$photoName";
 }

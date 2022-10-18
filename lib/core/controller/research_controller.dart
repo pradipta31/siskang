@@ -9,6 +9,7 @@ import 'package:siskangv2/core/service/research_service.dart';
 class ResearchController extends GetxController {
   MasaStudiModel? masaStudi;
   ResearchTimelineModel? researchTimeline;
+  var allResearch = <ResearchTimelineModel>[].obs;
   List<ListedResearchimelineModel> listedResearchimeline = <ListedResearchimelineModel>[];
 
   void getMasaStudi({required String prodiId, required String nim, required String jabatan}) async {
@@ -36,11 +37,18 @@ class ResearchController extends GetxController {
   }
 
   Future<List<ResearchTimelineModel>> getAllResearch({required String idProdi}) async {
-    return await ResearchService()
-        .getAllResearch(FormData({"id_prodi": idProdi}))
-        .catchError((error) {
-      log(error.toString());
-    });
+    if (allResearch.isNotEmpty) {
+      return allResearch;
+    } else {
+      return await ResearchService()
+          .getAllResearch(FormData({"id_prodi": idProdi}))
+          .catchError((error) {
+        log(error.toString());
+      }).then((value) {
+        allResearch.assignAll(value);
+        return allResearch;
+      });
+    }
   }
 
   ResearchTimelineModel _listingTimeline(ResearchTimelineModel data) {
