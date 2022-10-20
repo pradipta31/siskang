@@ -8,8 +8,8 @@ class InitialBindings extends Bindings {
   @override
   void dependencies() {
     Get.put(AuthController());
-    Get.lazyPut(() => ResearchController());
-    Get.lazyPut(() => ScheduleController());
-    Get.lazyPut(() => NewsController());
+    Get.lazyPut(() => ResearchController(), fenix: true);
+    Get.lazyPut(() => ScheduleController(), fenix: true);
+    Get.lazyPut(() => NewsController(), fenix: true);
   }
 }
