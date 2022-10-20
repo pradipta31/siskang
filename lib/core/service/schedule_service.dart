@@ -6,7 +6,7 @@ import 'package:siskangv2/core/model/schedule_model.dart';
 
 class ScheduleService extends GetConnect {
   Future<List<ScheduleModel>> getSchedule(FormData form) async {
-    return await post(getUriEndpoint(domain, "$staticPath/getJadwal").toString(), form)
+    return await post(getUriEndpoint(domain, "$staticPath/getJadwal").toString(), null)
         .then((value) {
       if (responseChecker(value)) {
         return List<ScheduleModel>.from(

@@ -9,7 +9,7 @@ class ScheduleController extends GetxController {
 
   void getSchedule({required String nim, required String idProdi}) async {
     await ScheduleService().getSchedule(FormData({'nim': nim, 'id_prodi': idProdi})).then((value) {
-      schedule.assignAll(value.where((e) => e.nim == nim));
+      schedule.assignAll(value);
       update();
     }).catchError((e) {
       log(e.toString());

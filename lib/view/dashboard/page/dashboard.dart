@@ -222,7 +222,7 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
                             //         1
                             //     : research.listedResearchimeline.length,
                             isInverted: false,
-                            activeBarColor: Colors.red,
+                            activeBarColor: Pallete.primaryLight,
                             inActiveBarColor: Colors.grey,
                             barWidth: 2,
                             dotWidget: Container(

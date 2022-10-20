@@ -287,7 +287,9 @@ class _AccountState extends State<Account> with SingleTickerProviderStateMixin {
                                           jabatan: _auth.userData!.jabatan!,
                                           nim: _auth.userData!.nim!,
                                           token: "LogOut")
-                                      .then((value) => Get.offAllNamed("/login"));
+                                      .then((value) {
+                                    return Get.offAllNamed("/login");
+                                  });
                                 },
                               )
                             ],
