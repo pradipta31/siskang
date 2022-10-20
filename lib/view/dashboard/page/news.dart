@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:number_paginator/number_paginator.dart';
 import 'package:siskangv2/core/controller/news_controller.dart';
 import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
@@ -43,28 +44,35 @@ class News extends StatelessWidget {
         height: Get.height,
         width: Get.width,
         child: GetBuilder<NewsController>(builder: (news) {
-          return ListView.builder(
-            itemCount: news.news.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    GestureDetector(
-                      onTap: () =>
-                          Get.toNamed('/news/detail', arguments: news.news[index].idBerita),
-                      child: NewsCard(
-                        data: news.news[index],
-                      ),
-                    ),
-                    const Divider(
-                      thickness: 2,
-                      color: Pallete.lightGrey,
-                    )
-                  ],
-                )),
+          return Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: news.news.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          GestureDetector(
+                            onTap: () =>
+                                Get.toNamed('/news/detail', arguments: news.news[index].idBerita),
+                            child: NewsCard(
+                              data: news.news[index],
+                            ),
+                          ),
+                          const Divider(
+                            thickness: 2,
+                            color: Pallete.lightGrey,
+                          )
+                        ],
+                      )),
+                ),
+              ),
+            ],
           );
         }),
       ),

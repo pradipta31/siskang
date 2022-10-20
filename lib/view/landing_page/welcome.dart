@@ -70,7 +70,7 @@ class WelcomePage extends StatelessWidget {
                               textColor: Pallete.white,
                               onTap: () async {
                                 if (_authController.authPref.hasData("Id")) {
-                                  _authController
+                                  await _authController
                                       .checkLogin()
                                       .then((value) => Get.offNamed('/dashboard'));
                                 } else {

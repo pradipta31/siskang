@@ -23,6 +23,16 @@ class AuthController extends GetxController {
     });
   }
 
+  Future<void> logout({required String jabatan, required String nim, required String token}) async {
+    await AuthService()
+        .logout(FormData({"jabatan": jabatan, "nim": nim, "token": token}))
+        .then((value) {
+      authPref.erase();
+    }).catchError((e) {
+      log("Error logout $e");
+    });
+  }
+
   Future<void> checkLogin() async {
     if (authPref.hasData("Id")) {
       log("${authPref.read("Username")}, ${authPref.read("Passwordplain")}");

@@ -216,20 +216,24 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
                             totalLength: research.listedResearchimeline.length,
                             gap: 30,
                             activeIndex:
-                                research.listedResearchimeline.indexWhere((e) => !e.status) > 0
-                                    ? research.listedResearchimeline.indexWhere((e) => !e.status) -
-                                        1
-                                    : research.listedResearchimeline.length,
+                                research.listedResearchimeline.indexWhere((e) => !e.status),
+                            // research.listedResearchimeline.indexWhere((e) => !e.status) > 0
+                            //     ? research.listedResearchimeline.indexWhere((e) => !e.status) -
+                            //         1
+                            //     : research.listedResearchimeline.length,
                             isInverted: false,
-                            activeBarColor: Pallete.primaryLight,
+                            activeBarColor: Colors.red,
                             inActiveBarColor: Colors.grey,
                             barWidth: 2,
                             dotWidget: Container(
                               height: 40,
                               width: 40,
-                              decoration: const BoxDecoration(
+                              decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: Pallete.primaryLight,
+                                color: index <=
+                                        research.listedResearchimeline.indexWhere((e) => !e.status)
+                                    ? Pallete.primaryLight
+                                    : Colors.grey,
                               ),
                               child: Center(
                                 child: Text(

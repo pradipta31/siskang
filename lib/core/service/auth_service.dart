@@ -14,4 +14,9 @@ class AuthService extends GetConnect {
       }
     });
   }
+
+  Future<void> logout(FormData form) async {
+    await post(getUriEndpoint(domain, "$staticPath/token_update").toString(), form)
+        .catchError((e) => throw e);
+  }
 }
