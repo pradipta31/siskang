@@ -6,6 +6,7 @@ import 'package:siskangv2/core/controller/auth_controller.dart';
 import 'package:siskangv2/core/controller/research_controller.dart';
 import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
+import 'package:siskangv2/view/misc/image_viewer.dart';
 import 'package:siskangv2/widget/status_badge.dart';
 
 class Account extends StatefulWidget {
@@ -64,12 +65,22 @@ class _AccountState extends State<Account> with SingleTickerProviderStateMixin {
                         child: GetBuilder<AuthController>(
                             init: Get.find<AuthController>(),
                             builder: (auth) {
-                              return ClipOval(
-                                child: SizedBox.fromSize(
-                                  size: const Size.fromRadius(48),
-                                  child: Image.network(
-                                    auth.userPhoto("18e64045a898fbfe78c2e9a441ffe75d.jpg"),
-                                    fit: BoxFit.fill,
+                              return GestureDetector(
+                                onTap: () => Get.to(() => ImageViewer(
+                                    tag: auth.userData!.id!,
+                                    image: NetworkImage(auth.userPhoto(auth.userData!.photo!)),
+                                    newsTitle: auth.userData!.name!)),
+                                child: ClipOval(
+                                  child: SizedBox.fromSize(
+                                    size: const Size.fromRadius(48),
+                                    child: Hero(
+                                      tag: auth.userData!.id!,
+                                      child: Image.network(
+                                        auth.userPhoto(auth.userData!.photo!),
+                                        fit: BoxFit.cover,
+                                        alignment: Alignment.topCenter,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               );

@@ -18,13 +18,11 @@ class NewsCard extends StatelessWidget {
         SizedBox(
           width: 100,
           height: 100,
-          child: ClipOval(
-            child: SizedBox.fromSize(
-              size: const Size.fromRadius(20),
-              child: Image.network(
-                data.fotoBerita!,
-                fit: BoxFit.fill,
-              ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.network(
+              data.fotoBerita!,
+              fit: BoxFit.cover,
             ),
           ),
         ),
