@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:siskangv2/core/common/links.dart';
 import 'package:siskangv2/core/model/schedule_model.dart';
 import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
@@ -189,12 +190,14 @@ class ScheduleCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            data.tgl.toString().toUpperCase(),
+                            // data.tgl.toString().toUpperCase(),
+                            dateToString(date: stringToDate(date: data.tgl.toString()))
+                                .toUpperCase(),
                             style: Get.textTheme.headline6
                                 ?.copyWith(fontWeight: FontWeight.w600, color: Pallete.black),
                           ),
                           Text(
-                            "${data.waktuMulai} - ${data.waktuSelesai}".toString().toUpperCase(),
+                            "${timeToString(time: stringToTime(time: data.waktuMulai!), context: context)} - ${timeToString(time: stringToTime(time: data.waktuSelesai!, format: "HH-mm"), context: context)}",
                             style: Get.textTheme.headline6
                                 ?.copyWith(fontWeight: FontWeight.w600, color: Pallete.black),
                           ),
