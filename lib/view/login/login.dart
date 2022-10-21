@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:siskangv2/components/main_action_button.dart';
 import 'package:siskangv2/core/controller/auth_controller.dart';
-import 'package:siskangv2/view/dashboard/main_dashboard.dart';
 
 class LoginPage extends StatelessWidget {
   final GlobalKey<FormState> _formLogin = GlobalKey<FormState>();

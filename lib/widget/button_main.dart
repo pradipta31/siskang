@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
+// ignore: must_be_immutable
 class ButtonMain extends StatelessWidget {
   double height;
   double width;
@@ -27,16 +26,16 @@ class ButtonMain extends StatelessWidget {
       height: height,
       width: width,
       decoration: BoxDecoration(
-          color: buttonColor??const Color.fromARGB(255, 34, 74, 134),
-          borderRadius: BorderRadius.all(Radius.circular(borderRadius??10.0))),
+          color: buttonColor ?? const Color.fromARGB(255, 34, 74, 134),
+          borderRadius: BorderRadius.all(Radius.circular(borderRadius ?? 10.0))),
       child: Center(
         child: Text(
           text,
           style: TextStyle(
               fontSize: 17.0,
               fontFamily: 'Lora',
-              color: textColor??const Color.fromARGB(255, 226, 225, 225)),
-          textAlign: alignText??TextAlign.center,
+              color: textColor ?? const Color.fromARGB(255, 226, 225, 225)),
+          textAlign: alignText ?? TextAlign.center,
         ),
       ),
     );

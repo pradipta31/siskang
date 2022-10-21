@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:number_paginator/number_paginator.dart';
 import 'package:siskangv2/core/controller/news_controller.dart';
 import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';

@@ -14,14 +14,16 @@ class UnderlineInputText extends StatelessWidget {
   TextAlign textAlign;
 
   UnderlineInputText(
-      {this.textEditingController,
+      {Key? key,
+      this.textEditingController,
       this.readOnly = false,
       this.maxLines,
       this.initValue,
       this.hint,
       this.onChanged,
       this.keyboardType = TextInputType.text,
-      this.textAlign = TextAlign.left});
+      this.textAlign = TextAlign.left})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class UnderlineInputText extends StatelessWidget {
       style: Get.textTheme.subtitle1!.copyWith(fontSize: 14),
       decoration: InputDecoration(
         isDense: true,
-        contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
         hintText: hint,
         fillColor: Pallete.transparent,
         focusedBorder: const UnderlineInputBorder(

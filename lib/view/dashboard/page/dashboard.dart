@@ -102,7 +102,7 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
                                           baseColor: Pallete.mediumLightGrey,
                                           highlightColor: Colors.grey[300]!,
                                           direction: ShimmerDirection.ltr,
-                                          period: Duration(seconds: 2),
+                                          period: const Duration(seconds: 2),
                                           child: StatusBadge(
                                             color: Pallete.darkGrey,
                                             text: Padding(
@@ -148,7 +148,7 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
                           style: Get.textTheme.bodyText1,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       )
                     ],
@@ -202,7 +202,6 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
                       init: Get.find<ResearchController>(),
                       builder: (research) {
                         return ListView.builder(
-                          //TODO: Sementara static krn respon dari API bukan list
                           itemCount: research.listedResearchimeline.length,
                           physics: const NeverScrollableScrollPhysics(),
                           padding: EdgeInsets.zero,

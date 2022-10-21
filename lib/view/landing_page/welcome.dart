@@ -4,15 +4,16 @@ import 'package:get/get.dart';
 import 'package:siskangv2/components/main_action_button.dart';
 import 'package:siskangv2/core/controller/auth_controller.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
-import 'package:siskangv2/view/dashboard/main_dashboard.dart';
 import 'package:siskangv2/view/login/login.dart';
 
 class WelcomePage extends StatelessWidget {
   final _authController = Get.find<AuthController>();
+
+  WelcomePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
         statusBarColor: Pallete.transparent, statusBarIconBrightness: Brightness.light));
     return Scaffold(
       body: Container(

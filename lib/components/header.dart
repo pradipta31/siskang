@@ -7,7 +7,7 @@ class HeaderMain extends StatelessWidget {
   final IconData iconData;
   final Function? onBack;
   final Widget? trailingIcon;
-  HeaderMain(
+  const HeaderMain(
       {Key? key,
       required this.title,
       this.iconData = Icons.arrow_back_sharp,
@@ -24,7 +24,7 @@ class HeaderMain extends StatelessWidget {
         BoxShadow(
             color: Pallete.darkGrey.withOpacity(0.16),
             blurRadius: 6,
-            offset: Offset(0, 3),
+            offset: const Offset(0, 3),
             spreadRadius: 4)
       ]),
       child: Stack(

@@ -76,7 +76,7 @@ class _MainDashboardState extends State<MainDashboard> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
         statusBarColor: Pallete.primaryLight, statusBarIconBrightness: Brightness.light));
 

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:siskangv2/core/common/links.dart';
 import 'package:siskangv2/core/model/news_model.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
 import 'package:html/parser.dart';

@@ -1,17 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
 
+// ignore: must_be_immutable
 class BorderedInputText extends StatelessWidget {
   Function(dynamic)? data;
   String? hint;
   bool addSuffix;
   TextEditingController? textEditingController;
   bool readOnly;
-  var maxLines;
-  var initValue;
-  var textAlign;
+  dynamic maxLines;
+  dynamic initValue;
+  dynamic textAlign;
   bool isObsecure;
   IconData? suffixIcon;
   TextInputType? type;
