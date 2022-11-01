@@ -6,6 +6,7 @@ import 'package:siskangv2/core/controller/auth_controller.dart';
 import 'package:siskangv2/core/controller/research_controller.dart';
 import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
+import 'package:siskangv2/view/account/page/edit_profile.dart';
 import 'package:siskangv2/view/misc/image_viewer.dart';
 import 'package:siskangv2/widget/status_badge.dart';
 
@@ -229,7 +230,9 @@ class _AccountState extends State<Account> with SingleTickerProviderStateMixin {
                                 title: "Profile Setting",
                                 icon: SvgPicture.asset(AssetsDirectory.user2,
                                     color: Pallete.primaryLight),
-                                onTap: () {},
+                                onTap: () {
+                                  Get.to(() => const EditProfile());
+                                },
                               ),
                               const SizedBox(
                                 height: 8,
