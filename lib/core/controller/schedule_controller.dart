@@ -15,4 +15,41 @@ class ScheduleController extends GetxController {
       log(e.toString());
     });
   }
+
+  int lengthOfSearchedList(String? search) {
+    if (search != null && search.isNotEmpty) {
+      if (!search.isBlank!) {
+        return schedule
+            .where((e) {
+              if (e.judul?.toUpperCase().contains(search.toUpperCase()) ?? false) {
+                return true;
+              } else if (e.nama?.toUpperCase().contains(search.toUpperCase()) ?? false) {
+                return true;
+              } else {
+                return false;
+              }
+            })
+            .toList()
+            .length;
+      }
+    }
+    return schedule.length;
+  }
+
+  List<ScheduleModel> scheduleData(String? search) {
+    if (search != null && search.isNotEmpty) {
+      if (!search.isBlank!) {
+        return schedule.where((e) {
+          if (e.judul?.toUpperCase().contains(search.toUpperCase()) ?? false) {
+            return true;
+          } else if (e.nama?.toUpperCase().contains(search.toUpperCase()) ?? false) {
+            return true;
+          } else {
+            return false;
+          }
+        }).toList();
+      }
+    }
+    return schedule;
+  }
 }

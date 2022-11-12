@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 class SearchBarComponent extends StatelessWidget {
   final String? hint;
+  final FocusNode? focusNode;
   final Function(String value)? searchQuery;
-  const SearchBarComponent({Key? key, this.hint, this.searchQuery}) : super(key: key);
+  const SearchBarComponent({Key? key, this.hint, this.searchQuery, this.focusNode})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +18,7 @@ class SearchBarComponent extends StatelessWidget {
             searchQuery!(value);
           }
         },
+        focusNode: focusNode,
         decoration: InputDecoration(
             prefixIcon: Icon(
               Icons.search,
