@@ -13,6 +13,7 @@ ListedResearchimelineModel _$ListedResearchimelineModelFromJson(
       name: json['name'] as String?,
       date: json['date'] as String?,
       status: json['status'] as bool? ?? false,
+      statusText: json['statusText'] as String?,
     );
 
 Map<String, dynamic> _$ListedResearchimelineModelToJson(
@@ -22,4 +23,5 @@ Map<String, dynamic> _$ListedResearchimelineModelToJson(
       'name': instance.name,
       'date': instance.date,
       'status': instance.status,
+      'statusText': instance.statusText,
     };

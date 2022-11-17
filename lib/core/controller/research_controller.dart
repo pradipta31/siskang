@@ -30,9 +30,6 @@ class ResearchController extends GetxController {
       researchTimeline!.listedTimeline!.forEach((key, value) {
         listedResearchimeline.add(ListedResearchimelineModel.fromJson(value));
       });
-      log(listedResearchimeline
-          .indexWhere((e) => e.date!.toLowerCase().startsWith('un', 0))
-          .toString());
       update();
     }).catchError((e) {
       throw e;
@@ -60,121 +57,133 @@ class ResearchController extends GetxController {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 0,
         "name": "Upload Proposal",
         "date": data.proposalUploadDate?.toLowerCase().startsWith('un', 0) ?? false
-            ? "TBD"
+            ? null
             : data.proposalUploadDate,
-        "status": !data.proposalUploadDate!.toLowerCase().startsWith('un', 0)
+        "status": !data.proposalUploadDate!.toLowerCase().startsWith('un', 0),
+        "statusText":
+            !data.proposalUploadDate!.toLowerCase().startsWith('un', 0) ? null : "Uploaded"
       },
       "1": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 1,
         "name": "Pengajuan Proposal",
         "date": data.proposalSubmissionDate?.toLowerCase().startsWith('un', 0) ?? false
-            ? "TBD"
+            ? null
             : data.proposalSubmissionDate,
-        "status": !data.proposalSubmissionStat!.toLowerCase().startsWith('un', 0)
+        "status": !data.proposalSubmissionStat!.toLowerCase().startsWith('un', 0),
+        "statusText": data.proposalSubmissionStat
       },
       "2": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 2,
         "name": "Verifikasi Proposal",
         "date": data.proposalVerifDate?.toLowerCase().startsWith('un', 0) ?? false
-            ? "TBD"
+            ? null
             : data.proposalVerifDate,
-        "status": !data.proposalVerifDate!.toLowerCase().startsWith('un', 0)
+        "status": !data.proposalVerifDate!.toLowerCase().startsWith('un', 0),
+        "statusText": null
       },
       "3": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 2,
         "name": "Verifikasi Kelayakan Proposal",
         "date": data.eligibilityVerifDate?.toLowerCase().startsWith('un', 0) ?? false
-            ? "TBD"
+            ? null
             : data.eligibilityVerifDate,
-        "status": !data.eligibilityProposal!.toLowerCase().startsWith('un', 0)
+        "status": !data.eligibilityProposal!.toLowerCase().startsWith('un', 0),
+        "statusText": data.eligibilityProposal
       },
       "4": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 2,
         "name": "Ujian Proposal",
         "date": data.proposalVerifDate?.toLowerCase().startsWith('un', 0) ?? false
-            ? "TBD"
+            ? null
             : data.proposalVerifDate,
-        "status": !data.proposalTestVerif!.toLowerCase().startsWith('un', 0)
+        "status": !data.proposalTestVerif!.toLowerCase().startsWith('un', 0),
+        "statusText": data.proposalTestVerif
       },
       "5": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 2,
         "name": "Revisi Proposal",
         "date": data.proposalRevVerifDate?.toLowerCase().startsWith('un', 0) ?? false
-            ? "TBD"
+            ? null
             : data.proposalRevVerifDate,
-        "status": !data.proposalRevVerif!.toLowerCase().startsWith('un', 0)
+        "status": !data.proposalRevVerif!.toLowerCase().startsWith('un', 0),
+        "statusText": data.proposalRevVerif
       },
       "6": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 2,
         "name": "Upload Pra Tesis",
         "date": data.preThesisUpDate?.toLowerCase().startsWith('un', 0) ?? false
-            ? "TBD"
+            ? null
             : data.preThesisUpDate,
-        "status": !data.preThesisUpDate!.toLowerCase().startsWith('un', 0)
+        "status": !data.preThesisUpDate!.toLowerCase().startsWith('un', 0),
+        "statusText": null
       },
       "7": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 3,
         "name": "Uji Kelayakan Pra Tesis",
         "date": data.preThesisEligVerifDate?.toLowerCase().startsWith('un', 0) ?? false
-            ? "TBD"
+            ? null
             : data.preThesisEligVerifDate,
-        "status": !data.preThesisEligVerif!.toLowerCase().startsWith('un', 0)
+        "status": !data.preThesisEligVerif!.toLowerCase().startsWith('un', 0),
+        "statusText": data.preThesisEligVerif
       },
       "8": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 3,
         "name": "Ujian Pra Tesis",
         "date": data.preThesisTestStatDate?.toLowerCase().startsWith('un', 0) ?? false
-            ? "TBD"
+            ? null
             : data.preThesisTestStatDate,
-        "status": !data.preThesisTestStat!.toLowerCase().startsWith('un', 0)
+        "status": !data.preThesisTestStat!.toLowerCase().startsWith('un', 0),
+        "statusText": data.preThesisTestStat
       },
       "9": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 3,
         "name": "Revisi Pra Tesis",
         "date": data.tglStatusPratesisPevisi?.toLowerCase().startsWith('un', 0) ?? false
-            ? "TBD"
+            ? null
             : data.tglStatusPratesisPevisi,
-        "status": !data.preThesisRevStat!.toLowerCase().startsWith('un', 0)
+        "status": !data.preThesisRevStat!.toLowerCase().startsWith('un', 0),
+        "statusText": data.preThesisRevStat
       },
       "10": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 4,
         "name": "Upload Tesis",
         "date": data.tglTesisUpload?.toLowerCase().startsWith('un', 0) ?? false
-            ? "TBD"
+            ? null
             : data.tglTesisUpload,
-        "status": !data.tglTesisUpload!.toLowerCase().startsWith('un', 0)
+        "status": !data.tglTesisUpload!.toLowerCase().startsWith('un', 0),
+        "statusText": null
       },
       "11": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 4,
         "name": "Verifikasi Kelayakan Tesis",
         "date": data.tglVerifikasiTesisKelayakan?.toLowerCase().startsWith('un', 0) ?? false
-            ? "TBD"
+            ? null
             : data.tglVerifikasiTesisKelayakan,
-        "status": !data.verifikasiTesisKelayakan!.toLowerCase().startsWith('un', 0)
+        "status": !data.verifikasiTesisKelayakan!.toLowerCase().startsWith('un', 0),
+        "statusText": data.verifikasiTesisKelayakan
       },
       "12": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 4,
         "name": "Ujian Tesis",
         "date": data.tglTesisUjian?.toLowerCase().startsWith('un', 0) ?? false
-            ? "TBD"
+            ? null
             : data.tglTesisUjian,
-        "status": !data.statusTesisUjian!.toLowerCase().startsWith('un', 0)
+        "status": !data.statusTesisUjian!.toLowerCase().startsWith('un', 0),
+        "statusText": data.verifikasiTesisKelayakan
       },
       "13": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 4,
         "name": "Revisi Tesis",
-        "date": !data.statusTesisUjian!.toLowerCase().startsWith('un', 0)
-            ? data.verifikasiTesisRevisi
-            : null,
-        "status": !data.verifikasiTesisRevisi!.toLowerCase().startsWith('un', 0)
+        "date": null,
+        "status": !data.verifikasiTesisRevisi!.toLowerCase().startsWith('un', 0),
+        "statusText": data.verifikasiTesisRevisi
       },
       "14": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 5,
         "name": "Done",
-        "date": !data.verifikasiTesisRevisi!.toLowerCase().startsWith('un', 0)
-            ? data.verifikasiTesisRevisi
-            : null,
-        "status": !data.verifikasiTesisRevisi!.toLowerCase().startsWith('un', 0)
+        "date": null,
+        "status": !data.verifikasiTesisRevisi!.toLowerCase().startsWith('un', 0),
+        "statusText": data.verifikasiTesisRevisi
       },
     };
     return data;

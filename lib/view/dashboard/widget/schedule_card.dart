@@ -48,124 +48,132 @@ class _ScheduleCardState extends State<ScheduleCard> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 15),
-            child: Container(
-              width: Get.width,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Pallete.backgroundUncover,
-                  boxShadow: [
-                    BoxShadow(
-                        color: Pallete.darkGrey.withOpacity(0.3),
-                        blurRadius: 5,
-                        offset: const Offset(0, 3),
-                        spreadRadius: 2)
-                  ]),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: ClipOval(
-                            child: SizedBox.fromSize(
-                              size: const Size.fromRadius(48),
-                              child: Image.network(
-                                widget.data.fotoMhs!,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Expanded(
-                            flex: 5,
-                            child: Text(
-                              widget.data.nama!,
-                              style: Get.textTheme.headline5?.copyWith(
-                                  fontWeight: FontWeight.bold, color: Pallete.primaryLight),
-                            )),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        Expanded(
-                          flex: 3,
-                          child: StatusBadge(
-                            color: Pallete.activeColor,
-                            text: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                widget.data.jenisUjian!,
-                                maxLines: 2,
-                                textAlign: TextAlign.center,
-                                style: Get.textTheme.bodyText2?.copyWith(color: Pallete.white),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      widget.data.judul.toString().toUpperCase(),
-                      style: Get.textTheme.headline5
-                          ?.copyWith(fontWeight: FontWeight.bold, color: Pallete.black),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    _expandedInfo()
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  isExpanded = !isExpanded;
-                  _runExpandCheck();
-                });
-              },
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          isExpanded = !isExpanded;
+          _runExpandCheck();
+        });
+      },
+      child: SizedBox(
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 15),
               child: Container(
-                width: 30,
-                height: 30,
+                width: Get.width,
                 decoration: BoxDecoration(
-                    shape: BoxShape.circle,
+                    borderRadius: BorderRadius.circular(10),
                     color: Pallete.backgroundUncover,
                     boxShadow: [
                       BoxShadow(
-                          color: Pallete.darkGrey.withOpacity(0.16),
-                          blurRadius: 6,
+                          color: Pallete.darkGrey.withOpacity(0.3),
+                          blurRadius: 5,
                           offset: const Offset(0, 3),
-                          spreadRadius: 4)
+                          spreadRadius: 2)
                     ]),
-                child: RotationTransition(
-                    turns: Tween(begin: 0.0, end: 0.5).animate(_animationController),
-                    child: const Icon(Icons.keyboard_arrow_up_rounded)),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: ClipOval(
+                              child: SizedBox.fromSize(
+                                size: const Size.fromRadius(48),
+                                child: Image.network(
+                                  widget.data.fotoMhs!,
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Expanded(
+                              flex: 5,
+                              child: Text(
+                                widget.data.nama!,
+                                style: Get.textTheme.headline5?.copyWith(
+                                    fontWeight: FontWeight.bold, color: Pallete.primaryLight),
+                              )),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Expanded(
+                            flex: 3,
+                            child: StatusBadge(
+                              color: Pallete.activeColor,
+                              text: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  widget.data.jenisUjian!,
+                                  maxLines: 2,
+                                  textAlign: TextAlign.center,
+                                  style: Get.textTheme.bodyText2?.copyWith(color: Pallete.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        widget.data.judul.toString().toUpperCase(),
+                        style: Get.textTheme.headline5
+                            ?.copyWith(fontWeight: FontWeight.bold, color: Pallete.black),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      _expandedInfo()
+                    ],
+                  ),
+                ),
               ),
             ),
-          )
-        ],
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    isExpanded = !isExpanded;
+                    _runExpandCheck();
+                  });
+                },
+                child: Container(
+                  width: 30,
+                  height: 30,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Pallete.backgroundUncover,
+                      boxShadow: [
+                        BoxShadow(
+                            color: Pallete.darkGrey.withOpacity(0.16),
+                            blurRadius: 6,
+                            offset: const Offset(0, 3),
+                            spreadRadius: 4)
+                      ]),
+                  child: RotationTransition(
+                      turns: Tween(begin: 0.5, end: 1.0).animate(_animationController),
+                      child: const Icon(Icons.keyboard_arrow_down_rounded)),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

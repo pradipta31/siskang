@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:siskangv2/core/controller/auth_controller.dart';
-import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
+import 'package:siskangv2/view/account/page/update_password.dart';
 import 'package:siskangv2/view/account/widget/profile_textfield.dart';
 import 'package:siskangv2/view/misc/image_viewer.dart';
 import 'package:siskangv2/widget/button_main.dart';
 
 class EditProfile extends StatelessWidget {
-  const EditProfile({Key? key}) : super(key: key);
+  final AuthController _auth = Get.find<AuthController>();
+  EditProfile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +140,7 @@ class EditProfile extends StatelessWidget {
                         enabled: false,
                         border: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8))),
-                        initialValue: "938993790",
+                        initialValue: _auth.userData?.nim,
                         keyboardType: TextInputType.number,
                         textInputAction: TextInputAction.next,
                         title: Padding(
@@ -155,7 +155,7 @@ class EditProfile extends StatelessWidget {
                         hintText: "Masukkan Nama",
                         border: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8))),
-                        initialValue: "Nyen kaden",
+                        initialValue: _auth.userData?.name,
                         keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
                         title: Padding(
@@ -170,7 +170,7 @@ class EditProfile extends StatelessWidget {
                         hintText: "Masukkan Email",
                         border: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8))),
-                        initialValue: "Nyen kaden",
+                        initialValue: _auth.userData?.email,
                         keyboardType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.next,
                         title: Padding(
@@ -185,7 +185,7 @@ class EditProfile extends StatelessWidget {
                         hintText: "Masukkan Nomor Handphone",
                         border: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8))),
-                        initialValue: "Nyen kaden",
+                        initialValue: "Unknown",
                         keyboardType: TextInputType.phone,
                         textInputAction: TextInputAction.done,
                         title: Padding(
@@ -196,57 +196,25 @@ class EditProfile extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: Text(
-                          "Ganti Password",
-                          style: Get.textTheme.headline5!.copyWith(fontWeight: FontWeight.bold),
+                        padding: const EdgeInsets.fromLTRB(0, 24, 0, 8),
+                        child: GestureDetector(
+                          onTap: () => Get.to(() => UpdatePassword()),
+                          child: Container(
+                            width: Get.width,
+                            color: Pallete.white,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                              child: ButtonMain(
+                                height: 50,
+                                width: Get.width,
+                                text: "Ganti Password",
+                                textColor: Pallete.white,
+                                buttonColor: Pallete.primaryLight,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                      ProfileTextfield(
-                        floatingLabelBehavior: FloatingLabelBehavior.never,
-                        hintText: "Masukkan Password Lama",
-                        border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8))),
-                        keyboardType: TextInputType.text,
-                        textInputAction: TextInputAction.next,
-                        obsecure: true,
-                        title: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Text("Password Lama",
-                              style:
-                                  Get.textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w600)),
-                        ),
-                      ),
-                      ProfileTextfield(
-                        floatingLabelBehavior: FloatingLabelBehavior.never,
-                        hintText: "Masukkan Password Baru",
-                        border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8))),
-                        keyboardType: TextInputType.text,
-                        textInputAction: TextInputAction.next,
-                        obsecure: true,
-                        title: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Text("Password Baru",
-                              style:
-                                  Get.textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w600)),
-                        ),
-                      ),
-                      ProfileTextfield(
-                        floatingLabelBehavior: FloatingLabelBehavior.never,
-                        hintText: "Ketik Ulang Password Baru",
-                        border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8))),
-                        keyboardType: TextInputType.text,
-                        textInputAction: TextInputAction.done,
-                        obsecure: true,
-                        title: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Text("Ketik Ulang Password Baru",
-                              style:
-                                  Get.textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w600)),
-                        ),
-                      ),
+                      )
                     ],
                   ),
                 ),

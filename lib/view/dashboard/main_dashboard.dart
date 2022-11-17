@@ -38,7 +38,13 @@ class _MainDashboardState extends State<MainDashboard> {
             _currentIndex = value;
           });
         },
-        children: const [MasterPage(), SchedulePage(), News(), Research(), Account()],
+        children: [
+          const MasterPage(),
+          const SchedulePage(),
+          News(),
+          const Research(),
+          const Account()
+        ],
       ),
       bottomNavigationBar: BottomNavBar(
         currentIndex: _currentIndex,

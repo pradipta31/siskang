@@ -56,16 +56,16 @@ class _SchedulePageState extends State<SchedulePage> {
                 },
               ),
               crossFadeState: !_showSearch ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-              duration: Duration(milliseconds: 200),
+              duration: const Duration(milliseconds: 200),
               firstCurve: Curves.fastOutSlowIn,
               secondCurve: Curves.fastOutSlowIn,
-              reverseDuration: Duration(microseconds: 200),
+              reverseDuration: const Duration(microseconds: 200),
               sizeCurve: Curves.linearToEaseOut,
             ),
           ),
           actions: [
             _showSearch
-                ? SizedBox()
+                ? const SizedBox()
                 : Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: GestureDetector(
