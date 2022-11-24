@@ -17,7 +17,7 @@ class ProfileTextfield extends StatelessWidget {
   bool enabled;
   bool obsecure;
   TextInputAction? textInputAction;
-  String Function(String?)? validator;
+  String? Function(String?)? validator;
   ValueChanged<dynamic>? onSaved;
 
   ProfileTextfield({

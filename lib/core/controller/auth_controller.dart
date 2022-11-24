@@ -28,6 +28,22 @@ class AuthController extends GetxController {
     });
   }
 
+  Future<void> changePassword(String oldPass, String newPass, String? reNewPass) async {
+    if (newPass == reNewPass) {
+      await AuthService()
+          .login(FormData({"username": username, "password": oldPass}))
+          .then((value) {
+        if (value.id != null || !value.id!.isBlank!) {
+          settingProfileAddDB(newPass);
+        } else {
+          throw "Password lama tidak sesuai";
+        }
+      }).catchError((e) => throw e.toString());
+    } else {
+      throw "Password baru tidak sesuai";
+    }
+  }
+
   Future<void> logout({required String jabatan, required String nim, required String token}) async {
     await AuthService()
         .logout(FormData({"jabatan": jabatan, "nim": nim, "token": token}))
@@ -63,19 +79,12 @@ class AuthController extends GetxController {
     });
   }
 
-  Future<void> settingProfileAddDB() async {
-    log({
-      "jabatan": tempUserData!.jabatan,
-      "nim": tempUserData!.nim,
-      "password": tempUserData!.password,
-      "no_telp": tempUserData!.phoneNum,
-      "foto": tempUserData!.photo
-    }.toString());
+  Future<void> settingProfileAddDB([String? password]) async {
     return await AuthService()
         .settingProfileAddDB(FormData({
       "jabatan": tempUserData!.jabatan,
       "nim": tempUserData!.nim,
-      "password": "2029101020",
+      "password": password,
       "no_telp": tempUserData!.phoneNum,
       "foto": tempUserData!.photo
     }))
@@ -84,7 +93,7 @@ class AuthController extends GetxController {
     });
   }
 
-  manipulateDoingUpdate() async {
+  Future manipulateDoingUpdate() async {
     if (tempUserData?.tempImage != null) {
       await uploadImage(tempUserData!.tempImage!).then((value) {
         tempUserData!.photo = value;
@@ -92,8 +101,8 @@ class AuthController extends GetxController {
         log("Failed add photo $e");
       });
     }
-    await updateProfile();
     await settingProfileAddDB();
+    userData = tempUserData;
   }
 
   String userPhoto(String photoName) => "https://siska-ng.site/assets/images/$photoName";

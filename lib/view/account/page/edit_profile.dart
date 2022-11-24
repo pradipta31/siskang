@@ -247,7 +247,7 @@ class _EditProfileState extends State<EditProfile> {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(0, 24, 0, 8),
                               child: GestureDetector(
-                                onTap: () => Get.to(() => const UpdatePassword()),
+                                onTap: () => Get.to(() => UpdatePassword()),
                                 child: Container(
                                   width: Get.width,
                                   color: Pallete.white,
@@ -297,11 +297,14 @@ class _EditProfileState extends State<EditProfile> {
     );
   }
 
-  _savedUpdate() {
+  _savedUpdate() async {
     if (_formKeyOne.currentState!.validate()) {
       // save
       _formKeyOne.currentState!.save();
-      widget._auth.manipulateDoingUpdate();
+      await widget._auth.manipulateDoingUpdate().then((value) {
+        widget._auth.tempUserData = null;
+        Get.back();
+      });
     }
   }
 

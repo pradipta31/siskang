@@ -230,8 +230,10 @@ class _AccountState extends State<Account> with SingleTickerProviderStateMixin {
                                 title: "Profile Setting",
                                 icon: SvgPicture.asset(AssetsDirectory.user2,
                                     color: Pallete.primaryLight),
-                                onTap: () {
-                                  Get.to(() => EditProfile());
+                                onTap: () async {
+                                  await Get.to(() => EditProfile())?.then((value) {
+                                    _auth.update();
+                                  });
                                 },
                               ),
                               const SizedBox(

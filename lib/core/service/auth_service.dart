@@ -15,6 +15,12 @@ class AuthService extends GetConnect {
     });
   }
 
+  Future<Map<String, dynamic>> checkPass(FormData form) async {
+    return await post(getUriEndpoint(domain, "$staticPath/login").toString(), form).then((value) {
+      return {"code": value.statusCode, "status": value.statusText};
+    });
+  }
+
   Future<void> logout(FormData form) async {
     await post(getUriEndpoint(domain, "$staticPath/token_update").toString(), form)
         .catchError((e) => throw e);
