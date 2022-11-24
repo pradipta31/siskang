@@ -18,7 +18,7 @@ class ProfileTextfield extends StatelessWidget {
   bool obsecure;
   TextInputAction? textInputAction;
   String Function(String?)? validator;
-  String Function(String?)? onSaved;
+  ValueChanged<dynamic>? onSaved;
 
   ProfileTextfield({
     Key? key,
@@ -45,26 +45,29 @@ class ProfileTextfield extends StatelessWidget {
       children: [
         title ?? const SizedBox(),
         TextFormField(
-            decoration: InputDecoration(
-                border: border,
-                labelText: labelText,
-                hintText: hintText,
-                fillColor:
-                    !enabled ? Pallete.lightGrey : context.theme.inputDecorationTheme.fillColor,
-                floatingLabelAlignment: floatingLabelAlignment,
-                floatingLabelBehavior: floatingLabelBehavior),
-            autovalidateMode: AutovalidateMode.onUserInteraction,
-            style: Get.textTheme.bodyText1,
-            cursorWidth: 2.0,
-            cursorColor: Get.theme.primaryColor,
-            obscureText: obsecure,
-            keyboardType: keyboardType,
-            maxLines: 1,
-            enabled: enabled,
-            initialValue: initialValue,
-            textInputAction: textInputAction,
-            validator: validator,
-            onSaved: onSaved),
+          decoration: InputDecoration(
+              border: border,
+              labelText: labelText,
+              hintText: hintText,
+              fillColor:
+                  !enabled ? Pallete.lightGrey : context.theme.inputDecorationTheme.fillColor,
+              floatingLabelAlignment: floatingLabelAlignment,
+              floatingLabelBehavior: floatingLabelBehavior),
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          style: Get.textTheme.bodyText1,
+          cursorWidth: 2.0,
+          cursorColor: Get.theme.primaryColor,
+          obscureText: obsecure,
+          keyboardType: keyboardType,
+          maxLines: 1,
+          enabled: enabled,
+          initialValue: initialValue,
+          textInputAction: textInputAction,
+          validator: validator,
+          onSaved: (value) {
+            if (onSaved != null) onSaved!(value);
+          },
+        ),
       ],
     );
   }

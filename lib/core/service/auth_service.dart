@@ -19,4 +19,21 @@ class AuthService extends GetConnect {
     await post(getUriEndpoint(domain, "$staticPath/token_update").toString(), form)
         .catchError((e) => throw e);
   }
+
+  Future<void> updateProfile(FormData form, String id) async {
+    return await put(getUriEndpoint(domain, "/api/profile/$id").toString(), form).then((value) {
+      if (!responseChecker(value)) {
+        throw "Error update profile ${value.body}";
+      }
+    });
+  }
+
+  Future<void> settingProfileAddDB(FormData form) async {
+    return await post(getUriEndpoint(domain, "$staticPath/settingProfileAddDB").toString(), form)
+        .then((value) {
+      if (!responseChecker(value)) {
+        throw "Error settingProfileAddDB ${value.body}";
+      }
+    });
+  }
 }

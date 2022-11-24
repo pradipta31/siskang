@@ -1,15 +1,32 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+
+import 'package:siskangv2/components/image_picker_popup.dart';
 import 'package:siskangv2/core/controller/auth_controller.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
 import 'package:siskangv2/view/account/page/update_password.dart';
 import 'package:siskangv2/view/account/widget/profile_textfield.dart';
-import 'package:siskangv2/view/misc/image_viewer.dart';
 import 'package:siskangv2/widget/button_main.dart';
 
-class EditProfile extends StatelessWidget {
+class EditProfile extends StatefulWidget {
   final AuthController _auth = Get.find<AuthController>();
   EditProfile({Key? key}) : super(key: key);
+
+  @override
+  State<EditProfile> createState() => _EditProfileState();
+}
+
+class _EditProfileState extends State<EditProfile> {
+  final GlobalKey<FormState> _formKeyOne = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    widget._auth.tempUserData = widget._auth.userData;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,12 +95,18 @@ class EditProfile extends StatelessWidget {
                                         child: SizedBox.fromSize(
                                           size: const Size.fromRadius(50),
                                           child: Hero(
-                                            tag: auth.userData!.id!,
-                                            child: Image.network(
-                                              auth.userPhoto(auth.userData!.photo!),
-                                              fit: BoxFit.cover,
-                                              alignment: Alignment.topCenter,
-                                            ),
+                                            tag: auth.tempUserData!.id!,
+                                            child: auth.tempUserData!.tempImage != null
+                                                ? Image.file(
+                                                    File(auth.tempUserData!.tempImage!.path),
+                                                    fit: BoxFit.cover,
+                                                    alignment: Alignment.topCenter,
+                                                  )
+                                                : Image.network(
+                                                    auth.userPhoto(auth.tempUserData!.photo!),
+                                                    fit: BoxFit.cover,
+                                                    alignment: Alignment.topCenter,
+                                                  ),
                                           ),
                                         ),
                                       ),
@@ -91,11 +114,23 @@ class EditProfile extends StatelessWidget {
                                     Positioned(
                                       right: 0,
                                       child: GestureDetector(
-                                        onTap: () => Get.to(() => ImageViewer(
-                                            tag: auth.userData!.id!,
-                                            image:
-                                                NetworkImage(auth.userPhoto(auth.userData!.photo!)),
-                                            newsTitle: auth.userData!.name!)),
+                                        onTap: () async {
+                                          await Get.dialog(
+                                                  ImagePickerPopUp(
+                                                      width: Get.width * 0.8,
+                                                      children: _imagePickerList(),
+                                                      title: Text(
+                                                        "Ambil gambar menggunakan",
+                                                        style: Get.textTheme.headline5!
+                                                            .copyWith(color: Pallete.black),
+                                                      )),
+                                                  useSafeArea: true)
+                                              .then((value) async {
+                                            if (value != null) {
+                                              _imagePickerCommand(value);
+                                            }
+                                          });
+                                        },
                                         child: Container(
                                           width: 40,
                                           height: 40,
@@ -134,85 +169,103 @@ class EditProfile extends StatelessWidget {
                           style: Get.textTheme.headline5!.copyWith(fontWeight: FontWeight.bold),
                         ),
                       ),
-                      ProfileTextfield(
-                        floatingLabelBehavior: FloatingLabelBehavior.never,
-                        hintText: "Masukkan NIM",
-                        enabled: false,
-                        border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8))),
-                        initialValue: _auth.userData?.nim,
-                        keyboardType: TextInputType.number,
-                        textInputAction: TextInputAction.next,
-                        title: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Text("NIM",
-                              style:
-                                  Get.textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w600)),
-                        ),
-                      ),
-                      ProfileTextfield(
-                        floatingLabelBehavior: FloatingLabelBehavior.never,
-                        hintText: "Masukkan Nama",
-                        border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8))),
-                        initialValue: _auth.userData?.name,
-                        keyboardType: TextInputType.name,
-                        textInputAction: TextInputAction.next,
-                        title: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Text("Nama",
-                              style:
-                                  Get.textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w600)),
-                        ),
-                      ),
-                      ProfileTextfield(
-                        floatingLabelBehavior: FloatingLabelBehavior.never,
-                        hintText: "Masukkan Email",
-                        border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8))),
-                        initialValue: _auth.userData?.email,
-                        keyboardType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.next,
-                        title: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Text("Email",
-                              style:
-                                  Get.textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w600)),
-                        ),
-                      ),
-                      ProfileTextfield(
-                        floatingLabelBehavior: FloatingLabelBehavior.never,
-                        hintText: "Masukkan Nomor Handphone",
-                        border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(8))),
-                        initialValue: "Unknown",
-                        keyboardType: TextInputType.phone,
-                        textInputAction: TextInputAction.done,
-                        title: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
-                          child: Text("No. Hp",
-                              style:
-                                  Get.textTheme.bodyText1!.copyWith(fontWeight: FontWeight.w600)),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 24, 0, 8),
-                        child: GestureDetector(
-                          onTap: () => Get.to(() => UpdatePassword()),
-                          child: Container(
-                            width: Get.width,
-                            color: Pallete.white,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                              child: ButtonMain(
-                                height: 50,
-                                width: Get.width,
-                                text: "Ganti Password",
-                                textColor: Pallete.white,
-                                buttonColor: Pallete.primaryLight,
+                      Form(
+                        key: _formKeyOne,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ProfileTextfield(
+                              floatingLabelBehavior: FloatingLabelBehavior.never,
+                              hintText: "Masukkan NIM",
+                              enabled: false,
+                              border: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(8))),
+                              initialValue: widget._auth.tempUserData?.nim,
+                              keyboardType: TextInputType.number,
+                              textInputAction: TextInputAction.next,
+                              title: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 8),
+                                child: Text("NIM",
+                                    style: Get.textTheme.bodyText1!
+                                        .copyWith(fontWeight: FontWeight.w600)),
                               ),
                             ),
-                          ),
+                            ProfileTextfield(
+                              floatingLabelBehavior: FloatingLabelBehavior.never,
+                              hintText: "Masukkan Nama",
+                              border: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(8))),
+                              initialValue: widget._auth.tempUserData?.name,
+                              keyboardType: TextInputType.name,
+                              textInputAction: TextInputAction.next,
+                              onSaved: (p0) {
+                                widget._auth.tempUserData!.name = p0.toString();
+                              },
+                              title: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 8),
+                                child: Text("Nama",
+                                    style: Get.textTheme.bodyText1!
+                                        .copyWith(fontWeight: FontWeight.w600)),
+                              ),
+                            ),
+                            ProfileTextfield(
+                              floatingLabelBehavior: FloatingLabelBehavior.never,
+                              hintText: "Masukkan Email",
+                              border: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(8))),
+                              initialValue: widget._auth.tempUserData?.email,
+                              keyboardType: TextInputType.emailAddress,
+                              textInputAction: TextInputAction.next,
+                              onSaved: (p0) {
+                                widget._auth.tempUserData!.email = p0.toString();
+                              },
+                              title: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 8),
+                                child: Text("Email",
+                                    style: Get.textTheme.bodyText1!
+                                        .copyWith(fontWeight: FontWeight.w600)),
+                              ),
+                            ),
+                            ProfileTextfield(
+                              floatingLabelBehavior: FloatingLabelBehavior.never,
+                              hintText: "Masukkan Nomor Handphone",
+                              border: const OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(8))),
+                              initialValue: widget._auth.tempUserData?.phoneNum,
+                              keyboardType: TextInputType.phone,
+                              textInputAction: TextInputAction.done,
+                              onSaved: (value) {
+                                widget._auth.tempUserData?.phoneNum = value.toString();
+                              },
+                              title: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 8),
+                                child: Text("No. Hp",
+                                    style: Get.textTheme.bodyText1!
+                                        .copyWith(fontWeight: FontWeight.w600)),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 24, 0, 8),
+                              child: GestureDetector(
+                                onTap: () => Get.to(() => const UpdatePassword()),
+                                child: Container(
+                                  width: Get.width,
+                                  color: Pallete.white,
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+                                    child: ButtonMain(
+                                      height: 50,
+                                      width: Get.width,
+                                      text: "Ganti Password",
+                                      textColor: Pallete.white,
+                                      buttonColor: Pallete.primaryLight,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       )
                     ],
@@ -224,11 +277,16 @@ class EditProfile extends StatelessWidget {
                 color: Pallete.white,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                  child: ButtonMain(
-                    height: 50,
-                    width: Get.width,
-                    text: "Update Profil",
-                    buttonColor: Pallete.primaryLight,
+                  child: GestureDetector(
+                    onTap: () {
+                      _savedUpdate();
+                    },
+                    child: ButtonMain(
+                      height: 50,
+                      width: Get.width,
+                      text: "Update Profil",
+                      buttonColor: Pallete.primaryLight,
+                    ),
                   ),
                 ),
               )
@@ -237,5 +295,97 @@ class EditProfile extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _savedUpdate() {
+    if (_formKeyOne.currentState!.validate()) {
+      // save
+      _formKeyOne.currentState!.save();
+      widget._auth.manipulateDoingUpdate();
+    }
+  }
+
+  List<Widget> _imagePickerList() {
+    return [
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GestureDetector(
+          onTap: () {
+            Get.back(result: 0);
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(right: 16),
+                child: Icon(
+                  Icons.camera_alt_rounded,
+                  size: 21,
+                  color: Pallete.primaryLight,
+                ),
+              ),
+              Text(
+                "Kamera",
+                style: Get.textTheme.headline5,
+              )
+            ],
+          ),
+        ),
+      ),
+      const Divider(thickness: 1, color: Pallete.darkGrey),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GestureDetector(
+          onTap: () {
+            Get.back(result: 1);
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(right: 16),
+                child: Icon(
+                  Icons.photo_library_rounded,
+                  size: 21,
+                  color: Pallete.primaryLight,
+                ),
+              ),
+              Text(
+                "Galeri",
+                style: Get.textTheme.headline5,
+              )
+            ],
+          ),
+        ),
+      ),
+    ];
+  }
+
+  void _imagePickerCommand(int value) async {
+    if (value == 0) {
+      await ImagePicker()
+          .pickImage(source: ImageSource.camera, maxHeight: 600, maxWidth: 600, imageQuality: 75)
+          .then((value) {
+        setState(() {
+          widget._auth.tempUserData!.tempImage = value;
+          widget._auth.update();
+        });
+      });
+    } else {
+      await ImagePicker()
+          .pickImage(source: ImageSource.gallery, maxHeight: 600, maxWidth: 600, imageQuality: 75)
+          .then((value) {
+        setState(() {
+          widget._auth.tempUserData!.tempImage = value;
+          widget._auth.update();
+        });
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    widget._auth.tempUserData = null;
+    super.dispose();
   }
 }

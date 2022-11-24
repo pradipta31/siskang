@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:image_picker/image_picker.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user_model.g.dart';
@@ -28,7 +31,11 @@ class UserModel {
   String? decryptPass;
   @JsonKey(name: "Nim_Nama")
   String? nimName;
+  @JsonKey(name: "no_telp")
+  String? phoneNum;
   String? jabatan;
+  @JsonKey(ignore: true)
+  XFile? tempImage;
   UserModel({
     this.id,
     this.name,
@@ -42,7 +49,9 @@ class UserModel {
     this.password,
     this.decryptPass,
     this.nimName,
+    this.phoneNum,
     this.jabatan,
+    this.tempImage,
   });
 
   UserModel copyWith({
@@ -58,7 +67,9 @@ class UserModel {
     String? password,
     String? decryptPass,
     String? nimName,
+    String? phoneNum,
     String? jabatan,
+    XFile? tempImage,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -73,7 +84,9 @@ class UserModel {
       password: password ?? this.password,
       decryptPass: decryptPass ?? this.decryptPass,
       nimName: nimName ?? this.nimName,
+      phoneNum: phoneNum ?? this.phoneNum,
       jabatan: jabatan ?? this.jabatan,
+      tempImage: tempImage ?? this.tempImage,
     );
   }
 
@@ -83,7 +96,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, name: $name, nim: $nim, prodiId: $prodiId, prodiCode: $prodiCode, prodiName: $prodiName, email: $email, photo: $photo, username: $username, password: $password, decryptPass: $decryptPass, nimName: $nimName, jabatan: $jabatan)';
+    return 'UserModel(id: $id, name: $name, nim: $nim, prodiId: $prodiId, prodiCode: $prodiCode, prodiName: $prodiName, email: $email, photo: $photo, username: $username, password: $password, decryptPass: $decryptPass, nimName: $nimName, phoneNum: $phoneNum, jabatan: $jabatan, tempImage: $tempImage)';
   }
 
   @override
@@ -103,7 +116,9 @@ class UserModel {
         other.password == password &&
         other.decryptPass == decryptPass &&
         other.nimName == nimName &&
-        other.jabatan == jabatan;
+        other.phoneNum == phoneNum &&
+        other.jabatan == jabatan &&
+        other.tempImage == tempImage;
   }
 
   @override
@@ -120,6 +135,8 @@ class UserModel {
         password.hashCode ^
         decryptPass.hashCode ^
         nimName.hashCode ^
-        jabatan.hashCode;
+        phoneNum.hashCode ^
+        jabatan.hashCode ^
+        tempImage.hashCode;
   }
 }
