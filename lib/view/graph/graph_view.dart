@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:siskangv2/core/common/research_grouping_enum.dart';
 import 'package:siskangv2/core/controller/research_controller.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
+import 'package:siskangv2/view/graph/pembina_graph.dart';
 import 'package:siskangv2/view/graph/tahap_graph.dart';
 import 'package:siskangv2/view/graph/topik_graph.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -112,6 +113,10 @@ class _GraphViewState extends State<GraphView> {
         return TahapGraph(data: _research.groupingResearchData(group, isPembimbing1));
       case ResearchGrouping.TOPIK:
         return TopikGraph(data: _research.groupingResearchData(group, isPembimbing1));
+      case ResearchGrouping.PEMBIMBING:
+        return PembinaGraph(
+            pembina1: _research.groupingResearchData(group, true),
+            pembina2: _research.groupingResearchData(group, false));
       default:
         return SizedBox();
     }

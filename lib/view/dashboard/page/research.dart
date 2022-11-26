@@ -95,10 +95,10 @@ class Research extends StatelessWidget {
                                       textAlign: TextAlign.center,
                                     ),
                                   ),
-                                ),
-                                onTap: () {},
-                                color: Pallete.white,
-                                height: 35),
+                                ), onTap: () {
+                              Get.toNamed('/research/graph',
+                                  arguments: [ResearchGrouping.PEMBIMBING, true]);
+                            }, color: Pallete.white, height: 35),
                           ),
                         ),
                         Expanded(
