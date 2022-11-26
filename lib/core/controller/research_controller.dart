@@ -1,10 +1,13 @@
+import 'dart:collection';
 import 'dart:developer';
 
 import 'package:get/get.dart';
+import 'package:siskangv2/core/common/research_grouping_enum.dart';
 import 'package:siskangv2/core/model/listed_research_timeline_model.dart';
 import 'package:siskangv2/core/model/masa_studi_model.dart';
 import 'package:siskangv2/core/model/research_timeline_model.dart';
 import 'package:siskangv2/core/service/research_service.dart';
+import 'package:collection/collection.dart';
 
 class ResearchController extends GetxController {
   MasaStudiModel? masaStudi;
@@ -49,6 +52,54 @@ class ResearchController extends GetxController {
         return allResearch;
       });
     }
+  }
+
+  dynamic groupingResearchData(ResearchGrouping grouping, [bool? isPembimbing1 = true]) {
+    switch (grouping) {
+      case ResearchGrouping.TAHAP:
+        return groupBy<ResearchTimelineModel, String>(
+            allResearch, (key) => key.tahapPenelitian ?? "UNKNOWN");
+      case ResearchGrouping.TOPIK:
+        return _manipulateTopikPenelitian();
+      case ResearchGrouping.PEMBIMBING:
+        return _manipulatePembimbing(isPembimbing1!);
+      default:
+    }
+  }
+
+  Map<String, List<ResearchTimelineModel>> _manipulatePembimbing(bool isPembimbing1) {
+    if (isPembimbing1) {
+      return groupBy<ResearchTimelineModel, String>(allResearch, (key) => key.pembimbing1!);
+    } else {
+      return groupBy<ResearchTimelineModel, String>(allResearch, (key) => key.pembimbing2!);
+    }
+  }
+
+  Map<String, int> _manipulateTopikPenelitian() {
+    Map<String, int> data = {};
+    Set<String> topik = HashSet<String>();
+
+    for (var res in allResearch) {
+      var parts = res.topik!.split(',');
+      for (var tpk in parts) {
+        topik.add(tpk.trim());
+      }
+    }
+
+    for (var element in topik) {
+      data = {
+        ...data,
+        ...{
+          element: allResearch
+              .where((res) => res.topik!.toLowerCase().contains(element.toLowerCase()))
+              .length
+        }
+      };
+    }
+
+    log(data.toString());
+
+    return data;
   }
 
   ResearchTimelineModel _listingTimeline(ResearchTimelineModel data) {

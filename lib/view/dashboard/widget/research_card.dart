@@ -98,14 +98,14 @@ class _ResearchCardState extends State<ResearchCard> with TickerProviderStateMix
                           child: Align(
                             alignment: Alignment.centerLeft,
                             child: AutoSizeText(
-                              widget.data.nama!,
+                              "${widget.data.nama} (${widget.data.angkatan})",
                               maxLines: 2,
                               stepGranularity: 2.0,
                               minFontSize: 14,
                               textAlign: TextAlign.left,
                               overflow: TextOverflow.ellipsis,
-                              style: Get.textTheme.headline5?.copyWith(
-                                  fontWeight: FontWeight.bold, color: Pallete.primaryLight),
+                              style: Get.textTheme.headline6
+                                  ?.copyWith(fontWeight: FontWeight.w800, color: Pallete.black),
                             ),
                           ),
                         ),
@@ -114,21 +114,47 @@ class _ResearchCardState extends State<ResearchCard> with TickerProviderStateMix
                         width: 8,
                       ),
                       Flexible(
-                        flex: 2,
-                        fit: FlexFit.tight,
-                        child: StatusBadge(
-                          color: widget.data.statusPenelitian!.toLowerCase() == "aktif"
-                              ? Pallete.activeColor
-                              : const Color.fromARGB(255, 177, 18, 6),
-                          text: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              widget.data.statusPenelitian!,
-                              maxLines: 2,
-                              textAlign: TextAlign.center,
-                              style: Get.textTheme.bodyText2?.copyWith(color: Pallete.white),
-                            ),
-                          ),
+                        flex: 1,
+                        fit: FlexFit.loose,
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.rawSnackbar(
+                                padding: const EdgeInsets.all(16),
+                                borderRadius: 8,
+                                margin: const EdgeInsets.fromLTRB(8, 0, 8, 16),
+                                backgroundColor: Pallete.primaryLight,
+                                boxShadows: [
+                                  const BoxShadow(
+                                      color: Pallete.darkGrey,
+                                      blurRadius: 2,
+                                      blurStyle: BlurStyle.outer)
+                                ],
+                                snackPosition: SnackPosition.BOTTOM,
+                                messageText: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      widget.data.nama ?? "",
+                                      style: Get.textTheme.bodyText2!.copyWith(
+                                          color: Pallete.white, fontWeight: FontWeight.w300),
+                                    ),
+                                    Text(
+                                      widget.data.statusPenelitian?.toUpperCase() ?? "UNKNOWN",
+                                      style: Get.textTheme.headline6!.copyWith(
+                                          fontWeight: FontWeight.bold, color: Pallete.white),
+                                    )
+                                  ],
+                                ));
+                          },
+                          child: StatusBadge(
+                              height: 30,
+                              width: 30,
+                              color: widget.data.statusPenelitian!.toLowerCase() == "aktif"
+                                  ? Pallete.activeColor
+                                  : const Color.fromARGB(255, 177, 18, 6),
+                              text: const SizedBox()),
                         ),
                       ),
                     ],
@@ -138,8 +164,8 @@ class _ResearchCardState extends State<ResearchCard> with TickerProviderStateMix
                   ),
                   Text(
                     widget.data.judul.toString().toUpperCase(),
-                    style: Get.textTheme.headline5
-                        ?.copyWith(fontWeight: FontWeight.bold, color: Pallete.black),
+                    style: Get.textTheme.headline6
+                        ?.copyWith(fontWeight: FontWeight.w600, color: Pallete.black),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(

@@ -105,15 +105,6 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
                                           height: 30,
                                           text: SizedBox(),
                                           color: Pallete.darkGrey,
-                                          // text: Padding(
-                                          //   padding: const EdgeInsets.all(4.0),
-                                          //   child: Text(
-                                          //     "Waiting",
-                                          //     maxLines: 1,
-                                          //     style: Get.textTheme.bodyText1
-                                          //         ?.copyWith(color: Pallete.white),
-                                          //   ),
-                                          // ),
                                         ),
                                       );
                                     } else {
