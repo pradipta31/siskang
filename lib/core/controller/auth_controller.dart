@@ -68,7 +68,11 @@ class AuthController extends GetxController {
     var length = await image.length();
     var request = http.MultipartRequest("POST", getUriEndpoint(domain, "$staticPath/upload_foto"));
     request.files.add(http.MultipartFile('file', stream, length, filename: basename(image.path)));
-    return await request.send().then((value) async => await value.stream.bytesToString());
+    return await request.send().then((value) async {
+      return basename(image.path);
+    }).catchError((e) {
+      log(e.toString(), name: "Upload Image");
+    });
   }
 
   Future<void> updateProfile() async {

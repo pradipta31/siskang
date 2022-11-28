@@ -1,4 +1,4 @@
-package com.example.siskangv2
+package com.pasca.siskangv2
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "533186851590",
+    "project_id": "siskang-cbf03",
+    "storage_bucket": "siskang-cbf03.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:533186851590:android:df6a43cd26ac8617ba2487",
+        "android_client_info": {
+          "package_name": "com.pasca.siskangv2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "533186851590-43mb32kddkt1nvnnjrroq2dkphrp58a0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pasca.siskangv2",
+            "certificate_hash": "32ae8e73dc70a18feaa7173458b97a94487b15ec"
+          }
+        },
+        {
+          "client_id": "533186851590-cf2uhffm727sku66qtjo18b5g5621bt0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmcFvA9aT8SM-OGT3ycdQL3w9W4u099c0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "533186851590-cf2uhffm727sku66qtjo18b5g5621bt0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
