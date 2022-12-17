@@ -79,7 +79,8 @@ class _ScheduleCardState extends State<ScheduleCard> with TickerProviderStateMix
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.max,
                         children: [
                           SizedBox(
                             width: 50,
@@ -101,8 +102,8 @@ class _ScheduleCardState extends State<ScheduleCard> with TickerProviderStateMix
                               flex: 5,
                               child: Text(
                                 widget.data.nama!,
-                                style: Get.textTheme.headline5?.copyWith(
-                                    fontWeight: FontWeight.bold, color: Pallete.primaryLight),
+                                style: Get.textTheme.headline6
+                                    ?.copyWith(fontWeight: FontWeight.w800, color: Pallete.black),
                               )),
                           const SizedBox(
                             width: 8,
@@ -111,6 +112,7 @@ class _ScheduleCardState extends State<ScheduleCard> with TickerProviderStateMix
                             flex: 3,
                             child: StatusBadge(
                               color: Pallete.activeColor,
+                              borderRadius: 10,
                               text: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
@@ -125,12 +127,12 @@ class _ScheduleCardState extends State<ScheduleCard> with TickerProviderStateMix
                         ],
                       ),
                       const SizedBox(
-                        height: 8,
+                        height: 16,
                       ),
                       Text(
                         widget.data.judul.toString().toUpperCase(),
-                        style: Get.textTheme.headline5
-                            ?.copyWith(fontWeight: FontWeight.bold, color: Pallete.black),
+                        style: Get.textTheme.headline6
+                            ?.copyWith(fontWeight: FontWeight.w600, color: Pallete.black),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(

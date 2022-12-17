@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>533186851590-ka00rtov6iv22vpons332gs4v8rud53t.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.533186851590-ka00rtov6iv22vpons332gs4v8rud53t</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>533186851590-43mb32kddkt1nvnnjrroq2dkphrp58a0.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA1_75bhyEncX4bftW0XRWvJzbaaKFqWls</string>
+	<key>GCM_SENDER_ID</key>
+	<string>533186851590</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.pasca.siskangv2</string>
+	<key>PROJECT_ID</key>
+	<string>siskang-cbf03</string>
+	<key>STORAGE_BUCKET</key>
+	<string>siskang-cbf03.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:533186851590:ios:22168c688a399ea7ba2487</string>
+</dict>
+</plist>

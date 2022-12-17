@@ -19,6 +19,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       password: json['Password'] as String?,
       decryptPass: json['Passwordplain'] as String?,
       nimName: json['Nim_Nama'] as String?,
+      phoneNum: json['no_telp'] as String?,
       jabatan: json['jabatan'] as String?,
     );
 
@@ -35,5 +36,6 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'Password': instance.password,
       'Passwordplain': instance.decryptPass,
       'Nim_Nama': instance.nimName,
+      'no_telp': instance.phoneNum,
       'jabatan': instance.jabatan,
     };
