@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:siskangv2/core/controller/auth_controller.dart';
 import 'package:siskangv2/core/controller/news_controller.dart';
+import 'package:siskangv2/core/controller/notif_controller.dart';
 import 'package:siskangv2/core/controller/research_controller.dart';
 import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
@@ -17,6 +18,7 @@ class MainDashboard extends StatefulWidget {
   final _authController = Get.find<AuthController>();
   final _researchController = Get.find<ResearchController>();
   final _newsController = Get.find<NewsController>();
+  final _notifController = Get.find<NotifController>();
   MainDashboard({Key? key}) : super(key: key);
 
   @override
@@ -38,13 +40,7 @@ class _MainDashboardState extends State<MainDashboard> {
             _currentIndex = value;
           });
         },
-        children: [
-          const MasterPage(),
-          const SchedulePage(),
-          News(),
-          const Research(),
-          const Account()
-        ],
+        children: const [MasterPage(), SchedulePage(), News(), Research(), Account()],
       ),
       bottomNavigationBar: BottomNavBar(
         currentIndex: _currentIndex,

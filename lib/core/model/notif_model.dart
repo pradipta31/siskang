@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
+import 'package:siskangv2/core/common/notification_type_enum.dart';
+
 part 'notif_model.g.dart';
 
 @JsonSerializable()
@@ -15,15 +17,15 @@ class NotifModel {
   String? message;
   @JsonKey(name: "tglKirim")
   String? date;
-  @JsonKey(name: "jenisPesan")
-  String? type;
+  @JsonKey(name: "jenisPesan", fromJson: _parseNotifType)
+  NotificationType? type;
   @JsonKey(name: "sukses")
   String? success;
   @JsonKey(name: "gagal")
   String? failed;
   String? calon;
-  @JsonKey(name: "is_read")
-  String? isRead;
+  @JsonKey(name: "is_read", fromJson: _parseReadStatus)
+  bool isRead;
   NotifModel({
     this.id,
     this.idDetail,
@@ -34,7 +36,7 @@ class NotifModel {
     this.success,
     this.failed,
     this.calon,
-    this.isRead,
+    this.isRead = false,
   });
 
   NotifModel copyWith({
@@ -43,11 +45,11 @@ class NotifModel {
     String? title,
     String? message,
     String? date,
-    String? type,
+    NotificationType? type,
     String? success,
     String? failed,
     String? calon,
-    String? isRead,
+    bool? isRead,
   }) {
     return NotifModel(
       id: id ?? this.id,
@@ -102,4 +104,15 @@ class NotifModel {
         calon.hashCode ^
         isRead.hashCode;
   }
+}
+
+NotificationType _parseNotifType(_) {
+  return NotificationType.values.elementAt(int.parse(_) - 1);
+}
+
+bool _parseReadStatus(_) {
+  if (_ == "1") {
+    return true;
+  }
+  return false;
 }

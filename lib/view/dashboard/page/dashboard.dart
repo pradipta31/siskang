@@ -1,9 +1,11 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:siskangv2/core/common/links.dart';
 import 'package:siskangv2/core/controller/auth_controller.dart';
+import 'package:siskangv2/core/controller/notif_controller.dart';
 import 'package:siskangv2/core/controller/research_controller.dart';
 import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
@@ -18,6 +20,9 @@ class MasterPage extends StatefulWidget {
 }
 
 class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateMixin {
+  final _authController = Get.find<AuthController>();
+  final _notifController = Get.find<NotifController>();
+
   @override
   void initState() {
     super.initState();
@@ -47,12 +52,47 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: GestureDetector(
-                onTap: () {},
-                child: SvgPicture.asset(
-                  AssetsDirectory.notificationOff,
-                  color: Pallete.white,
-                ),
-              ),
+                  onTap: () {
+                    Get.toNamed('/notification', arguments: _authController.userData);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: FutureBuilder<int>(
+                      future: _notifController.getCountNotification(
+                          nim: _authController.userData!.nim!),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          if (snapshot.data! > 0) {
+                            return Badge(
+                              position: BadgePosition.topEnd(top: 2),
+                              badgeColor: Colors.red,
+                              padding: const EdgeInsets.fromLTRB(5, 4, 4, 5),
+                              // padding: const EdgeInsets.all(2),
+                              badgeContent: Center(
+                                  child: Text(
+                                snapshot.data!.toString(),
+                                style: Get.textTheme.bodyText1!.copyWith(color: Pallete.white),
+                              )),
+                              child: SvgPicture.asset(
+                                AssetsDirectory.notificationOn,
+                                color: Pallete.white,
+                              ),
+                            );
+                          } else {
+                            return SvgPicture.asset(
+                              AssetsDirectory.notificationOff,
+                              color: Pallete.white,
+                            );
+                          }
+                        } else {
+                          return SvgPicture.asset(
+                            AssetsDirectory.notificationOff,
+                            color: Pallete.white,
+                          );
+                        }
+                      },
+                    ),
+                  )),
             )
           ],
         ),

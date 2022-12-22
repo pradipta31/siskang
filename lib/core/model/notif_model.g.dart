@@ -12,11 +12,12 @@ NotifModel _$NotifModelFromJson(Map<String, dynamic> json) => NotifModel(
       title: json['judul'] as String?,
       message: json['isi'] as String?,
       date: json['tglKirim'] as String?,
-      type: json['jenisPesan'] as String?,
+      type: _parseNotifType(json['jenisPesan']),
       success: json['sukses'] as String?,
       failed: json['gagal'] as String?,
       calon: json['calon'] as String?,
-      isRead: json['is_read'] as String?,
+      isRead:
+          json['is_read'] == null ? false : _parseReadStatus(json['is_read']),
     );
 
 Map<String, dynamic> _$NotifModelToJson(NotifModel instance) =>
@@ -26,9 +27,16 @@ Map<String, dynamic> _$NotifModelToJson(NotifModel instance) =>
       'judul': instance.title,
       'isi': instance.message,
       'tglKirim': instance.date,
-      'jenisPesan': instance.type,
+      'jenisPesan': _$NotificationTypeEnumMap[instance.type],
       'sukses': instance.success,
       'gagal': instance.failed,
       'calon': instance.calon,
       'is_read': instance.isRead,
     };
+
+const _$NotificationTypeEnumMap = {
+  NotificationType.POST_NOTIF: 'POST_NOTIF',
+  NotificationType.PROPOSAL_SCHEDULE_NOTIF: 'PROPOSAL_SCHEDULE_NOTIF',
+  NotificationType.PRATHESIS_NOTIF: 'PRATHESIS_NOTIF',
+  NotificationType.THESIS_TEST_NOTIF: 'THESIS_TEST_NOTIF',
+};
