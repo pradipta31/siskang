@@ -12,8 +12,10 @@ import 'package:collection/collection.dart';
 class ResearchController extends GetxController {
   MasaStudiModel? masaStudi;
   ResearchTimelineModel? researchTimeline;
+  ResearchTimelineModel? otherTimeline;
   var allResearch = <ResearchTimelineModel>[].obs;
   List<ListedResearchimelineModel> listedResearchimeline = <ListedResearchimelineModel>[];
+  List<ListedResearchimelineModel> otherListedResearchimeline = <ListedResearchimelineModel>[];
 
   void getMasaStudi({required String prodiId, required String nim, required String jabatan}) async {
     await ResearchService()
@@ -39,6 +41,19 @@ class ResearchController extends GetxController {
     });
   }
 
+  void getOtherResearchTimelineByNim({required String nim}) async {
+    await ResearchService().getResearchTimelineByNim(FormData({"nim": nim})).then((value) {
+      otherTimeline = _listingTimeline(value);
+      otherListedResearchimeline.clear();
+      otherTimeline!.listedTimeline!.forEach((key, value) {
+        otherListedResearchimeline.add(ListedResearchimelineModel.fromJson(value));
+      });
+      update();
+    }).catchError((e) {
+      throw e;
+    });
+  }
+
   Future<List<ResearchTimelineModel>> getAllResearch({required String idProdi}) async {
     if (allResearch.isNotEmpty) {
       return allResearch;
@@ -52,6 +67,47 @@ class ResearchController extends GetxController {
         return allResearch;
       });
     }
+  }
+
+  List<ResearchTimelineModel> researchData(String? search) {
+    if (search != null && search.isNotEmpty) {
+      if (!search.isBlank!) {
+        return allResearch.where((e) {
+          if (e.judul?.toUpperCase().contains(search.toUpperCase()) ?? false) {
+            return true;
+          } else if (e.nama?.toUpperCase().contains(search.toUpperCase()) ?? false) {
+            return true;
+          } else if (e.pembimbing1?.toUpperCase().contains(search.toUpperCase()) ?? false) {
+            return true;
+          } else if (e.pembimbing2?.toUpperCase().contains(search.toUpperCase()) ?? false) {
+            return true;
+          } else {
+            return false;
+          }
+        }).toList();
+      }
+    }
+    return allResearch;
+  }
+
+  int lengthOfResearchList(String? search) {
+    if (search != null && search.isNotEmpty) {
+      if (!search.isBlank!) {
+        return allResearch
+            .where((e) {
+              if (e.judul?.toUpperCase().contains(search.toUpperCase()) ?? false) {
+                return true;
+              } else if (e.nama?.toUpperCase().contains(search.toUpperCase()) ?? false) {
+                return true;
+              } else {
+                return false;
+              }
+            })
+            .toList()
+            .length;
+      }
+    }
+    return allResearch.length;
   }
 
   dynamic groupingResearchData(ResearchGrouping grouping, [bool? isPembimbing1 = true]) {

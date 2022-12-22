@@ -5,6 +5,7 @@ import 'package:siskangv2/view/landing_page/welcome.dart';
 import 'package:siskangv2/view/login/login.dart';
 import 'package:siskangv2/view/news/news_detail.dart';
 import 'package:siskangv2/view/notification/notification.dart';
+import 'package:siskangv2/view/research/research_timeline.dart';
 
 class Pages {
   static List<GetPage<dynamic>> pages = [
@@ -16,6 +17,12 @@ class Pages {
     GetPage(
         name: '/research/graph', page: () => const GraphView(), transition: Transition.rightToLeft),
     GetPage(
-        name: '/notification', page: () => const Notification(), transition: Transition.rightToLeft)
+        name: '/notification',
+        page: () => const Notification(),
+        transition: Transition.rightToLeft),
+    GetPage(
+        name: '/research_timeline',
+        page: () => const ResearchOtherTimeline(),
+        transition: Transition.rightToLeft)
   ];
 }

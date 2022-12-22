@@ -237,62 +237,62 @@ class _AccountState extends State<Account> with SingleTickerProviderStateMixin {
                                 },
                               ),
                               const SizedBox(
-                                height: 8,
+                                height: 24,
                               ),
-                              Theme(
-                                data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-                                child: ExpansionTile(
-                                    onExpansionChanged: (value) {
-                                      if (_controller.isCompleted) {
-                                        _controller.reverse();
-                                      } else {
-                                        _controller.forward();
-                                      }
-                                    },
-                                    collapsedIconColor: Pallete.darkGrey,
-                                    iconColor: Pallete.darkGrey,
-                                    tilePadding: EdgeInsets.zero,
-                                    childrenPadding: const EdgeInsets.symmetric(vertical: 8),
-                                    children: [
-                                      _expansionChildren("Topik Penelitian"),
-                                      _expansionChildren("Pembimbing"),
-                                      _expansionChildren("Tahapan Penelitian")
-                                    ],
-                                    trailing: RotationTransition(
-                                        turns: Tween(begin: 0.0, end: 0.25).animate(_controller),
-                                        child: const Icon(
-                                          Icons.arrow_forward_ios_rounded,
-                                          size: 18,
-                                        )),
-                                    title: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          width: 40,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              color: Pallete.primaryLight.withAlpha(50)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: SvgPicture.asset(AssetsDirectory.shield,
-                                                color: Pallete.primaryLight),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 8,
-                                        ),
-                                        Text(
-                                          "Statistik Penelitian",
-                                          style: Get.textTheme.headline6!
-                                              .copyWith(fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    )),
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
+                              // Theme(
+                              //   data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+                              //   child: ExpansionTile(
+                              //       onExpansionChanged: (value) {
+                              //         if (_controller.isCompleted) {
+                              //           _controller.reverse();
+                              //         } else {
+                              //           _controller.forward();
+                              //         }
+                              //       },
+                              //       collapsedIconColor: Pallete.darkGrey,
+                              //       iconColor: Pallete.darkGrey,
+                              //       tilePadding: EdgeInsets.zero,
+                              //       childrenPadding: const EdgeInsets.symmetric(vertical: 8),
+                              //       children: [
+                              //         _expansionChildren("Topik Penelitian"),
+                              //         _expansionChildren("Pembimbing"),
+                              //         _expansionChildren("Tahapan Penelitian")
+                              //       ],
+                              //       trailing: RotationTransition(
+                              //           turns: Tween(begin: 0.0, end: 0.25).animate(_controller),
+                              //           child: const Icon(
+                              //             Icons.arrow_forward_ios_rounded,
+                              //             size: 18,
+                              //           )),
+                              //       title: Row(
+                              //         mainAxisAlignment: MainAxisAlignment.start,
+                              //         children: [
+                              //           Container(
+                              //             width: 40,
+                              //             height: 40,
+                              //             decoration: BoxDecoration(
+                              //                 shape: BoxShape.circle,
+                              //                 color: Pallete.primaryLight.withAlpha(50)),
+                              //             child: Padding(
+                              //               padding: const EdgeInsets.all(8.0),
+                              //               child: SvgPicture.asset(AssetsDirectory.shield,
+                              //                   color: Pallete.primaryLight),
+                              //             ),
+                              //           ),
+                              //           const SizedBox(
+                              //             width: 8,
+                              //           ),
+                              //           Text(
+                              //             "Statistik Penelitian",
+                              //             style: Get.textTheme.headline6!
+                              //                 .copyWith(fontWeight: FontWeight.bold),
+                              //           ),
+                              //         ],
+                              //       )),
+                              // ),
+                              // const SizedBox(
+                              //   height: 8,
+                              // ),
                               _userMenu(
                                 title: "Logout",
                                 icon: SvgPicture.asset(AssetsDirectory.exit,

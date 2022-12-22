@@ -24,7 +24,7 @@ class _ResearchState extends State<Research> {
   String? _search;
   bool _showSearch = false;
 
-  List<ResearchTimelineModel> data = [];
+  // List<ResearchTimelineModel> data = [];
 
   @override
   void initState() {
@@ -33,7 +33,7 @@ class _ResearchState extends State<Research> {
   }
 
   _getData() async {
-    data = await _research.getAllResearch(idProdi: _auth.userData!.prodiId!);
+    await _research.getAllResearch(idProdi: _auth.userData!.prodiId!);
     setState(() {});
   }
 
@@ -182,18 +182,20 @@ class _ResearchState extends State<Research> {
                   Expanded(
                     child: GetBuilder<ResearchController>(
                       builder: (controller) {
-                        if (data.isNotEmpty) {
+                        if (controller.allResearch.isNotEmpty) {
+                          int length = controller.lengthOfResearchList(_search);
+                          var data = controller.researchData(_search);
                           return ListView.builder(
                             itemBuilder: (context, index) => Padding(
                               padding: const EdgeInsets.only(bottom: 16),
                               child: ResearchCard(data: data[index]),
                             ),
-                            itemCount: data.length,
+                            itemCount: length,
                             shrinkWrap: true,
                             padding: const EdgeInsets.all(16),
                           );
                         } else {
-                          return SizedBox();
+                          return const SizedBox();
                         }
                       },
                     ),
