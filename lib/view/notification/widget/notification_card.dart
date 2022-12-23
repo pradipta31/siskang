@@ -21,7 +21,7 @@ class NotificationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      color: Pallete.white,
+      color: isRead ? Pallete.white : Pallete.primaryLight.withOpacity(0.3),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         mainAxisSize: MainAxisSize.max,
