@@ -9,8 +9,10 @@ class NotificationCard extends StatelessWidget {
   String message;
   bool isRead;
   DateTime date;
+  double? padding;
   NotificationCard({
     Key? key,
+    this.padding,
     required this.title,
     required this.message,
     required this.isRead,
@@ -22,65 +24,68 @@ class NotificationCard extends StatelessWidget {
     return Container(
       width: Get.width,
       color: isRead ? Pallete.white : Pallete.primaryLight.withOpacity(0.3),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: Pallete.primaryLight,
-            ),
-            child: const Padding(
-              padding: EdgeInsets.all(8),
-              child: Icon(
-                Icons.notifications,
-                size: 48,
-                color: Pallete.white,
+      child: Padding(
+        padding: EdgeInsets.all(padding ?? 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Pallete.primaryLight,
+              ),
+              child: const Padding(
+                padding: EdgeInsets.all(8),
+                child: Icon(
+                  Icons.notifications,
+                  size: 48,
+                  color: Pallete.white,
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            width: 8,
-          ),
-          Flexible(
-              fit: FlexFit.tight,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Expanded(
-                          child: Text(
-                        title,
-                        style: Get.textTheme.headline6!.copyWith(fontWeight: FontWeight.bold),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: true,
-                      )),
-                      const SizedBox(
-                        width: 4,
-                      ),
-                      Text(
-                        _getTimeOfBill(date: date),
-                        style: Get.textTheme.headline6,
-                      )
-                    ],
-                  ),
-                  Text(
-                    message,
-                    style: Get.textTheme.bodyText1,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  )
-                ],
-              ))
-        ],
+            const SizedBox(
+              width: 8,
+            ),
+            Flexible(
+                fit: FlexFit.tight,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                            child: Text(
+                          title,
+                          style: Get.textTheme.headline6!.copyWith(fontWeight: FontWeight.bold),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: true,
+                        )),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        Text(
+                          _getTimeOfBill(date: date),
+                          style: Get.textTheme.headline6,
+                        )
+                      ],
+                    ),
+                    Text(
+                      message,
+                      style: Get.textTheme.bodyText1,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    )
+                  ],
+                ))
+          ],
+        ),
       ),
     );
   }

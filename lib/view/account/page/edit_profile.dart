@@ -36,7 +36,7 @@ class _EditProfileState extends State<EditProfile> {
           backgroundColor: Pallete.white,
           elevation: 0,
           leading: IconButton(
-              onPressed: () => Get.back(),
+              onPressed: () => Get.back(result: false),
               icon: const Icon(
                 Icons.arrow_back,
                 color: Pallete.black,
@@ -247,7 +247,32 @@ class _EditProfileState extends State<EditProfile> {
                             Padding(
                               padding: const EdgeInsets.fromLTRB(0, 24, 0, 8),
                               child: GestureDetector(
-                                onTap: () => Get.to(() => UpdatePassword()),
+                                onTap: () async {
+                                  return await Get.to(() => UpdatePassword())?.then((value) {
+                                    if (value != null) {
+                                      if (value) {
+                                        Get.rawSnackbar(
+                                            padding: const EdgeInsets.all(16),
+                                            borderRadius: 8,
+                                            margin: const EdgeInsets.fromLTRB(8, 0, 8, 16),
+                                            backgroundColor: Pallete.primaryLight,
+                                            boxShadows: [
+                                              const BoxShadow(
+                                                  color: Pallete.darkGrey,
+                                                  blurRadius: 2,
+                                                  blurStyle: BlurStyle.outer)
+                                            ],
+                                            snackPosition: SnackPosition.BOTTOM,
+                                            messageText: Text(
+                                              "Password Berhasil Diubah",
+                                              style: Get.textTheme.headline6!.copyWith(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Pallete.white),
+                                            ));
+                                      }
+                                    }
+                                  });
+                                },
                                 child: Container(
                                   width: Get.width,
                                   color: Pallete.white,
@@ -303,7 +328,7 @@ class _EditProfileState extends State<EditProfile> {
       _formKeyOne.currentState!.save();
       await widget._auth.manipulateDoingUpdate().then((value) {
         widget._auth.tempUserData = null;
-        Get.back();
+        Get.back(result: true);
       });
     }
   }

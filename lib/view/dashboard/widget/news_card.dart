@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:siskangv2/components/badge.dart';
+import 'package:siskangv2/components/badge.dart' as Badges;
 import 'package:siskangv2/core/common/links.dart';
 import 'package:siskangv2/core/model/news_model.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
@@ -62,7 +62,7 @@ class NewsCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Badge(
+                        Badges.Badge(
                           colorBadge: Colors.blue[700],
                           titleBadge: 'Berita',
                           iconBadge: const Icon(

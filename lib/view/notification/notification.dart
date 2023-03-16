@@ -48,43 +48,43 @@ class Notification extends StatelessWidget {
                 log(controller.notif.length.toString());
                 return Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: GestureDetector(
-                        onTap: () async {
-                          await _notifController
-                              .updateReadNotification(
-                                  idPesan: controller.notif[index].id!, nim: data.nim!)
-                              .then((value) {
-                            if (!value) {
-                              Get.snackbar("Kesalahan", "Gagal dalam memperbarui notifikasi");
-                            } else {
-                              Get.defaultDialog(
-                                  title: controller.notif[index].title ?? "N/A",
-                                  middleText: controller.notif[index].message ?? "N/A",
-                                  middleTextStyle: Get.textTheme.bodyText1,
-                                  titleStyle: Get.textTheme.headline6!
-                                      .copyWith(fontWeight: FontWeight.bold, fontSize: 16),
-                                  contentPadding: const EdgeInsets.all(8),
-                                  barrierDismissible: false,
-                                  confirm: MainActionButton(
-                                    color: Pallete.primaryLight,
-                                    height: 30,
-                                    label: "OK",
-                                    width: Get.width,
-                                    onTap: () {
-                                      Get.back();
-                                    },
-                                  ));
-                            }
-                          });
-                        },
-                        child: NotificationCard(
-                            title: controller.notif[index].title ?? "N/A",
-                            message: controller.notif[index].message ?? "N/A",
-                            isRead: controller.notif[index].isRead,
-                            date: stringToDate(date: controller.notif[index].date!)),
-                      ),
+                    GestureDetector(
+                      onTap: () async {
+                        await _notifController
+                            .updateReadNotification(
+                                idPesan: controller.notif[index].id!, nim: data.nim!)
+                            .then((value) {
+                          if (!value) {
+                            Get.snackbar("Kesalahan", "Gagal dalam memperbarui notifikasi");
+                          } else {
+                            controller.notif[index].isRead = true;
+                            controller.update();
+                            Get.defaultDialog(
+                                title: controller.notif[index].title ?? "N/A",
+                                middleText: controller.notif[index].message ?? "N/A",
+                                middleTextStyle: Get.textTheme.bodyText1,
+                                titleStyle: Get.textTheme.headline6!
+                                    .copyWith(fontWeight: FontWeight.bold, fontSize: 16),
+                                contentPadding: const EdgeInsets.all(8),
+                                barrierDismissible: false,
+                                confirm: MainActionButton(
+                                  color: Pallete.primaryLight,
+                                  height: 30,
+                                  label: "OK",
+                                  width: Get.width,
+                                  onTap: () {
+                                    Get.back();
+                                  },
+                                ));
+                          }
+                        });
+                      },
+                      child: NotificationCard(
+                          title: controller.notif[index].title ?? "N/A",
+                          message: controller.notif[index].message ?? "N/A",
+                          isRead: controller.notif[index].isRead,
+                          padding: 12,
+                          date: stringToDate(date: controller.notif[index].date!)),
                     ),
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 12),

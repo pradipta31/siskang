@@ -1,4 +1,4 @@
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as Badges;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -63,10 +63,13 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
                       builder: (context, snapshot) {
                         if (snapshot.connectionState == ConnectionState.done) {
                           if (snapshot.data! > 0) {
-                            return Badge(
-                              position: BadgePosition.topEnd(top: 2),
-                              badgeColor: Colors.red,
-                              padding: const EdgeInsets.fromLTRB(5, 4, 4, 5),
+                            return Badges.Badge(
+                              badgeStyle: const Badges.BadgeStyle(
+                                badgeColor: Colors.red,
+                                padding: EdgeInsets.fromLTRB(5, 4, 4, 5),
+                              ),
+                              position: Badges.BadgePosition.topEnd(top: 2),
+
                               // padding: const EdgeInsets.all(2),
                               badgeContent: Center(
                                   child: Text(

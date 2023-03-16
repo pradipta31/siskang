@@ -130,7 +130,7 @@ class UpdatePassword extends StatelessWidget {
                             _errorSnackbar(e.toString());
                           }).then((value) {
                             _auth.userData!.decryptPass = newPass!;
-                            Get.back();
+                            Get.back(result: true);
                           });
                         }
                       }
