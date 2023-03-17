@@ -262,7 +262,7 @@ class _EditProfileState extends State<EditProfile> {
                                                   blurRadius: 2,
                                                   blurStyle: BlurStyle.outer)
                                             ],
-                                            snackPosition: SnackPosition.BOTTOM,
+                                            snackPosition: SnackPosition.TOP,
                                             messageText: Text(
                                               "Password Berhasil Diubah",
                                               style: Get.textTheme.headline6!.copyWith(

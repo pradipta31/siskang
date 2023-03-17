@@ -246,7 +246,7 @@ class _AccountState extends State<Account> with SingleTickerProviderStateMixin {
                                                   blurRadius: 2,
                                                   blurStyle: BlurStyle.outer)
                                             ],
-                                            snackPosition: SnackPosition.BOTTOM,
+                                            snackPosition: SnackPosition.TOP,
                                             messageText: Text(
                                               "Profile berhasil diubah",
                                               style: Get.textTheme.headline6!.copyWith(

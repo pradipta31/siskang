@@ -40,7 +40,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_animated_button: ^2.0.0
-  flutter_svg: ^1.1.5
+  flutter_svg: ^2.0.4
   flutter_timeline: ^0.3.0
   get: ^4.6.5
   get_storage: ^2.0.3
@@ -64,7 +64,7 @@ dev_dependencies:
   json_serializable: ^6.4.0
 
 dependency_overrides:
-  firebase_core_platform_interface: 4.5.1
+  firebase_core_platform_interface: 4.5.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

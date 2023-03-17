@@ -1,10 +1,7 @@
 import 'package:another_stepper/utils/utils.dart';
-import 'package:another_stepper/widgets/stepper_dot_widget.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:another_stepper/widgets/stepper_dot_widget.dart';
+import 'package:siskangv2/widget/stepper_dot.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
 
