@@ -23,6 +23,7 @@ class AuthService extends GetConnect {
   Future<bool> updateToken(String jabatan, String nim) async {
     return await FirebaseMessaging.instance.getToken().then((token) async {
       if (token != null) {
+        await FirebaseMessaging.instance.subscribeToTopic("mahasiswa");
         return await post(getUriEndpoint(domain, "$staticPath/token_update").toString(),
             FormData({'jabatan': jabatan, 'nim': nim, 'token': token})).then((value) {
           if (responseChecker(value)) {
@@ -45,7 +46,9 @@ class AuthService extends GetConnect {
 
   Future<void> logout(FormData form) async {
     await post(getUriEndpoint(domain, "$staticPath/token_update").toString(), form)
-        .catchError((e) => throw e);
+        .then((value) async {
+      await FirebaseMessaging.instance.unsubscribeFromTopic("mahasiswa");
+    }).catchError((e) => throw e);
   }
 
   Future<void> updateProfile(FormData form, String id) async {
