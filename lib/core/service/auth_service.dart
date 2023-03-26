@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:siskangv2/core/common/links.dart';
 import 'package:siskangv2/core/model/user_model.dart';
+import 'dart:developer';
 
 class AuthService extends GetConnect {
   Future<UserModel> login(FormData form) async {
@@ -23,6 +24,7 @@ class AuthService extends GetConnect {
   Future<bool> updateToken(String jabatan, String nim) async {
     return await FirebaseMessaging.instance.getToken().then((token) async {
       if (token != null) {
+        // log(token, name: "Token");
         await FirebaseMessaging.instance.subscribeToTopic("mahasiswa");
         return await post(getUriEndpoint(domain, "$staticPath/token_update").toString(),
             FormData({'jabatan': jabatan, 'nim': nim, 'token': token})).then((value) {
@@ -48,6 +50,7 @@ class AuthService extends GetConnect {
     await post(getUriEndpoint(domain, "$staticPath/token_update").toString(), form)
         .then((value) async {
       await FirebaseMessaging.instance.unsubscribeFromTopic("mahasiswa");
+      await FirebaseMessaging.instance.deleteToken();
     }).catchError((e) => throw e);
   }
 
