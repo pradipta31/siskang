@@ -19,7 +19,8 @@ class MasterPage extends StatefulWidget {
   State<MasterPage> createState() => _MasterPageState();
 }
 
-class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateMixin {
+class _MasterPageState extends State<MasterPage>
+    with SingleTickerProviderStateMixin {
   final _authController = Get.find<AuthController>();
   final _notifController = Get.find<NotifController>();
 
@@ -53,7 +54,8 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: GestureDetector(
                   onTap: () {
-                    Get.toNamed('/notification', arguments: _authController.userData);
+                    Get.toNamed('/notification',
+                        arguments: _authController.userData);
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(right: 8),
@@ -74,7 +76,8 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
                               badgeContent: Center(
                                   child: Text(
                                 snapshot.data!.toString(),
-                                style: Get.textTheme.bodyText1!.copyWith(color: Pallete.white),
+                                style: Get.textTheme.bodyText1!
+                                    .copyWith(color: Pallete.white),
                               )),
                               child: SvgPicture.asset(
                                 AssetsDirectory.notificationOn,
@@ -116,7 +119,8 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
                       SizedBox(
                         width: Get.width,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 16),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -129,8 +133,10 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
                                         "Halo, ${auth.userData?.name}",
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
-                                        style: Get.textTheme.headline4?.copyWith(
-                                            fontWeight: FontWeight.w700, color: Pallete.black),
+                                        style: Get.textTheme.headline4
+                                            ?.copyWith(
+                                                fontWeight: FontWeight.w700,
+                                                color: Pallete.black),
                                       );
                                     }),
                               ),
@@ -156,43 +162,83 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
                                           Get.rawSnackbar(
                                               padding: const EdgeInsets.all(16),
                                               borderRadius: 8,
-                                              margin: const EdgeInsets.fromLTRB(8, 0, 8, 16),
-                                              backgroundColor: Pallete.primaryLight,
+                                              margin: const EdgeInsets.fromLTRB(
+                                                  8, 0, 8, 16),
+                                              backgroundColor:
+                                                  Pallete.primaryLight,
                                               boxShadows: [
                                                 const BoxShadow(
                                                     color: Pallete.darkGrey,
                                                     blurRadius: 2,
                                                     blurStyle: BlurStyle.outer)
                                               ],
-                                              snackPosition: SnackPosition.BOTTOM,
+                                              snackPosition:
+                                                  SnackPosition.BOTTOM,
                                               messageText: Column(
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 mainAxisSize: MainAxisSize.min,
                                                 children: [
                                                   Text(
                                                     "Status Mahasiswa",
-                                                    style: Get.textTheme.bodyText2!.copyWith(
-                                                        color: Pallete.white,
-                                                        fontWeight: FontWeight.w300),
+                                                    style: Get
+                                                        .textTheme.bodyText2!
+                                                        .copyWith(
+                                                            color:
+                                                                Pallete.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w300),
                                                   ),
                                                   Text(
-                                                    res.masaStudi?.status?.toUpperCase() ??
+                                                    res.masaStudi?.status
+                                                            ?.toUpperCase() ??
                                                         "UNKNOWN",
-                                                    style: Get.textTheme.headline6!.copyWith(
-                                                        fontWeight: FontWeight.bold,
-                                                        color: Pallete.white),
+                                                    style: Get
+                                                        .textTheme.headline6!
+                                                        .copyWith(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color:
+                                                                Pallete.white),
                                                   )
                                                 ],
                                               ));
                                         },
                                         child: StatusBadge(
-                                          width: 30,
-                                          height: 30,
-                                          text: const SizedBox(),
-                                          color: res.masaStudi?.status?.toUpperCase() == "IN STUDI"
+                                          //   width: 30,
+                                          //   height: 30,
+                                          //   text: const SizedBox(),
+                                          //   color: res.masaStudi?.status?.toUpperCase() == "IN STUDI"
+                                          //       ? Pallete.activeColor
+                                          //       : const Color.fromARGB(255, 177, 18, 6),
+                                          width: res.masaStudi!.status!.toLowerCase() == "in studi"
+                                                ? Get.width / 6
+                                                : Get.width / 4,
+                                          color: res.masaStudi!.status!
+                                                      .toLowerCase() ==
+                                                  "in studi"
                                               ? Pallete.activeColor
-                                              : const Color.fromARGB(255, 177, 18, 6),
+                                              : const Color.fromARGB(
+                                                  255, 177, 18, 6),
+                                          text: Padding(
+                                            padding: const EdgeInsets.all(4),
+                                            child: Text(
+                                              res.masaStudi!.status!
+                                                          .toLowerCase() ==
+                                                      "in studi"
+                                                  ? "Aktif"
+                                                  : "Tidak Aktif",
+                                              maxLines: 1,
+                                              textAlign: TextAlign.center,
+                                              style: Get.textTheme.bodyText2
+                                                  ?.copyWith(
+                                                      color: Pallete.white,
+                                                      fontSize: 12),
+                                            ),
+                                          ),
                                           // text: Padding(
                                           //   padding: const EdgeInsets.all(4.0),
                                           //   child: Text(
@@ -217,7 +263,7 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
                           "Selamat datang di SisKa-NG",
-                          style: Get.textTheme.bodyText1,
+                          style: Get.textTheme.bodyText1?.copyWith(color: Color.fromARGB(255, 155, 156, 157), fontSize: 12),
                         ),
                       ),
                       const SizedBox(
@@ -281,21 +327,28 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
                           scrollDirection: Axis.vertical,
                           itemBuilder: (context, index) => ResearchTimeline(
                             title: research.listedResearchimeline[index].name!,
-                            statusText: research.listedResearchimeline[index].statusText,
-                            statusDate: research.listedResearchimeline[index].date != null
+                            statusText: research
+                                .listedResearchimeline[index].statusText,
+                            statusDate: research
+                                        .listedResearchimeline[index].date !=
+                                    null
                                 ? dateToString(
                                         date: stringToDate(
-                                            date: research.listedResearchimeline[index].date!),
+                                            date: research
+                                                .listedResearchimeline[index]
+                                                .date!),
                                         format: "dd MMM")
                                     .replaceAll(" ", "\n")
                                 : null,
-                            dateTextStyle: Get.textTheme.headline5!
-                                .copyWith(color: Pallete.darkGrey.withOpacity(0.7)),
+                            dateTextStyle: Get.textTheme.headline5!.copyWith(
+                                color: Pallete.darkGrey.withOpacity(0.7)),
                             index: index,
                             totalLength: research.listedResearchimeline.length,
                             gap: 30,
-                            activeIndex: research.listedResearchimeline.any((e) => !e.status)
-                                ? research.listedResearchimeline.indexWhere((e) => !e.status)
+                            activeIndex: research.listedResearchimeline
+                                    .any((e) => !e.status)
+                                ? research.listedResearchimeline
+                                    .indexWhere((e) => !e.status)
                                 : research.listedResearchimeline.length - 1,
                             isInverted: false,
                             activeBarColor: Pallete.primaryLight,
@@ -318,12 +371,13 @@ class _MasterPageState extends State<MasterPage> with SingleTickerProviderStateM
                               child: Center(
                                 child: Text(
                                   "${index + 1}",
-                                  style: Get.textTheme.bodyText1!.copyWith(color: Pallete.white),
+                                  style: Get.textTheme.bodyText1!
+                                      .copyWith(color: Pallete.white),
                                 ),
                               ),
                             ),
-                            titleTextStyle:
-                                Get.textTheme.headline6!.copyWith(fontWeight: FontWeight.bold),
+                            titleTextStyle: Get.textTheme.headline6!
+                                .copyWith(fontWeight: FontWeight.bold),
                             subtitleTextStyle: Get.textTheme.bodyText1!,
                           ),
                         );

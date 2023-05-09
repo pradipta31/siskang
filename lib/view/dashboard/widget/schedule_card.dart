@@ -103,23 +103,23 @@ class _ScheduleCardState extends State<ScheduleCard> with TickerProviderStateMix
                               child: Text(
                                 widget.data.nama!,
                                 style: Get.textTheme.headline6
-                                    ?.copyWith(fontWeight: FontWeight.w800, color: Pallete.black),
+                                    ?.copyWith(fontWeight: FontWeight.w800, color: Color.fromARGB(255, 111, 113, 232)),
                               )),
                           const SizedBox(
                             width: 8,
                           ),
                           Expanded(
-                            flex: 3,
+                            flex: 2,
                             child: StatusBadge(
-                              color: Pallete.activeColor,
-                              borderRadius: 10,
+                              color: Color.fromRGBO(70,189,132, 1),
+                              borderRadius: 20,
                               text: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
                                   widget.data.jenisUjian!,
                                   maxLines: 2,
                                   textAlign: TextAlign.center,
-                                  style: Get.textTheme.bodyText2?.copyWith(color: Pallete.white),
+                                  style: Get.textTheme.bodyText2?.copyWith(color: Pallete.white, fontSize: 9),
                                 ),
                               ),
                             ),
@@ -132,7 +132,7 @@ class _ScheduleCardState extends State<ScheduleCard> with TickerProviderStateMix
                       Text(
                         widget.data.judul.toString().toUpperCase(),
                         style: Get.textTheme.headline6
-                            ?.copyWith(fontWeight: FontWeight.w600, color: Pallete.black),
+                            ?.copyWith(fontWeight: FontWeight.w800, color: Color.fromRGBO(51,65,85, 1), fontSize: 15),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(
@@ -224,7 +224,7 @@ class _ScheduleCardState extends State<ScheduleCard> with TickerProviderStateMix
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: Get.textTheme.headline6
-                                    ?.copyWith(fontWeight: FontWeight.w600, color: Pallete.black),
+                                    ?.copyWith(fontWeight: FontWeight.w600, color: Color.fromRGBO(51,65,85, 0.7)),
                               ))),
                 )
               ],
@@ -259,7 +259,7 @@ class _ScheduleCardState extends State<ScheduleCard> with TickerProviderStateMix
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: Get.textTheme.headline6
-                                    ?.copyWith(fontWeight: FontWeight.w600, color: Pallete.black),
+                                    ?.copyWith(fontWeight: FontWeight.w600, color: Color.fromRGBO(51,65,85, 0.7)),
                               ))),
                 )
               ],
@@ -290,12 +290,12 @@ class _ScheduleCardState extends State<ScheduleCard> with TickerProviderStateMix
                           dateToString(date: stringToDate(date: widget.data.tgl.toString()))
                               .toUpperCase(),
                           style: Get.textTheme.headline6
-                              ?.copyWith(fontWeight: FontWeight.w600, color: Pallete.black),
+                              ?.copyWith(fontWeight: FontWeight.w600, color: Color.fromRGBO(51,65,85, 0.7)),
                         ),
                         Text(
                           "${timeToString(time: stringToTime(time: widget.data.waktuMulai!), context: context)} - ${timeToString(time: stringToTime(time: widget.data.waktuSelesai!, format: "HH-mm"), context: context)}",
                           style: Get.textTheme.headline6
-                              ?.copyWith(fontWeight: FontWeight.w600, color: Pallete.black),
+                              ?.copyWith(fontWeight: FontWeight.w600, color: Color.fromRGBO(51,65,85, 0.7)),
                         ),
                       ]),
                 )
@@ -324,7 +324,7 @@ class _ScheduleCardState extends State<ScheduleCard> with TickerProviderStateMix
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: Get.textTheme.headline6
-                      ?.copyWith(fontWeight: FontWeight.w600, color: Pallete.black),
+                      ?.copyWith(fontWeight: FontWeight.w600, color: Color.fromRGBO(51,65,85, 0.7)),
                 ))
               ],
             ),

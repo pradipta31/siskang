@@ -113,7 +113,7 @@ class _ResearchCardState extends State<ResearchCard> with TickerProviderStateMix
                                   textAlign: TextAlign.left,
                                   overflow: TextOverflow.ellipsis,
                                   style: Get.textTheme.headline6
-                                      ?.copyWith(fontWeight: FontWeight.w800, color: Pallete.black),
+                                      ?.copyWith(fontWeight: FontWeight.w800, color: Color.fromARGB(255, 111, 113, 232)),
                                 ),
                               ),
                             ),
@@ -162,7 +162,8 @@ class _ResearchCardState extends State<ResearchCard> with TickerProviderStateMix
                                   color: widget.data.statusPenelitian!.toLowerCase() == "aktif"
                                       ? Pallete.activeColor
                                       : const Color.fromARGB(255, 177, 18, 6),
-                                  text: const SizedBox()),
+                                  text: const SizedBox()
+                                  ),
                             ),
                           ),
                         ],
@@ -173,7 +174,7 @@ class _ResearchCardState extends State<ResearchCard> with TickerProviderStateMix
                       Text(
                         widget.data.judul.toString().toUpperCase(),
                         style: Get.textTheme.headline6
-                            ?.copyWith(fontWeight: FontWeight.w600, color: Pallete.black),
+                            ?.copyWith(fontWeight: FontWeight.bold, fontSize: 16, color: Color.fromRGBO(40, 50, 66, 1)),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(
