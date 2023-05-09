@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "533186851590-ukdr82v8uec63h7tp7qnvr91d2p68u3k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pasca.siskangv2",
+            "certificate_hash": "b729501398c7708b4cf5c4c07454f8c8088c7f4b"
+          }
+        },
+        {
           "client_id": "533186851590-cf2uhffm727sku66qtjo18b5g5621bt0.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -37,6 +45,13 @@
             {
               "client_id": "533186851590-cf2uhffm727sku66qtjo18b5g5621bt0.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "533186851590-ka00rtov6iv22vpons332gs4v8rud53t.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.pasca.siskangv2"
+              }
             }
           ]
         }
