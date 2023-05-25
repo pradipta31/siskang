@@ -125,13 +125,45 @@ class UpdatePassword extends StatelessWidget {
                         } else if (newPass!.length < 8) {
                           _errorSnackbar("Password tidak boleh kurang dari 8 karakter");
                         } else {
-                          await _auth.changePassword(oldPass!, newPass!, reNewPass).catchError((e) {
-                            Get.snackbar("", "");
-                            _errorSnackbar(e.toString());
-                          }).then((value) {
-                            _auth.userData!.decryptPass = newPass!;
-                            Get.back(result: true);
-                          });
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text(
+                                "Ganti Password",
+                                style: Get.textTheme.headline6!
+                                    .copyWith(fontWeight: FontWeight.bold, color: Pallete.black),
+                              ),
+                              content: Text(
+                                "Apakah anda yakin untuk mengganti password anda?",
+                                style: Get.textTheme.bodyMedium!.copyWith(color: Pallete.black),
+                              ),
+                              actions: [
+                                TextButton(
+                                    onPressed: () async {
+                                      Get.back();
+                                      await _auth
+                                          .changePassword(oldPass!, newPass!, reNewPass)
+                                          .catchError((e) {
+                                        Get.snackbar("", "");
+                                        _errorSnackbar(e.toString());
+                                      }).then((value) {
+                                        _auth.userData!.decryptPass = newPass!;
+                                        Get.back(result: true);
+                                      });
+                                    },
+                                    child: Text("Ya",
+                                        style: Get.textTheme.bodyMedium!
+                                            .copyWith(color: Pallete.black))),
+                                TextButton(
+                                    onPressed: () async {
+                                      Get.back();
+                                    },
+                                    child: Text("Tidak",
+                                        style: Get.textTheme.bodyMedium!
+                                            .copyWith(color: Pallete.black)))
+                              ],
+                            ),
+                          );
                         }
                       }
                     },

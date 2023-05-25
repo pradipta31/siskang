@@ -304,12 +304,43 @@ class _EditProfileState extends State<EditProfile> {
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                   child: GestureDetector(
                     onTap: () {
-                      _savedUpdate();
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text(
+                            "Ubah Profil",
+                            style: Get.textTheme.headline6!
+                                .copyWith(fontWeight: FontWeight.bold, color: Pallete.black),
+                          ),
+                          content: Text(
+                            "Apakah anda yakin untuk mengubah profil anda?",
+                            style: Get.textTheme.bodyMedium!.copyWith(color: Pallete.black),
+                          ),
+                          actions: [
+                            TextButton(
+                                onPressed: () async {
+                                  Get.back();
+                                  _savedUpdate();
+                                },
+                                child: Text("Ya",
+                                    style:
+                                        Get.textTheme.bodyMedium!.copyWith(color: Pallete.black))),
+                            TextButton(
+                                onPressed: () async {
+                                  Get.back();
+                                },
+                                child: Text("Tidak",
+                                    style:
+                                        Get.textTheme.bodyMedium!.copyWith(color: Pallete.black)))
+                          ],
+                        ),
+                      );
                     },
                     child: ButtonMain(
                       height: 50,
                       width: Get.width,
                       text: "Update Profil",
+                      textColor: Pallete.white,
                       buttonColor: Pallete.primaryLight,
                     ),
                   ),
