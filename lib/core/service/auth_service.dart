@@ -24,7 +24,7 @@ class AuthService extends GetConnect {
   Future<bool> updateToken(String jabatan, String nim) async {
     return await FirebaseMessaging.instance.getToken().then((token) async {
       if (token != null) {
-        // log(token, name: "Token");
+        log(token, name: "Token");
         await FirebaseMessaging.instance.subscribeToTopic("mahasiswa");
         return await post(getUriEndpoint(domain, "$staticPath/token_update").toString(),
             FormData({'jabatan': jabatan, 'nim': nim, 'token': token})).then((value) {
