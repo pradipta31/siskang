@@ -8,10 +8,12 @@ import 'dart:developer';
 
 class AuthService extends GetConnect {
   Future<UserModel> login(FormData form) async {
-    return await post(getUriEndpoint(domain, "$staticPath/login").toString(), form)
+    return await post(getUriEndpoint(domain, "$staticPath/login_profile").toString(), form)
         .then((value) async {
+      log(value.body);
       if (responseChecker(value)) {
-        var data = UserModel.fromJson(jsonDecode(value.body));
+        UserModel data =
+            List<UserModel>.from(jsonDecode(value.body).map((e) => UserModel.fromJson(e))).first;
         return await updateToken(data.jabatan!, data.nim!)
             .then((value) => data)
             .catchError((e) => throw e);

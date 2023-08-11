@@ -53,6 +53,8 @@ void main() async {
           style:
               Get.textTheme.headline6!.copyWith(fontWeight: FontWeight.bold, color: Pallete.white),
         ),
+        isDismissible: false,
+        dismissDirection: DismissDirection.horizontal,
         snackPosition: SnackPosition.TOP,
         messageText: Text(
           message.notification?.body ?? "",
