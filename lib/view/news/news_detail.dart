@@ -59,6 +59,8 @@ class NewsDetail extends StatelessWidget {
                                       bottomRight: Radius.circular(16)),
                                   child: Image.network(
                                     snapshot.data!.fotoBerita!,
+                                    errorBuilder: (context, error, stackTrace) =>
+                                        Image.asset("/asset/images/logo_undiksha.png"),
                                     fit: BoxFit.cover,
                                     width: Get.width,
                                     height: 200,

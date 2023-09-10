@@ -105,6 +105,9 @@ class _EditProfileState extends State<EditProfile> {
                                                 : Image.network(
                                                     auth.userPhoto(auth.tempUserData!.photo!),
                                                     fit: BoxFit.cover,
+                                                    errorBuilder: (context, error, stackTrace) =>
+                                                        Image.asset(
+                                                            "/asset/images/logo_undiksha.png"),
                                                     alignment: Alignment.topCenter,
                                                   ),
                                           ),

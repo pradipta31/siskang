@@ -91,6 +91,8 @@ class _ScheduleCardState extends State<ScheduleCard> with TickerProviderStateMix
                                 child: Image.network(
                                   widget.data.fotoMhs!,
                                   fit: BoxFit.fill,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      Image.asset("/asset/images/logo_undiksha.png"),
                                 ),
                               ),
                             ),
@@ -102,8 +104,9 @@ class _ScheduleCardState extends State<ScheduleCard> with TickerProviderStateMix
                               flex: 5,
                               child: Text(
                                 widget.data.nama!,
-                                style: Get.textTheme.headline6
-                                    ?.copyWith(fontWeight: FontWeight.w800, color: Color.fromARGB(255, 111, 113, 232)),
+                                style: Get.textTheme.headline6?.copyWith(
+                                    fontWeight: FontWeight.w800,
+                                    color: Color.fromARGB(255, 111, 113, 232)),
                               )),
                           const SizedBox(
                             width: 8,
@@ -111,7 +114,7 @@ class _ScheduleCardState extends State<ScheduleCard> with TickerProviderStateMix
                           Expanded(
                             flex: 2,
                             child: StatusBadge(
-                              color: Color.fromRGBO(70,189,132, 1),
+                              color: Color.fromRGBO(70, 189, 132, 1),
                               borderRadius: 20,
                               text: Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -119,7 +122,8 @@ class _ScheduleCardState extends State<ScheduleCard> with TickerProviderStateMix
                                   widget.data.jenisUjian!,
                                   maxLines: 2,
                                   textAlign: TextAlign.center,
-                                  style: Get.textTheme.bodyText2?.copyWith(color: Pallete.white, fontSize: 9),
+                                  style: Get.textTheme.bodyText2
+                                      ?.copyWith(color: Pallete.white, fontSize: 9),
                                 ),
                               ),
                             ),
@@ -131,8 +135,10 @@ class _ScheduleCardState extends State<ScheduleCard> with TickerProviderStateMix
                       ),
                       Text(
                         widget.data.judul.toString().toUpperCase(),
-                        style: Get.textTheme.headline6
-                            ?.copyWith(fontWeight: FontWeight.w800, color: Color.fromRGBO(51,65,85, 1), fontSize: 15),
+                        style: Get.textTheme.headline6?.copyWith(
+                            fontWeight: FontWeight.w800,
+                            color: Color.fromRGBO(51, 65, 85, 1),
+                            fontSize: 15),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(
@@ -223,8 +229,9 @@ class _ScheduleCardState extends State<ScheduleCard> with TickerProviderStateMix
                                     : widget.data.pembimbing2.toString().toUpperCase(),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: Get.textTheme.headline6
-                                    ?.copyWith(fontWeight: FontWeight.w600, color: Color.fromRGBO(51,65,85, 0.7)),
+                                style: Get.textTheme.headline6?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: Color.fromRGBO(51, 65, 85, 0.7)),
                               ))),
                 )
               ],
@@ -258,8 +265,9 @@ class _ScheduleCardState extends State<ScheduleCard> with TickerProviderStateMix
                                     : widget.data.penguji2.toString().toUpperCase(),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: Get.textTheme.headline6
-                                    ?.copyWith(fontWeight: FontWeight.w600, color: Color.fromRGBO(51,65,85, 0.7)),
+                                style: Get.textTheme.headline6?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: Color.fromRGBO(51, 65, 85, 0.7)),
                               ))),
                 )
               ],
@@ -289,13 +297,13 @@ class _ScheduleCardState extends State<ScheduleCard> with TickerProviderStateMix
                         Text(
                           dateToString(date: stringToDate(date: widget.data.tgl.toString()))
                               .toUpperCase(),
-                          style: Get.textTheme.headline6
-                              ?.copyWith(fontWeight: FontWeight.w600, color: Color.fromRGBO(51,65,85, 0.7)),
+                          style: Get.textTheme.headline6?.copyWith(
+                              fontWeight: FontWeight.w600, color: Color.fromRGBO(51, 65, 85, 0.7)),
                         ),
                         Text(
                           "${timeToString(time: stringToTime(time: widget.data.waktuMulai!), context: context)} - ${timeToString(time: stringToTime(time: widget.data.waktuSelesai!, format: "HH-mm"), context: context)}",
-                          style: Get.textTheme.headline6
-                              ?.copyWith(fontWeight: FontWeight.w600, color: Color.fromRGBO(51,65,85, 0.7)),
+                          style: Get.textTheme.headline6?.copyWith(
+                              fontWeight: FontWeight.w600, color: Color.fromRGBO(51, 65, 85, 0.7)),
                         ),
                       ]),
                 )
@@ -323,8 +331,8 @@ class _ScheduleCardState extends State<ScheduleCard> with TickerProviderStateMix
                   widget.data.ruangan.toString().toUpperCase(),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: Get.textTheme.headline6
-                      ?.copyWith(fontWeight: FontWeight.w600, color: Color.fromRGBO(51,65,85, 0.7)),
+                  style: Get.textTheme.headline6?.copyWith(
+                      fontWeight: FontWeight.w600, color: Color.fromRGBO(51, 65, 85, 0.7)),
                 ))
               ],
             ),

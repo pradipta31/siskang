@@ -91,6 +91,8 @@ class _ResearchCardState extends State<ResearchCard> with TickerProviderStateMix
                                 child: Image.network(
                                   widget.data.foto!,
                                   fit: BoxFit.fill,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      Image.asset("/asset/images/logo_undiksha.png"),
                                 ),
                               ),
                             ),
@@ -112,8 +114,9 @@ class _ResearchCardState extends State<ResearchCard> with TickerProviderStateMix
                                   minFontSize: 14,
                                   textAlign: TextAlign.left,
                                   overflow: TextOverflow.ellipsis,
-                                  style: Get.textTheme.headline6
-                                      ?.copyWith(fontWeight: FontWeight.w800, color: Color.fromARGB(255, 111, 113, 232)),
+                                  style: Get.textTheme.headline6?.copyWith(
+                                      fontWeight: FontWeight.w800,
+                                      color: Color.fromARGB(255, 111, 113, 232)),
                                 ),
                               ),
                             ),
@@ -162,8 +165,7 @@ class _ResearchCardState extends State<ResearchCard> with TickerProviderStateMix
                                   color: widget.data.statusPenelitian!.toLowerCase() == "aktif"
                                       ? Pallete.activeColor
                                       : const Color.fromARGB(255, 177, 18, 6),
-                                  text: const SizedBox()
-                                  ),
+                                  text: const SizedBox()),
                             ),
                           ),
                         ],
@@ -173,8 +175,10 @@ class _ResearchCardState extends State<ResearchCard> with TickerProviderStateMix
                       ),
                       Text(
                         widget.data.judul.toString().toUpperCase(),
-                        style: Get.textTheme.headline6
-                            ?.copyWith(fontWeight: FontWeight.bold, fontSize: 16, color: Color.fromRGBO(40, 50, 66, 1)),
+                        style: Get.textTheme.headline6?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Color.fromRGBO(40, 50, 66, 1)),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(
