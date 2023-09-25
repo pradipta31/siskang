@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-const String domain = "siska-ng.site";
+const String domain = "siska-ng.tech";
 const String staticPath = "/Siska_api";
 const String defaultDateFormat = "dd-MM-yyyy";
 const String defaultStringDateFormat = "dd MMMM yyyy";
