@@ -162,13 +162,14 @@ class ResearchController extends GetxController {
     data.listedTimeline = {
       "0": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 0,
-        "name": "Upload Proposal",
+        "name": "Pengajuan Judul",
         "date": data.proposalUploadDate?.toLowerCase().startsWith('un', 0) ?? false
             ? null
             : data.proposalUploadDate,
         "status": !data.proposalUploadDate!.toLowerCase().startsWith('un', 0),
         "statusText":
-            !data.proposalUploadDate!.toLowerCase().startsWith('un', 0) ? null : "Uploaded"
+            // !data.proposalUploadDate!.toLowerCase().startsWith('un', 0) ? null : 
+            "Judul diterima"
       },
       "1": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 1,
@@ -177,7 +178,9 @@ class ResearchController extends GetxController {
             ? null
             : data.proposalSubmissionDate,
         "status": !data.proposalSubmissionStat!.toLowerCase().startsWith('un', 0),
-        "statusText": data.proposalSubmissionStat
+        "statusText": 
+        // "Lanjut ke tahap proposal"
+        data.proposalSubmissionStat
       },
       "2": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 2,
@@ -186,7 +189,9 @@ class ResearchController extends GetxController {
             ? null
             : data.proposalVerifDate,
         "status": !data.proposalVerifDate!.toLowerCase().startsWith('un', 0),
-        "statusText": null
+        "statusText": 
+        // "Proposal terverifikasi"
+        "Proposal di Setujui"
       },
       "3": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 2,
@@ -222,7 +227,7 @@ class ResearchController extends GetxController {
             ? null
             : data.preThesisUpDate,
         "status": !data.preThesisUpDate!.toLowerCase().startsWith('un', 0),
-        "statusText": null
+        "statusText": data.preThesisUpDate
       },
       "7": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 3,
@@ -258,7 +263,7 @@ class ResearchController extends GetxController {
             ? null
             : data.tglTesisUpload,
         "status": !data.tglTesisUpload!.toLowerCase().startsWith('un', 0),
-        "statusText": null
+        "statusText": data.tglTesisUpload
       },
       "11": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 4,
