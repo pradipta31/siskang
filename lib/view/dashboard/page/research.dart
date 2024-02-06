@@ -132,7 +132,7 @@ class _ResearchState extends State<Research> {
                                   ), onTap: () {
                                 Get.toNamed('/research/graph',
                                     arguments: [ResearchGrouping.TOPIK, true]);
-                              }, color: Pallete.white, height: 35),
+                              }, color: Pallete.white, height: 50),
                             ),
                           ),
                           Expanded(
@@ -152,7 +152,7 @@ class _ResearchState extends State<Research> {
                                   ), onTap: () {
                                 Get.toNamed('/research/graph',
                                     arguments: [ResearchGrouping.PEMBIMBING, true]);
-                              }, color: Pallete.white, height: 35),
+                              }, color: Pallete.white, height: 50),
                             ),
                           ),
                           Expanded(
@@ -172,7 +172,7 @@ class _ResearchState extends State<Research> {
                                   ), onTap: () {
                                 Get.toNamed('/research/graph',
                                     arguments: [ResearchGrouping.TAHAP, true]);
-                              }, color: Pallete.white, height: 35),
+                              }, color: Pallete.white, height: 50),
                             ),
                           ),
                         ],

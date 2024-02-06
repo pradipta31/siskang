@@ -16,7 +16,8 @@ class ResearchCard extends StatefulWidget {
   State<ResearchCard> createState() => _ResearchCardState();
 }
 
-class _ResearchCardState extends State<ResearchCard> with TickerProviderStateMixin {
+class _ResearchCardState extends State<ResearchCard>
+    with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
   bool isExpanded = false;
@@ -80,7 +81,8 @@ class _ResearchCardState extends State<ResearchCard> with TickerProviderStateMix
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.max,
                         children: [
                           SizedBox(
                             width: 50,
@@ -92,7 +94,8 @@ class _ResearchCardState extends State<ResearchCard> with TickerProviderStateMix
                                   widget.data.foto!,
                                   fit: BoxFit.fill,
                                   errorBuilder: (context, error, stackTrace) =>
-                                      Image.asset("/asset/images/logo_undiksha.png"),
+                                      Image.asset(
+                                          "/asset/images/logo_undiksha.png"),
                                 ),
                               ),
                             ),
@@ -102,83 +105,55 @@ class _ResearchCardState extends State<ResearchCard> with TickerProviderStateMix
                           ),
                           Expanded(
                             flex: 5,
-                            child: SizedBox(
-                              width: Get.width,
-                              height: 50,
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: AutoSizeText(
-                                  "${widget.data.nama} (${widget.data.angkatan})",
-                                  maxLines: 2,
-                                  stepGranularity: 2.0,
-                                  minFontSize: 14,
-                                  textAlign: TextAlign.left,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: Get.textTheme.headline6?.copyWith(
-                                      fontWeight: FontWeight.w800,
-                                      color: Color.fromARGB(255, 111, 113, 232)),
-                                ),
-                              ),
+                            child: AutoSizeText(
+                              "${widget.data.nama} (${widget.data.angkatan})",
+                              maxLines: 2,
+                              stepGranularity: 2.0,
+                              minFontSize: 14,
+                              textAlign: TextAlign.left,
+                              overflow: TextOverflow.ellipsis,
+                              style: Get.textTheme.headline6?.copyWith(
+                                  fontWeight: FontWeight.w800,
+                                  color: Color.fromARGB(255, 39, 72, 127)),
                             ),
                           ),
                           const SizedBox(
                             width: 8,
                           ),
-                          Flexible(
-                            flex: 1,
-                            fit: FlexFit.loose,
-                            child: GestureDetector(
-                              onTap: () {
-                                Get.rawSnackbar(
-                                    padding: const EdgeInsets.all(16),
-                                    borderRadius: 8,
-                                    margin: const EdgeInsets.fromLTRB(8, 0, 8, 16),
-                                    backgroundColor: Pallete.primaryLight,
-                                    boxShadows: [
-                                      const BoxShadow(
-                                          color: Pallete.darkGrey,
-                                          blurRadius: 2,
-                                          blurStyle: BlurStyle.outer)
-                                    ],
-                                    snackPosition: SnackPosition.BOTTOM,
-                                    messageText: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Text(
-                                          widget.data.nama ?? "",
-                                          style: Get.textTheme.bodyText2!.copyWith(
-                                              color: Pallete.white, fontWeight: FontWeight.w300),
-                                        ),
-                                        Text(
-                                          widget.data.statusPenelitian?.toUpperCase() ?? "UNKNOWN",
-                                          style: Get.textTheme.headline6!.copyWith(
-                                              fontWeight: FontWeight.bold, color: Pallete.white),
-                                        )
-                                      ],
-                                    ));
-                              },
-                              child: StatusBadge(
-                                  height: 30,
-                                  width: 30,
-                                  color: widget.data.statusPenelitian!.toLowerCase() == "aktif"
-                                      ? Pallete.activeColor
-                                      : const Color.fromARGB(255, 177, 18, 6),
-                                  text: const SizedBox()),
+                          Expanded(
+                            flex: 2,
+                            child: StatusBadge(
+                              color: Color.fromRGBO(70, 189, 132, 1),
+                              borderRadius: 20,
+                              text: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  widget.data.statusPenelitian!,
+                                  maxLines: 2,
+                                  textAlign: TextAlign.center,
+                                  style: Get.textTheme.bodyText2?.copyWith(
+                                      color: Pallete.white, fontSize: 9),
+                                ),
+                              ),
                             ),
                           ),
                         ],
                       ),
                       const SizedBox(
-                        height: 8,
+                        height: 16,
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: Divider(
+                          thickness: 0.5,
+                        ),
                       ),
                       Text(
                         widget.data.judul.toString().toUpperCase(),
                         style: Get.textTheme.headline6?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Color.fromRGBO(40, 50, 66, 1)),
+                            fontWeight: FontWeight.w800,
+                            color: Color.fromRGBO(51, 65, 85, 1),
+                            fontSize: 15),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(
@@ -215,7 +190,8 @@ class _ResearchCardState extends State<ResearchCard> with TickerProviderStateMix
                             spreadRadius: 4)
                       ]),
                   child: RotationTransition(
-                      turns: Tween(begin: 0.0, end: 0.5).animate(_animationController),
+                      turns: Tween(begin: 0.0, end: 0.5)
+                          .animate(_animationController),
                       child: const Icon(Icons.keyboard_arrow_up_rounded)),
                 ),
               ),
@@ -235,7 +211,7 @@ class _ResearchCardState extends State<ResearchCard> with TickerProviderStateMix
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Divider(
-              thickness: 1.5,
+              thickness: 0.5,
             ),
           ),
           const SizedBox(
@@ -250,9 +226,9 @@ class _ResearchCardState extends State<ResearchCard> with TickerProviderStateMix
                 SvgPicture.asset(
                   AssetsDirectory.users,
                   fit: BoxFit.contain,
-                  height: 25,
-                  width: 25,
-                  color: Pallete.primaryLight,
+                  height: 26,
+                  width: 26,
+                  color: Pallete.selectedColor,
                 ),
                 const SizedBox(
                   width: 16,
@@ -265,13 +241,21 @@ class _ResearchCardState extends State<ResearchCard> with TickerProviderStateMix
                           2,
                           (idx) => Text(
                                 idx != 1
-                                    ? widget.data.pembimbing1.toString().toUpperCase()
-                                    : widget.data.pembimbing2.toString().toUpperCase(),
-                                maxLines: 2,
+                                    ? widget.data.pembimbing1
+                                        .toString()
+                                        .toUpperCase()
+                                    : widget.data.pembimbing2
+                                        .toString()
+                                        .toUpperCase(),
+                                maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
-                                style: Get.textTheme.headline6
-                                    ?.copyWith(fontWeight: FontWeight.w600, color: Pallete.black),
-                              ))),
+                                style: Get.textTheme.headline6?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 11,
+                                    height: 1.9,
+                                    color: Color.fromRGBO(95, 114, 141, 0.698)),
+                              ))
+                              ),
                 )
               ],
             ),
@@ -306,7 +290,8 @@ class _ResearchCardState extends State<ResearchCard> with TickerProviderStateMix
                       borderRadius: 30,
                       fontSize: 12,
                       onTap: () {
-                        Get.toNamed('/research_timeline', arguments: widget.data.nim);
+                        Get.toNamed('/research_timeline',
+                            arguments: widget.data.nim);
                       },
                       label: "Timeline",
                       textColor: Pallete.white,
