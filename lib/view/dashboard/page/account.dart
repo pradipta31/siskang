@@ -77,7 +77,9 @@ class _AccountState extends State<Account> with SingleTickerProviderStateMixin {
                                     child: Hero(
                                       tag: auth.userData!.id!,
                                       child: Image.network(
-                                        auth.userPhoto(auth.userData!.photo!),
+                                        //TODO: Ini URL nya ada yg ganti schemanya. Yg awalnya return nama image sekarang jadi return link image
+                                        auth.userData!.photo!,
+                                        // auth.userPhoto(auth.userData!.photo!),
                                         errorBuilder: (context, error, stackTrace) =>
                                             Image.asset("/asset/images/logo_undiksha.png"),
                                         fit: BoxFit.cover,

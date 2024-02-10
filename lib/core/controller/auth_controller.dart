@@ -23,6 +23,7 @@ class AuthController extends GetxController {
         authPref.write(key, value.toString());
       });
       update();
+      log(userData!.photo!);
     }).catchError((error) {
       throw error;
     });

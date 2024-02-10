@@ -103,7 +103,9 @@ class _EditProfileState extends State<EditProfile> {
                                                     alignment: Alignment.topCenter,
                                                   )
                                                 : Image.network(
-                                                    auth.userPhoto(auth.tempUserData!.photo!),
+                                                    //TODO: Ini URL nya ada yg ganti schemanya. Yg awalnya return nama image sekarang jadi return link image
+                                                    auth.tempUserData!.photo!,
+                                                    // auth.userPhoto(auth.tempUserData!.photo!),
                                                     fit: BoxFit.cover,
                                                     errorBuilder: (context, error, stackTrace) =>
                                                         Image.asset(
