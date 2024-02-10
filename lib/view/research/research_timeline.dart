@@ -23,7 +23,7 @@ class ResearchOtherTimeline extends StatelessWidget {
           title: Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              "Notifikasi",
+              "Timeline",
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: Get.textTheme.headline4
