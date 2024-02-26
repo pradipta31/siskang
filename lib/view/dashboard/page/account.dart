@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -78,10 +80,10 @@ class _AccountState extends State<Account> with SingleTickerProviderStateMixin {
                                       tag: auth.userData!.id!,
                                       child: Image.network(
                                         //TODO: Ini URL nya ada yg ganti schemanya. Yg awalnya return nama image sekarang jadi return link image
-                                        auth.userData!.photo!,
-                                        // auth.userPhoto(auth.userData!.photo!),
+                                        // auth.userData!.photo!,
+                                        auth.userData!.photo!.startsWith("http", 0)? auth.userData!.photo! : auth.userPhoto(auth.userData!.photo!),
                                         errorBuilder: (context, error, stackTrace) =>
-                                            Image.asset("/asset/images/logo_undiksha.png"),
+                                            Image.asset("asset/images/logo_undiksha.png"),
                                         fit: BoxFit.cover,
                                         alignment: Alignment.topCenter,
                                       ),

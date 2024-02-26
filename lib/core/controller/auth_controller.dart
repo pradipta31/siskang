@@ -70,6 +70,8 @@ class AuthController extends GetxController {
     var request = http.MultipartRequest("POST", getUriEndpoint(domain, "$staticPath/upload_foto"));
     request.files.add(http.MultipartFile('file', stream, length, filename: basename(image.path)));
     return await request.send().then((value) async {
+      var res = await http.Response.fromStream(value);
+      log(res.body, name: "Response Uploaded Data");
       return basename(image.path);
     }).catchError((e) {
       log(e.toString(), name: "Upload Image");
@@ -110,5 +112,5 @@ class AuthController extends GetxController {
     userData = tempUserData;
   }
 
-  String userPhoto(String photoName) => "https://siska-ng.site/assets/images/$photoName";
+  String userPhoto(String photoName) => "https://siska-ng.tech/assets/images/$photoName";
 }

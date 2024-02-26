@@ -95,8 +95,8 @@ class _EditProfileState extends State<EditProfile> {
                                         child: SizedBox.fromSize(
                                           size: const Size.fromRadius(50),
                                           child: Hero(
-                                            tag: auth.tempUserData!.id!,
-                                            child: auth.tempUserData!.tempImage != null
+                                            tag: auth.tempUserData?.id??auth.userData!.id!,
+                                            child: auth.tempUserData?.tempImage != null
                                                 ? Image.file(
                                                     File(auth.tempUserData!.tempImage!.path),
                                                     fit: BoxFit.cover,
@@ -104,12 +104,12 @@ class _EditProfileState extends State<EditProfile> {
                                                   )
                                                 : Image.network(
                                                     //TODO: Ini URL nya ada yg ganti schemanya. Yg awalnya return nama image sekarang jadi return link image
-                                                    auth.tempUserData!.photo!,
+                                                    auth.tempUserData?.photo??auth.userData!.photo!,
                                                     // auth.userPhoto(auth.tempUserData!.photo!),
                                                     fit: BoxFit.cover,
                                                     errorBuilder: (context, error, stackTrace) =>
                                                         Image.asset(
-                                                            "/asset/images/logo_undiksha.png"),
+                                                            "asset/images/logo_undiksha.png"),
                                                     alignment: Alignment.topCenter,
                                                   ),
                                           ),
