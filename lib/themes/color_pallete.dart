@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
 class Pallete {
-  static const primaryLight = Color(0xFF52b6df);
+  // static const primaryLight = Color(0xFF52B6DF);
+  static const primaryLight = Color.fromARGB(255, 72, 161, 196);
   static const selectedColor = Color(0xFF316d86);
   static const unselectedColor = Color(0xFFd9e4f6);
   static const background = Color(0xFFFFFFFF);
