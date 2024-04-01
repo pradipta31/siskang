@@ -19,23 +19,25 @@ class ProfileTextfield extends StatelessWidget {
   TextInputAction? textInputAction;
   String? Function(String?)? validator;
   ValueChanged<dynamic>? onSaved;
+  Function(String)? onChanged;
 
-  ProfileTextfield({
-    Key? key,
-    this.labelText,
-    this.hintText,
-    this.title,
-    this.border,
-    this.keyboardType,
-    this.floatingLabelAlignment,
-    this.floatingLabelBehavior,
-    this.initialValue,
-    this.enabled = true,
-    this.obsecure = false,
-    this.textInputAction,
-    this.validator,
-    this.onSaved,
-  }) : super(key: key);
+  ProfileTextfield(
+      {Key? key,
+      this.labelText,
+      this.hintText,
+      this.title,
+      this.border,
+      this.keyboardType,
+      this.floatingLabelAlignment,
+      this.floatingLabelBehavior,
+      this.initialValue,
+      this.enabled = true,
+      this.obsecure = false,
+      this.textInputAction,
+      this.validator,
+      this.onSaved,
+      this.onChanged})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +66,11 @@ class ProfileTextfield extends StatelessWidget {
           initialValue: initialValue,
           textInputAction: textInputAction,
           validator: validator,
+          onChanged: (value) {
+            if (onChanged != null) {
+              onChanged!(value);
+            }
+          },
           onSaved: (value) {
             if (onSaved != null) onSaved!(value);
           },

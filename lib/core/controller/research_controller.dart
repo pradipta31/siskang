@@ -69,7 +69,7 @@ class ResearchController extends GetxController {
     }
   }
 
-  List<ResearchTimelineModel> researchData(String? search) {
+  List<ResearchTimelineModel> researchData(String? search, {int start = 0, int end = 0}) {
     if (search != null && search.isNotEmpty) {
       if (!search.isBlank!) {
         return allResearch.where((e) {
@@ -84,8 +84,34 @@ class ResearchController extends GetxController {
           } else {
             return false;
           }
+        }).where((e) {
+          if (e.angkatan != null) {
+            if (int.parse(e.angkatan!.substring(0, e.angkatan!.length > 4 ? 4 : null)) >= start &&
+                (end > start
+                    ? int.parse(e.angkatan!.substring(0, e.angkatan!.length > 4 ? 4 : null)) <= end
+                    : true)) {
+              return true;
+            } else {
+              return false;
+            }
+          }
+          return true;
         }).toList();
       }
+    } else {
+      return allResearch.where((e) {
+        if (e.angkatan != null) {
+          if (int.parse(e.angkatan!.substring(0, e.angkatan!.length > 4 ? 4 : null)) >= start &&
+              (end > start
+                  ? int.parse(e.angkatan!.substring(0, e.angkatan!.length > 4 ? 4 : null)) <= end
+                  : true)) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+        return false;
+      }).toList();
     }
     return allResearch;
   }
@@ -168,7 +194,7 @@ class ResearchController extends GetxController {
             : data.proposalUploadDate,
         "status": !data.proposalUploadDate!.toLowerCase().startsWith('un', 0),
         "statusText":
-            // !data.proposalUploadDate!.toLowerCase().startsWith('un', 0) ? null : 
+            // !data.proposalUploadDate!.toLowerCase().startsWith('un', 0) ? null :
             "Judul diterima"
       },
       "1": {
@@ -178,9 +204,9 @@ class ResearchController extends GetxController {
             ? null
             : data.proposalSubmissionDate,
         "status": !data.proposalSubmissionStat!.toLowerCase().startsWith('un', 0),
-        "statusText": 
-        // "Lanjut ke tahap proposal"
-        data.proposalSubmissionStat
+        "statusText":
+            // "Lanjut ke tahap proposal"
+            data.proposalSubmissionStat
       },
       "2": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 2,
@@ -189,9 +215,9 @@ class ResearchController extends GetxController {
             ? null
             : data.proposalVerifDate,
         "status": !data.proposalVerifDate!.toLowerCase().startsWith('un', 0),
-        "statusText": 
-        // "Proposal terverifikasi"
-        "Proposal di Setujui"
+        "statusText":
+            // "Proposal terverifikasi"
+            "Proposal di Setujui"
       },
       "3": {
         "show": _tahapPenelitian(data.tahapPenelitian!) <= 2,

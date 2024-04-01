@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -5,10 +7,11 @@ import 'package:siskangv2/components/search_bar.dart';
 import 'package:siskangv2/core/common/research_grouping_enum.dart';
 import 'package:siskangv2/core/controller/auth_controller.dart';
 import 'package:siskangv2/core/controller/research_controller.dart';
-import 'package:siskangv2/core/model/research_timeline_model.dart';
 import 'package:siskangv2/themes/asset_dir.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
+import 'package:siskangv2/view/account/widget/profile_textfield.dart';
 import 'package:siskangv2/view/dashboard/widget/research_card.dart';
+import 'package:siskangv2/widget/button_main.dart';
 
 class Research extends StatefulWidget {
   const Research({Key? key}) : super(key: key);
@@ -22,6 +25,8 @@ class _ResearchState extends State<Research> {
   final _auth = Get.find<AuthController>();
   final FocusNode _focusNode = FocusNode();
   String? _search;
+  int? _startYear;
+  int? _endYear;
   bool _showSearch = false;
 
   // List<ResearchTimelineModel> data = [];
@@ -48,7 +53,7 @@ class _ResearchState extends State<Research> {
             alignment: Alignment.centerLeft,
             child: AnimatedCrossFade(
               firstChild: Text(
-                _search ?? "Penelitian",
+                _search != "" && _search != null ? _search! : "Penelitian",
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Get.textTheme.headline4
@@ -57,6 +62,17 @@ class _ResearchState extends State<Research> {
               secondChild: SearchBarComponent(
                 focusNode: _focusNode,
                 hint: "Search",
+                trailing: GestureDetector(
+                  onTap: () async {
+                    await Get.bottomSheet<Map<String, String>>(_bottomSheetSearch()).then((value) {
+                      setState(() {});
+                    });
+                  },
+                  child: Icon(
+                    Icons.menu,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
                 searchQuery: (value) {
                   setState(() {
                     _search = value;
@@ -183,14 +199,15 @@ class _ResearchState extends State<Research> {
                     child: GetBuilder<ResearchController>(
                       builder: (controller) {
                         if (controller.allResearch.isNotEmpty) {
-                          int length = controller.lengthOfResearchList(_search);
-                          var data = controller.researchData(_search);
+                          // int length = controller.lengthOfResearchList(_search);
+                          var data = controller.researchData(_search,
+                              start: _startYear ?? 0, end: _endYear ?? 0);
                           return ListView.builder(
                             itemBuilder: (context, index) => Padding(
                               padding: const EdgeInsets.only(bottom: 16),
                               child: ResearchCard(data: data[index]),
                             ),
-                            itemCount: length,
+                            itemCount: data.length,
                             shrinkWrap: true,
                             padding: const EdgeInsets.all(16),
                           );
@@ -236,6 +253,132 @@ class _ResearchState extends State<Research> {
     );
   }
 
+  Widget _bottomSheetSearch() {
+    final GlobalKey<FormState> _formKeyOne = GlobalKey<FormState>();
+
+    savedUpdate() {
+      if (_formKeyOne.currentState!.validate()) {
+        // save
+        _formKeyOne.currentState!.save();
+      }
+    }
+
+    return Container(
+      width: Get.width,
+      height: Get.bottomBarHeight,
+      decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+                color: Get.theme.shadowColor,
+                blurRadius: 8,
+                offset: const Offset(0, -1),
+                spreadRadius: 1),
+          ],
+          shape: BoxShape.rectangle,
+          borderRadius:
+              const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+          color: Colors.white),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Form(
+          key: _formKeyOne,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "Cari Angkatan",
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Get.textTheme.headline4
+                    ?.copyWith(color: Pallete.primaryLight, fontWeight: FontWeight.w700),
+                textAlign: TextAlign.left,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: ProfileTextfield(
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      hintText: "Mulai",
+                      initialValue: _startYear != null ? _startYear.toString() : null,
+                      border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8))),
+                      keyboardType: TextInputType.number,
+                      onSaved: (value) {
+                        if (value.isNotEmpty) {
+                          _startYear = int.parse(value);
+                        } else {
+                          _startYear = null;
+                        }
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      " - ",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: Get.textTheme.bodyLarge
+                          ?.copyWith(color: Pallete.black, fontWeight: FontWeight.w700),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: ProfileTextfield(
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      hintText: "Hingga",
+                      initialValue: _endYear != null ? _endYear.toString() : null,
+                      border: const OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(8))),
+                      keyboardType: TextInputType.number,
+                      onSaved: (value) {
+                        if (value.isNotEmpty) {
+                          _endYear = int.parse(value);
+                        } else {
+                          _endYear = null;
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      savedUpdate();
+                      Get.back();
+                    },
+                    child: ButtonMain(
+                      height: 50,
+                      width: Get.width,
+                      text: "Terapkan",
+                      textColor: Pallete.white,
+                      buttonColor: Pallete.primaryLight,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buttonStatistic(Widget text,
       {Function()? onTap, Color? borderColor, Color? color, double? width, double? height}) {
     return InkWell(
@@ -245,7 +388,6 @@ class _ResearchState extends State<Research> {
       child: Container(
         width: width,
         height: height,
-        child: text,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           // color: color,
@@ -258,6 +400,7 @@ class _ResearchState extends State<Research> {
           // ],
           border: Border.all(color: borderColor ?? Pallete.primaryLight, width: 1),
         ),
+        child: text,
       ),
     );
   }

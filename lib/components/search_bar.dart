@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class SearchBarComponent extends StatelessWidget {
   final String? hint;
   final FocusNode? focusNode;
+  final Widget? trailing;
   final Function(String value)? searchQuery;
-  const SearchBarComponent({Key? key, this.hint, this.searchQuery, this.focusNode})
+  const SearchBarComponent({Key? key, this.hint, this.searchQuery, this.focusNode, this.trailing})
       : super(key: key);
 
   @override
@@ -26,6 +27,7 @@ class SearchBarComponent extends StatelessWidget {
             ),
             contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
             hintText: hint ?? "",
+            suffixIcon: trailing,
             border: InputBorder.none),
         cursorColor: Theme.of(context).primaryColor,
       ),
