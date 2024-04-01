@@ -95,7 +95,7 @@ class _ResearchCardState extends State<ResearchCard>
                                   fit: BoxFit.fill,
                                   errorBuilder: (context, error, stackTrace) =>
                                       Image.asset(
-                                          "/asset/images/logo_undiksha.png"),
+                                          "asset/images/logo_undiksha.png"),
                                 ),
                               ),
                             ),

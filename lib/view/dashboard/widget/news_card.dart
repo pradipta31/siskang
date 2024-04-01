@@ -28,7 +28,7 @@ class NewsCard extends StatelessWidget {
                 data.fotoBerita!,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) =>
-                    Image.asset("/asset/images/logo_undiksha.png"),
+                    Image.asset("asset/images/logo_undiksha.png"),
               ),
             ),
           ),
