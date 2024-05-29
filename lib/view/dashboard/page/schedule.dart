@@ -23,6 +23,7 @@ class _SchedulePageState extends State<SchedulePage> {
   final FocusNode _focusNode = FocusNode();
   String? _search;
   bool _showSearch = false;
+
   @override
   void initState() {
     _schedule.getSchedule(nim: _auth.userData!.nim!, idProdi: _auth.userData!.prodiId!);
@@ -95,17 +96,27 @@ class _SchedulePageState extends State<SchedulePage> {
             child: GetBuilder<ScheduleController>(builder: (schedule) {
               int length = schedule.lengthOfSearchedList(_search);
               var data = schedule.scheduleData(_search);
-              return ListView.builder(
-                itemCount: length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) => Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                    child: ScheduleCard(data: data[index])),
+              return RefreshIndicator(
+                onRefresh: _handleRefresh,
+                color: Colors.white,
+                backgroundColor: Colors.blue,
+                child: ListView.builder(
+                  itemCount: length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) => Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+                      child: ScheduleCard(data: data[index])),
+                ),
               );
             }),
           ),
         ),
       ),
     );
+  }
+
+  Future<void> _handleRefresh() async {
+    _schedule.getSchedule(nim: _auth.userData!.nim!, idProdi: _auth.userData!.prodiId!);
+    setState(() {});
   }
 }

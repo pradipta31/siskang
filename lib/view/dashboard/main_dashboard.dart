@@ -18,7 +18,7 @@ class MainDashboard extends StatefulWidget {
   final _authController = Get.find<AuthController>();
   final _researchController = Get.find<ResearchController>();
   final _newsController = Get.find<NewsController>();
-  final _notifController = Get.find<NotifController>();
+  // final _notifController = Get.find<NotifController>();
   MainDashboard({Key? key}) : super(key: key);
 
   @override

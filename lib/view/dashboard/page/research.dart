@@ -202,14 +202,19 @@ class _ResearchState extends State<Research> {
                           // int length = controller.lengthOfResearchList(_search);
                           var data = controller.researchData(_search,
                               start: _startYear ?? 0, end: _endYear ?? 0);
-                          return ListView.builder(
-                            itemBuilder: (context, index) => Padding(
-                              padding: const EdgeInsets.only(bottom: 16),
-                              child: ResearchCard(data: data[index]),
+                          return RefreshIndicator(
+                            onRefresh: _handleRefresh,
+                            color: Colors.white,
+                            backgroundColor: Colors.blue,
+                            child: ListView.builder(
+                              itemBuilder: (context, index) => Padding(
+                                padding: const EdgeInsets.only(bottom: 16),
+                                child: ResearchCard(data: data[index]),
+                              ),
+                              itemCount: data.length,
+                              shrinkWrap: true,
+                              padding: const EdgeInsets.all(16),
                             ),
-                            itemCount: data.length,
-                            shrinkWrap: true,
-                            padding: const EdgeInsets.all(16),
                           );
                         } else {
                           return const SizedBox();
@@ -251,6 +256,10 @@ class _ResearchState extends State<Research> {
         ),
       ),
     );
+  }
+
+  Future<void> _handleRefresh() async {
+    await _getData();
   }
 
   Widget _bottomSheetSearch() {

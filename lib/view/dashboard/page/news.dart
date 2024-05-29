@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:siskangv2/components/in_page_search_bar.dart';
 import 'package:siskangv2/core/common/links.dart';
+import 'package:siskangv2/core/controller/auth_controller.dart';
 import 'package:siskangv2/core/controller/news_controller.dart';
 import 'package:siskangv2/core/model/news_model.dart';
 import 'package:siskangv2/themes/color_pallete.dart';
@@ -19,6 +20,8 @@ class News extends StatefulWidget {
 class _NewsState extends State<News> {
   String? _searchQuery;
   final FocusNode _focusNode = FocusNode();
+  final _newsController = Get.find<NewsController>();
+  final _authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -42,93 +45,103 @@ class _NewsState extends State<News> {
         height: Get.height,
         width: Get.width,
         child: GetBuilder<NewsController>(builder: (news) {
-          return SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 16, 8, 0),
-                  child: InPageSearchBar(
-                    hint: "Cari Berita",
-                    focusNode: _focusNode,
-                    onSubmitted: (p0) {
-                      _focusNode.unfocus();
-                    },
-                    searchQuery: (p0) {
-                      setState(() {
-                        _searchQuery = p0;
-                      });
-                    },
-                  ),
-                ),
-                if (_searchQuery == null || _searchQuery!.isBlank!) ...[
+          return RefreshIndicator(
+            onRefresh: _handleRefresh,
+            color: Colors.white,
+            backgroundColor: Colors.blue,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-                    child: Text(
-                      "Berita Terbaru",
-                      style: Get.textTheme.headline4!
-                          .copyWith(fontWeight: FontWeight.bold, color: Pallete.black),
+                    padding: const EdgeInsets.fromLTRB(8, 16, 8, 0),
+                    child: InPageSearchBar(
+                      hint: "Cari Berita",
+                      focusNode: _focusNode,
+                      onSubmitted: (p0) {
+                        _focusNode.unfocus();
+                      },
+                      searchQuery: (p0) {
+                        setState(() {
+                          _searchQuery = p0;
+                        });
+                      },
                     ),
                   ),
-                  CarouselSlider(
-                    items: List.generate(
-                        news.primeNews.length >= 5 ? 5 : news.primeNews.length,
-                        (index) => GestureDetector(
-                              onTap: () => Get.toNamed('/news/detail',
-                                  arguments: news.primeNews[index].idBerita),
-                              child: BeritaTerkini(
-                                date: dateToString(
-                                    date: stringToDate(date: news.primeNews[index].tglBerita!),
-                                    format: "dd MMMM yyyy"),
-                                title: news.primeNews[index].judulBerita!,
-                                image: NetworkImage(news.primeNews[index].fotoBerita!),
-                              ),
-                            )),
-                    options: CarouselOptions(
-                      height: 170.0,
-                      enlargeCenterPage: true,
-                      autoPlay: true,
-                      aspectRatio: 16 / 9,
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      enableInfiniteScroll: true,
-                      autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                      viewportFraction: 0.8,
+                  if (_searchQuery == null || _searchQuery!.isBlank!) ...[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                      child: Text(
+                        "Berita Terbaru",
+                        style: Get.textTheme.headline4!
+                            .copyWith(fontWeight: FontWeight.bold, color: Pallete.black),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-                    child: Text(
-                      "Berita Lainnya",
-                      style: Get.textTheme.headline4!
-                          .copyWith(fontWeight: FontWeight.bold, color: Pallete.black),
+                    CarouselSlider(
+                      items: List.generate(
+                          news.primeNews.length >= 5 ? 5 : news.primeNews.length,
+                          (index) => GestureDetector(
+                                onTap: () => Get.toNamed('/news/detail',
+                                    arguments: news.primeNews[index].idBerita),
+                                child: BeritaTerkini(
+                                  date: dateToString(
+                                      date: stringToDate(date: news.primeNews[index].tglBerita!),
+                                      format: "dd MMMM yyyy"),
+                                  title: news.primeNews[index].judulBerita!,
+                                  image: NetworkImage(news.primeNews[index].fotoBerita!),
+                                ),
+                              )),
+                      options: CarouselOptions(
+                        height: 170.0,
+                        enlargeCenterPage: true,
+                        autoPlay: true,
+                        aspectRatio: 16 / 9,
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        enableInfiniteScroll: true,
+                        autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                        viewportFraction: 0.8,
+                      ),
                     ),
-                  ),
-                  _listedNews(news.restNews)
-                ] else ...[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-                    child: Text(
-                      "Hasil Pencarian",
-                      style: Get.textTheme.headline4!
-                          .copyWith(fontWeight: FontWeight.bold, color: Pallete.black),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                      child: Text(
+                        "Berita Lainnya",
+                        style: Get.textTheme.headline4!
+                            .copyWith(fontWeight: FontWeight.bold, color: Pallete.black),
+                      ),
                     ),
-                  ),
-                  _listedNews(news.primeNews
-                      .where(
-                          (e) => e.judulBerita!.toLowerCase().contains(_searchQuery!.toLowerCase()))
-                      .toList()),
-                  _listedNews(news.restNews
-                      .where(
-                          (e) => e.judulBerita!.toLowerCase().contains(_searchQuery!.toLowerCase()))
-                      .toList()),
-                ]
-              ],
+                    _listedNews(news.restNews)
+                  ] else ...[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                      child: Text(
+                        "Hasil Pencarian",
+                        style: Get.textTheme.headline4!
+                            .copyWith(fontWeight: FontWeight.bold, color: Pallete.black),
+                      ),
+                    ),
+                    _listedNews(news.primeNews
+                        .where((e) =>
+                            e.judulBerita!.toLowerCase().contains(_searchQuery!.toLowerCase()))
+                        .toList()),
+                    _listedNews(news.restNews
+                        .where((e) =>
+                            e.judulBerita!.toLowerCase().contains(_searchQuery!.toLowerCase()))
+                        .toList()),
+                  ]
+                ],
+              ),
             ),
           );
         }),
       ),
     ));
+  }
+
+  Future<void> _handleRefresh() async {
+    _newsController.getNews(idProdi: _authController.userData!.prodiId!);
+    setState(() {});
   }
 
   Widget _listedNews(List<NewsModel> news) {

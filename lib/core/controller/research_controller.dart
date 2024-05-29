@@ -41,6 +41,19 @@ class ResearchController extends GetxController {
     });
   }
 
+  Future<void> getFutureResearchTimelineByNim({required String nim}) async {
+    await ResearchService().getResearchTimelineByNim(FormData({"nim": nim})).then((value) {
+      researchTimeline = _listingTimeline(value);
+      listedResearchimeline.clear();
+      researchTimeline!.listedTimeline!.forEach((key, value) {
+        listedResearchimeline.add(ListedResearchimelineModel.fromJson(value));
+      });
+      update();
+    }).catchError((e) {
+      throw e;
+    });
+  }
+
   void getOtherResearchTimelineByNim({required String nim}) async {
     await ResearchService().getResearchTimelineByNim(FormData({"nim": nim})).then((value) {
       otherTimeline = _listingTimeline(value);
